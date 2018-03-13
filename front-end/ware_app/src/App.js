@@ -6,11 +6,12 @@ class App extends Component {
 
   componentDidMount() {
     
-    const all = productService.getAll()
+    const all = productService.getAll().then(res => console.log(res));
+    
   }
   render() {
     return (
-      <Provider>
+      <div>
       <div className="App">
         <header className="App-header">
         Hello
@@ -21,7 +22,7 @@ class App extends Component {
         <p className="App-intro">
         </p>
       </div>
-      </Provider>
+      </div>
     );
   }
 }

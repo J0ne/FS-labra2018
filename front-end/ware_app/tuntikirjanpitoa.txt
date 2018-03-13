@@ -1,4 +1,5 @@
 12.3.   aloitusta, eka commit ym            1h
-13.3.   muutamien kirjastojen asennuksia    1h  
+13.3.   muutamien kirjastojen asennuksia    1h
+        - json-server, axios...
         
 
