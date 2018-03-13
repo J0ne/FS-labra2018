@@ -1,0 +1,22 @@
+{
+    "products": [
+        {
+            "nimi": "Tuote 1",
+            "id": 1,
+            "kuvaus": "Lorem ipsum",
+            "varastossaKpl": 100
+        },
+        {
+            "nimi": "Tuote 2",
+            "id": 2,
+            "kuvaus": "Lorem ipsum",
+            "varastossaKpl": 100
+        },
+        {
+            "nimi": "Tuote 3",
+            "id": 3,
+            "kuvaus": "Lorem ipsum",
+            "varastossaKpl": 100
+        }
+    ] 
+}
