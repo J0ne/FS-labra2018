@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
 import {Provider} from 'react-redux'
 import productService from './services/products'
+import ConnectedProductList from './components/ProductList'
+import { productInitialization } from './reducers/productReducer'
+import { connect } from 'react-redux'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      products: []
+    }
+  }
 
-  componentDidMount() {
-    
-    const all = productService.getAll().then(res => console.log(res));
-    
+  componentDidMount = async () => {
+    this.props.productInitialization()
+
   }
   render() {
     return (
-      <div>
       <div className="App">
-        <header className="App-header">
-        Hello
-        </header>
-        {/* <ul>
-        {products.getAll().map( p => <li key={p.id}>{p.name}</li>)}
-        </ul> */}
+        <ul>
+        {this.state.products.map( p => <li key={p.id}>{p.nimi}</li>)}
+        </ul>
         <p className="App-intro">
         </p>
-      </div>
+        <ConnectedProductList store={this.props.store} />
       </div>
     );
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { productInitialization }
+)(App)
