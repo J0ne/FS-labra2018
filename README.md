@@ -26,8 +26,8 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 
 ### Tuntikirjanpitoa (testiä...)
 
-| pvm	| aika (h)|kommentit 												|
-| ------|:-------:| ---------------------------------------------------------:|
+| pvm	| aika (h)|kommentit  |
+| ------|:-------:| ---------:|
 |	12.3.|  1	| aloitusta, eka commit ym												|
 |	13.3.|	1	| kirjastojen asennuksia, json-server, axios, productReducer, store, ja tilan initialisointi, UI semanticin tuonti ja testailua|
 |	14.3.|	2	| lukemista: GraphQL, osan 7 materiaaleja	|
