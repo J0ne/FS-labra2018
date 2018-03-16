@@ -3,6 +3,8 @@ import { Dropdown,Button, Checkbox, Form } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import Select2 from 'react-select2-wrapper';
+import 'react-select2-wrapper/css/select2.css';
 
 const friendOptions = [
   {
@@ -42,6 +44,16 @@ class LendingForm extends React.Component {
 
         return (
         <Form>
+            <Form.Field>
+                    <Select2
+                        data={friendOptions}
+                        options={
+                            {
+                                placeholder: 'Valitse asiakas',
+                            }
+                        }
+                    />
+            </Form.Field>
             <Form.Field>
                 <Dropdown placeholder='Valitse lainaaja' fluid selection options={friendOptions} />
             </Form.Field>

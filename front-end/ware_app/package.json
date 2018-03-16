@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "jquery": "^3.3.1",
     "json-server": "^0.12.1",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
@@ -14,8 +15,11 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-select2": "^4.0.3",
+    "react-select2-wrapper": "^1.0.4-beta6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "select2": "^4.0.6-rc.1",
     "semantic-ui-react": "^0.78.3"
   },
   "scripts": {
