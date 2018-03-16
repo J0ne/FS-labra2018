@@ -6,5 +6,6 @@
 
     - lukemista: GraphQL, osan 7 materiaaleja
     - productReducer, store, ja tilan initialisointi
+    - UI semanticin tuonti ja testailua
         
 

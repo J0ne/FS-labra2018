@@ -18,5 +18,24 @@
             "kuvaus": "Lorem ipsum",
             "varastossaKpl": 100
         }
-    ] 
+    ] ,
+    "lendings": [
+        {
+            "id": 1,
+            "tuoteid": 2,
+            "asiakasid": 1,
+            "kpl": 1,
+            "alkupvm": "2018-03-16",
+            "loppupvm": null,
+            "status": "aktiivinen"
+        }
+    ],
+    "customers": [
+        {
+            "id": 1,
+            "etunimi": "Möttönen",
+            "sukunimi": "Matti"
+        }
+    ]
+
 }
