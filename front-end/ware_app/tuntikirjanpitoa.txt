@@ -7,5 +7,8 @@
     - lukemista: GraphQL, osan 7 materiaaleja
     - productReducer, store, ja tilan initialisointi
     - UI semanticin tuonti ja testailua
-        
+
+16.3. 2h
+    - navigaatiota, SPA-hommia
+    - dummy-dataa
 
