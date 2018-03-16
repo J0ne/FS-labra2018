@@ -10,7 +10,7 @@ Back end: (todo)
 
 Sovellus on eräänlainen lainauksien hallinta. 
 
-Pähkinänkuoressa:
+###Lyhyesti:
 Varastossa on n kpl erilaisia tuotteita. 
 Asiakasrekisterissä on asiakkaat, jotka lainaavat tavaroita.
 Lainaukset ovat siis toimenpiteitä, jotka liittyvät tuotteeseen ja asiakkaaseen.
@@ -21,6 +21,14 @@ Käyttäjä voi kirjata lainauksia asiakkaalle. Ja (jos aika riittää, niin) ha
 Lainauksen tallentaminen muuttaa varastossa olevan tuotteen kappalemäärää.
 
 Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusvarasto.
+
+
+### Tuntikirjanpitoa (testiä...)
+
+| pvm	        | kommenttia    | aikaa |
+| ------------- |:-------------:| -----:|
+| 				|  				| 		|
+
 
 
 
