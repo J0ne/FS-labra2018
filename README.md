@@ -2,10 +2,10 @@
 
 Full Stack - websovelluskehitys - harjoitustyön repositorio
 
-Front end:
+*Front end:*
 https://github.com/J0ne/FS-labra2018/tree/master/front-end/ware_app
 
-Back end: (todo)
+*Back end:* (todo)
 
 
 Sovellus on eräänlainen lainauksien hallinta. 
@@ -24,14 +24,14 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 
 ---
 
-### Tuntikirjanpitoa (testiä...)
+### Tuntikirjanpitoa
 
 | pvm	| aika (h)|kommentit  |
 | ------|:-------:| ---------:|
 |	12.3.|  1	| aloitusta, eka commit ym												|
 |	13.3.|	1	| kirjastojen asennuksia, json-server, axios, productReducer, store, ja tilan initialisointi, UI semanticin tuonti ja testailua|
 |	14.3.|	2	| lukemista: GraphQL, osan 7 materiaaleja	|
-|	16.3.| 	2	| navigaatiota, SPA-hommia,dummy-dataa|
+|	16.3.| 	2,5	| navigaatiota, SPA-hommia,dummy-dataa, UI-komponenttien testailua (mm. modal)|
 
 
 
