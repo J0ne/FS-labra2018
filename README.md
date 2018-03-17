@@ -10,7 +10,7 @@ https://github.com/J0ne/FS-labra2018/tree/master/front-end/ware_app
 
 Sovellus on eräänlainen lainauksien hallinta. 
 
-###Lyhyesti:
+### Lyhyesti:
 Varastossa on n kpl erilaisia tuotteita. 
 Asiakasrekisterissä on asiakkaat, jotka lainaavat tavaroita.
 Lainaukset ovat siis toimenpiteitä, jotka liittyvät tuotteeseen ja asiakkaaseen.
