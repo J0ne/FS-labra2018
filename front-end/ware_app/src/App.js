@@ -51,7 +51,7 @@ class App extends Component {
       <div>
       <Router>
       <Container>
-       <Menu inverted stackable={true}>
+       <Menu stackable={true}>
           <Menu.Item name='Lainaukset' as={NavLink} to={"/lainaukset"} active={activeItem === 'Lainaukset'} onClick={this.handleItemClick} />
             <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={this.handleItemClick} />
             <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={this.handleItemClick} />
@@ -62,7 +62,7 @@ class App extends Component {
             <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
           </Menu.Menu>
         </Menu>
-            <Route exact path="/lainaukset" render={({ match }) => <div><LendingForm />
+            <Route exact path="/lainaukset" render={({ match }) => <div><LendingForm store={this.props.store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList store={this.props.store} />} />
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>

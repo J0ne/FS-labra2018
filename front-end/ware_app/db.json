@@ -35,7 +35,12 @@
             "id": 1,
             "etunimi": "Möttönen",
             "sukunimi": "Matti"
-        }
+        },
+        {
+            "id": 2,
+            "etunimi": "Testaaja",
+            "sukunimi": "Teppo"
+         }
     ]
 
 }
