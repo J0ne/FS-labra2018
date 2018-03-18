@@ -33,16 +33,15 @@ class App extends Component {
       modalOpen: false
     }
 }
-
   handleItemClick = (e, { name }) => { 
     console.log(name)
     this.setState({ activeItem: name })}
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
+
   componentDidMount = async () => {
     this.props.productInitialization()
-
   }
   render() {
 
