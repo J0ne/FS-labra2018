@@ -42,6 +42,7 @@ class LendingForm extends React.Component {
             startDate: moment(),
             selectedCustomer: null,
             selectedProducts: [],
+            productsSelected: false,
             deadlineDate: null
         }
         this.handleChange = this.handleChange.bind(this);
@@ -62,6 +63,9 @@ class LendingForm extends React.Component {
     handleChange = (e) => {
         console.log(e.format('L'))
     }
+    handleProductSelection = (e) => {
+        this.setState({productsSelected: true})
+    }
 
     customerSelect = (e) => {
         // console.log(e)
@@ -70,13 +74,30 @@ class LendingForm extends React.Component {
 
     }
 
-    isActiveStep(step){
-        if(!this.state.selectedCustomer){
+    activeStep(){
+        if(this.state.selectedCustomer === null){
+            return 0 
+        }
+        if (!this.state.productsSelected) {
+            return 1
+        }
+        else{
+            return 2;
+        }
 
+    }
+    
+    getDisplayValue(val){
+        if (this.activeStep() === val){
+            return {display: ''}
+        }
+        else {
+            return {display: 'none'}
         }
     }
 
     render() {
+        
         const { customers } = this.props
         return (
         <Container>
@@ -123,14 +144,14 @@ class LendingForm extends React.Component {
                         }
                     />
             </Form.Field> */}
-            <Form.Field>
+            <Form.Field style={this.getDisplayValue(0)}>
                 <Dropdown 
                 onChange={this.handleCustomerChange}
                 value={this.state.selectedCustomer}
                 placeholder='Valitse asiakas' 
                 fluid search selection options={this.props.customers} />
             </Form.Field>
-            <Form.Field>
+            <Form.Field style={this.getDisplayValue(1)}>
                 <Dropdown 
                 value={this.state.selectedProducts} 
                 onChange={this.handleProductsChange}
@@ -138,17 +159,22 @@ class LendingForm extends React.Component {
                 multiple
                 fluid search selection 
                 options={this.props.products} />
+                        <Form.Field>
+                            <Button floated="right" onClick={this.handleProductSelection}>Valmis</Button>
+                        </Form.Field>
             </Form.Field>
-            <Form.Field>
-                <DatePicker
+
+            <Form.Field style={this.getDisplayValue(2)}>
+                {/* <DatePicker
                         selected={this.state.startDate}
                         onChange={this.handleChange}
-                        placeholderText="Palautuspäivä" />
+                        placeholderText="Palautuspäivä" /> */}
             </Form.Field>
-            <Button type='submit'>Lisää</Button>
+           
         </Form>
-        <Container>
-                    <Segment.Group>
+                <Container>
+                    
+                    <Segment.Group style={this.getDisplayValue(1)}>
                         {this.state.user !== null ? <Segment><Icon name="user" />{this.state.selectedCustomer} </Segment> : ''}
                         <Segment>
                             <ul>
@@ -157,7 +183,7 @@ class LendingForm extends React.Component {
                         </Segment>
                         <Segment>Nested Bottom</Segment>
                     </Segment.Group>
-        </Container>
+                 </Container>
             </Container>
         )
     }
