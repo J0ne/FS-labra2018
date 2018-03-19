@@ -34,6 +34,7 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |	16.3.| 	2,5 | navigaatiota, SPA-hommia,dummy-dataa, UI-komponenttien testailua (mm. modal)
 |   16.3 |  2   | datepicker-komponentti, moment.js + lokalisointi (fi), lainaus-form, Select2|
 |   17.3.|  4,5   | Select2:n käyttöä, asiakkaiden haku: putkea kuntoon, service, reducer..., Select2 lazyna, jonka hylkäsin toistaiseksi, LendingForm: UIn hahmottelua (Semanticin Step-komponentti)|
+|	19.3.|	2,5	| Select2:n korvaaminen UI Semanticin omalla dropdownilla (pajassa 2h)	|
 
 
 

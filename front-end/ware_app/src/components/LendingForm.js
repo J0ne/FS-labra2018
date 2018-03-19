@@ -1,13 +1,11 @@
 import React from 'react'
-import Divider, { Container, Dropdown, Button, Checkbox, Form, Header, Step } from 'semantic-ui-react'
+import Divider, { Container, Dropdown, Button, 
+    Checkbox, Form, Header, Step, Segment, Icon } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import Select2 from 'react-select2-wrapper';
-import 'react-select2-wrapper/css/select2.css';
 import { connect } from 'react-redux'
 import { getCustomers } from '../reducers/customerReducers'
-import $ from 'jquery'; 
 
 const friendOptions = [
   {
@@ -43,7 +41,7 @@ class LendingForm extends React.Component {
         this.state = {
             startDate: moment(),
             selectedCustomer: null,
-            selectedProducta: [],
+            selectedProducts: [],
             deadlineDate: null
         }
         this.handleChange = this.handleChange.bind(this);
@@ -51,18 +49,25 @@ class LendingForm extends React.Component {
     }
 
     
-
+    handleCustomerChange = (event, data) => {
+        this.setState({selectedCustomer: data.value})
+    }
+    handleProductsChange = (event, data) => {
+        console.log(data.value, data.key)
+        this.setState({ selectedProducts: data.value})
+    } 
     componentDidMount(){
         this.props.getCustomers()
     }
     handleChange = (e) => {
         console.log(e.format('L'))
     }
+
     customerSelect = (e) => {
         // console.log(e)
         // this.setState({ selectedCustomer: Number(e.currentTarget.value)})
         // //console.log(this.refs.tags.el)
-        // return false
+
     }
 
     isActiveStep(step){
@@ -77,14 +82,17 @@ class LendingForm extends React.Component {
         <Container>
                 <Header as="h3">Uusi lainaus</Header>
                 <Step.Group ordered fluid>
-                    <Step completed active>
+                    <Step active={this.state.selectedCustomer === null}
+                    completed={this.state.selectedCustomer !== null}
+                   >
                         <Step.Content>
                             <Step.Title>Asiakas</Step.Title>
                             <Step.Description>Valitse asiakas</Step.Description>
                         </Step.Content>
                     </Step>
 
-                    <Step>
+                    <Step active={this.state.selectedProducts.length == 0 && this.state.selectedCustomer != null}
+                        completed={this.state.selectedProducts.length > 0}>
                         <Step.Content>
                             <Step.Title>Tuoteet</Step.Title>
                             <Step.Description>Valitse tuotteet</Step.Description>
@@ -93,7 +101,8 @@ class LendingForm extends React.Component {
 
                     <Step>
                         <Step.Content>
-                            <Step.Title>Kuittaus</Step.Title>
+                            <Step.Title>Tiedot</Step.Title>
+                            <Step.Description>Tilauksen tarkemmat tiedot</Step.Description>
                         </Step.Content>
                     </Step>
                     <Step disabled={true}>
@@ -115,37 +124,40 @@ class LendingForm extends React.Component {
                     />
             </Form.Field> */}
             <Form.Field>
-                   <Select2
-                        // value={this.state.selectedCustomer}
-                        onSelect={this.customerSelect}
-                        data={this.props.customers}
-                        options={
-                            {
-                                placeholder: 'Valitse asiakas',
-                            }
-                        }
-                    />
+                <Dropdown 
+                onChange={this.handleCustomerChange}
+                value={this.state.selectedCustomer}
+                placeholder='Valitse asiakas' 
+                fluid search selection options={this.props.customers} />
             </Form.Field>
             <Form.Field>
-                    <Select2
-                        // value={this.state.selectedCustomer}
-                        multiple
-                        data={this.props.products}
-                        options={
-                            {
-                                placeholder: 'Poimi tuotteita',
-                            }
-                        }
-                    />
+                <Dropdown 
+                value={this.state.selectedProducts} 
+                onChange={this.handleProductsChange}
+                placeholder='Valitse tuotteet' 
+                multiple
+                fluid search selection 
+                options={this.props.products} />
             </Form.Field>
             <Form.Field>
-                    <DatePicker
+                <DatePicker
                         selected={this.state.startDate}
                         onChange={this.handleChange}
                         placeholderText="Palautuspäivä" />
             </Form.Field>
             <Button type='submit'>Lisää</Button>
         </Form>
+        <Container>
+                    <Segment.Group>
+                        {this.state.user !== null ? <Segment><Icon name="user" />{this.state.selectedCustomer} </Segment> : ''}
+                        <Segment>
+                            <ul>
+                            {this.state.selectedProducts.map(p => <li key="{}">{p}</li>)}
+                            </ul>
+                        </Segment>
+                        <Segment>Nested Bottom</Segment>
+                    </Segment.Group>
+        </Container>
             </Container>
         )
     }
@@ -156,17 +168,16 @@ const mapStateToProps = (state) => {
     return {
         customers: state.customers.map(c => {
             return {
-                id: c.id,
                 text: `${c.etunimi} ${c.sukunimi}`,
-                value: c.id
+                key: c.id,
+                value: `${c.etunimi} ${c.sukunimi}`
             } 
         } ),
         products: state.products.map(p => {
-            console.log(p)
             return {
-                id: p.id,
-                value: p.id,
-                text: p.nimi
+                key: p.id,
+                text: p.nimi,
+                value: p.nimi
             }
         })
     }
