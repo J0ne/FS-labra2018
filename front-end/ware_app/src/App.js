@@ -62,7 +62,7 @@ class App extends Component {
         </Menu>
             <Route exact path="/lainaukset" render={({ match }) => <div><LendingForm store={this.props.store} />
             </div>} />
-          <Route exact path="/varasto" render={() => <ConnectedProductList store={this.props.store} />} />
+          <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    

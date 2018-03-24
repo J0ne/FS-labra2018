@@ -9,34 +9,6 @@ import { connect } from 'react-redux'
 import { getCustomers } from '../reducers/customerReducers'
 import ProductListForm from './ProductListForm'
 
-const friendOptions = [
-  {
-      id: 1,
-    text: 'Pena',
-    value: 'Pena'
-  },
-    {
-        id: 2,
-        text: 'Eki',
-        value: 'Eki'
-    }, {
-        id: 3,
-        text: 'Reiska',
-        value: 'Reiska'
-    }
-]
-const tuotteet = [
-    {
-        id: 1,
-        text: "Hattu",
-        value: "Hattu"
-    },
-    {
-        id: 2,
-        text: "Hanskat",
-        value: "Hanskat"
-    }
-]
 class LendingForm extends React.Component {
     constructor(props) {
         super(props)
@@ -44,6 +16,7 @@ class LendingForm extends React.Component {
             startDate: moment(),
             selectedCustomer: null,
             selectedProducts: [],
+            selectedProductsAsObjs: [],
             productsSelected: false,
             deadlineDate: null,
             confirmed: false
@@ -57,7 +30,14 @@ class LendingForm extends React.Component {
         this.setState({selectedCustomer: data.value})
     }
     handleProductsChange = (event, data) => {
-        console.log(data.value, data.key)
+        console.log(data.value)
+        
+        const objArray = data.options.filter(function (element) {
+            return data.value.includes(element.key);
+        });
+        const tmp = [...this.state.selectedProductsAsObjs, ...objArray]
+        this.setState({selectedProductsAsObjs: tmp})
+        console.log(this.state.selectedProductsAsObjs)
         this.setState({ selectedProducts: data.value})
     } 
     componentDidMount(){
@@ -244,11 +224,14 @@ const mapStateToProps = (state) => {
                 value: `${c.etunimi} ${c.sukunimi}`
             } 
         } ),
-        products: state.products.map(p => {
+        products: state.products.map(p => { console.log(p)
             return {
                 key: p.id,
-                text: p.nimi,
-                value: p.nimi
+                text: p.nimi + ' ' + p.id,
+                value: p.id,
+                koko: p.koko,
+                kpl: p.kpl ? Number(p.kpl): 0,
+                kuvaus: p.kuvaus
             }
         })
     }
