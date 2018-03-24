@@ -1,13 +1,13 @@
 import React from 'react'
 import Divider, { Container, Dropdown, Button, 
     Checkbox, Form, Header, Step, 
-    Segment, Icon, Grid, List } from 'semantic-ui-react'
+    Segment, Icon, Grid, List, Label } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux'
 import { getCustomers } from '../reducers/customerReducers'
-import ProductForm from './ProductForm'
+import ProductListForm from './ProductListForm'
 
 const friendOptions = [
   {
@@ -45,7 +45,8 @@ class LendingForm extends React.Component {
             selectedCustomer: null,
             selectedProducts: [],
             productsSelected: false,
-            deadlineDate: null
+            deadlineDate: null,
+            confirmed: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.customerSelect = this.customerSelect.bind(this);
@@ -68,7 +69,13 @@ class LendingForm extends React.Component {
     handleProductSelection = (e) => {
         this.setState({productsSelected: true})
     }
-
+    handleSave = (e) => {
+        console.table(this.state)
+    }
+    handleKuittaus = (e, { checked}) => {
+        console.log(e, checked)
+        this.setState({confirmed:  checked})
+    }
     customerSelect = (e) => {
         // console.log(e)
         // this.setState({ selectedCustomer: Number(e.currentTarget.value)})
@@ -195,10 +202,31 @@ class LendingForm extends React.Component {
                             </ul>
                             <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
                                 {this.state.selectedProducts.map(p => 
-                                <ProductForm product={p} key={p} />)}
+                                    <ProductListForm product={p} key={p} />)}
                             </List>
+                                    
                         </Segment>
-                        <Segment></Segment>
+                        <Segment floated="left">
+                            <Form.Field>
+                                <Checkbox
+                                    toggle
+                                    label='Kuitattu'
+                                    name='checkboxKuittaus'
+                                    checked={this.state.confirmed}
+                                    onChange={this.handleKuittaus}
+                                />
+                            </Form.Field>
+                        </Segment>
+                        <Segment floated='right'>
+                           
+                            <Button.Group floated="right" style={!this.state.productsSelected ? { display: 'none' } : { display: '' }} >
+                                <Button negative><Icon name="remove" /> Peruuta</Button>
+                                {/* <Button.Or text="tai" /> */}
+                                <Button><Icon name="edit" /> Muokkaa</Button>
+                                {/* <Button.Or text="tai" /> */}
+                                <Button disabled={!this.state.confirmed} onClick={this.handleSave} positive><Icon name="save" /> Tallenna</Button>
+                            </Button.Group>
+                        </Segment>
                     </Segment.Group>
         </Container>
             </Container>

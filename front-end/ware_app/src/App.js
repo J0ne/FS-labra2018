@@ -34,7 +34,6 @@ class App extends Component {
     }
 }
   handleItemClick = (e, { name }) => { 
-    console.log(name)
     this.setState({ activeItem: name })}
   handleOpen = () => this.setState({ modalOpen: true })
 

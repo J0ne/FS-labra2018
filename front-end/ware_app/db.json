@@ -1,46 +1,73 @@
 {
-    "products": [
-        {
-            "nimi": "Tuote 1",
-            "id": 1,
-            "kuvaus": "Lorem ipsum",
-            "varastossaKpl": 100
-        },
-        {
-            "nimi": "Tuote 2",
-            "id": 2,
-            "kuvaus": "Lorem ipsum",
-            "varastossaKpl": 100
-        },
-        {
-            "nimi": "Tuote 3",
-            "id": 3,
-            "kuvaus": "Lorem ipsum",
-            "varastossaKpl": 100
-        }
-    ] ,
-    "lendings": [
-        {
-            "id": 1,
-            "tuoteid": 2,
-            "asiakasid": 1,
-            "kpl": 1,
-            "alkupvm": "2018-03-16",
-            "loppupvm": null,
-            "status": "aktiivinen"
-        }
-    ],
-    "customers": [
-        {
-            "id": 1,
-            "etunimi": "Möttönen",
-            "sukunimi": "Matti"
-        },
-        {
-            "id": 2,
-            "etunimi": "Testaaja",
-            "sukunimi": "Teppo"
-         }
-    ]
-
+  "products": [
+    {
+      "nimi": "Tuote 1",
+      "id": 1,
+      "kuvaus": "Lorem ipsum",
+      "varastossaKpl": 100
+    },
+    {
+      "nimi": "Tuote 2",
+      "id": 2,
+      "kuvaus": "Lorem ipsum",
+      "varastossaKpl": 100
+    },
+    {
+      "nimi": "Tuote 3",
+      "id": 3,
+      "kuvaus": "Lorem ipsum",
+      "varastossaKpl": 100
+    },
+    {
+      "nimi": "Kumisaappaat",
+      "koko": "xl",
+      "kuvaus": "Nokia",
+      "kpl": "20",
+      "id": 4
+    },
+    {
+      "nimi": "Kumisaappaat",
+      "koko": "m",
+      "kuvaus": "Nokia, mustat",
+      "kpl": "50",
+      "id": 5
+    },
+    {
+      "nimi": "Kumisaappaat",
+      "koko": "s",
+      "kuvaus": "Nokia, mustat",
+      "kpl": "20",
+      "id": 6
+    },
+    {
+      "nimi": "Maastotakki",
+      "koko": "xl",
+      "kuvaus": "Nato-kuvioitu",
+      "kpl": "20",
+      "id": 7
+    }
+  ],
+  "lendings": [
+    {
+      "id": 1,
+      "tuoteid": 2,
+      "asiakasid": 1,
+      "kpl": 1,
+      "alkupvm": "2018-03-16",
+      "loppupvm": null,
+      "status": "aktiivinen"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "etunimi": "Möttönen",
+      "sukunimi": "Matti"
+    },
+    {
+      "id": 2,
+      "etunimi": "Testaaja",
+      "sukunimi": "Teppo"
+    }
+  ]
 }

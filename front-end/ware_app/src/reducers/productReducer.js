@@ -3,7 +3,8 @@ import productService from '../services/products'
 const reducer = (state = [], action) => {
     console.log(state, action)
 
-    if (action.type === 'CREATE') {
+    if (action.type === 'ADD_PRODUCT') {
+        debugger
         return [...state, action.data]
     }
     if (action.type === 'INIT_PRODUCTS') {
@@ -20,6 +21,18 @@ export const productInitialization = (data) => {
         dispatch({
             type: 'INIT_PRODUCTS',
             data: products
+        })
+
+    }
+}
+
+export const createProduct = (data) => {
+    return async (dispatch) => {
+        const product = await productService.createNew(data)
+        console.log("PRODUCT", product)
+        dispatch({
+            type: 'ADD_PRODUCT',
+            data: product
         })
 
     }

@@ -36,6 +36,7 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |   17.3.|  4,5   | Select2:n käyttöä, asiakkaiden haku: putkea kuntoon, service, reducer..., Select2 lazyna, jonka hylkäsin toistaiseksi, LendingForm: UIn hahmottelua (Semanticin Step-komponentti)|
 |	19.3.|	4,5	| Select2:n korvaaminen UI Semanticin omalla dropdownilla (pajassa 2h), Steppien näkyvyydet,
 productForm-komponentti ja lendingFormin parantelua	|
+|	24.3.| 5	| Lainauslomakkeen tekoa UI-säätöä, NumberPicker-komponentin kanssa painimista, tuotteiden tallennus: lomake, reducer ym.|
 
 
 
