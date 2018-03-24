@@ -15,12 +15,10 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "react-select": "^1.2.1",
-    "react-select2": "^4.0.3",
-    "react-select2-wrapper": "^1.0.4-beta6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "select2": "^4.0.6-rc.1",
-    "semantic-ui-react": "^0.78.3"
+    "semantic-ui-react": "^0.78.3",
+    "semantic-ui-react-numberpicker": "0.0.1-b"
   },
   "scripts": {
     "start": "react-scripts start",

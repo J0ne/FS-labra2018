@@ -136,7 +136,7 @@ class LendingForm extends React.Component {
                 </Step.Group>
              </Container>
         <Container>
-                    <Grid stackable columns={2} padded>
+                    <Grid stackable columns={1} padded>
                         <Grid.Column>
                             <div>
                                 <div style={this.getDisplayValue(0)}>
@@ -146,8 +146,25 @@ class LendingForm extends React.Component {
                                         placeholder='Valitse asiakas'
                                         fluid search selection options={this.props.customers} />
                                 </div>
-                                <div style={this.getDisplayValue(1)}>
+                                <Form style={this.getDisplayValue(1)} onSubmit={this.handleSubmit}>
+                                    <Form.Group widths='equal'>
+                                        <Dropdown
+                                            size="small"
+                                            noResultsMessage="Ei lisättäviä tuotteita"
+                                            value={this.state.selectedProducts}
+                                            onChange={this.handleProductsChange}
+                                            placeholder='Valitse tuotteet'
+                                            multiple
+                                            fluid search selection
+                                            options={this.props.products} />
+                                    
+                                        <Button floated="right" disabled={this.state.selectedProducts.length === 0} primary style={this.getDisplayValue(1)}
+                                            onClick={this.handleProductSelection}>Lisää tuotteet</Button>
+                                    </Form.Group>
+                                </Form>
+                                {/* <div style={this.getDisplayValue(1)}>
                                     <Dropdown
+                                        size="small"
                                         noResultsMessage="Ei lisättäviä tuotteita"
                                         value={this.state.selectedProducts}
                                         onChange={this.handleProductsChange}
@@ -155,7 +172,7 @@ class LendingForm extends React.Component {
                                         multiple
                                         fluid search selection
                                         options={this.props.products} />
-                                </div>
+                                </div> */}
                                 <div style={this.getDisplayValue(2)}>
                                     {/* <DatePicker
                         selected={this.state.startDate}
@@ -164,10 +181,6 @@ class LendingForm extends React.Component {
                                 </div>
 
                             </div>   
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Button floated="right" disabled={this.state.selectedProducts.length === 0} primary style={this.getDisplayValue(1)} 
-                            onClick={this.handleProductSelection}>Lisää tuotteet</Button>
                         </Grid.Column>
                     </Grid>
         </Container>
