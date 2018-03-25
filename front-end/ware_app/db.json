@@ -1,24 +1,6 @@
 {
   "products": [
     {
-      "nimi": "Tuote 1",
-      "id": 1,
-      "kuvaus": "Lorem ipsum",
-      "varastossaKpl": 100
-    },
-    {
-      "nimi": "Tuote 2",
-      "id": 2,
-      "kuvaus": "Lorem ipsum",
-      "varastossaKpl": 100
-    },
-    {
-      "nimi": "Tuote 3",
-      "id": 3,
-      "kuvaus": "Lorem ipsum",
-      "varastossaKpl": 100
-    },
-    {
       "nimi": "Kumisaappaat",
       "koko": "xl",
       "kuvaus": "Nokia",
@@ -45,6 +27,69 @@
       "kuvaus": "Nato-kuvioitu",
       "kpl": "20",
       "id": 7
+    },
+    {
+      "nimi": "Kerrasto",
+      "koko": "s",
+      "kuvaus": "Lyhyet kalsarit, verkkopaita",
+      "kpl": "100",
+      "id": 8
+    },
+    {
+      "nimi": "Kerrasto",
+      "koko": "m",
+      "kuvaus": "Lyhyet kalsarit, verkkopaita",
+      "kpl": "100",
+      "id": 9
+    },
+    {
+      "nimi": "Kerrasto",
+      "koko": "l",
+      "kuvaus": "Lyhyet kalsarit, verkkopaita",
+      "kpl": "100",
+      "id": 10
+    },
+    {
+      "nimi": "Kerrasto",
+      "koko": "xl",
+      "kuvaus": "Lyhyet kalsarit, verkkopaita",
+      "kpl": "100",
+      "id": 11
+    },
+    {
+      "nimi": "Lakana",
+      "koko": "",
+      "kuvaus": "",
+      "kpl": "100",
+      "id": 12
+    },
+    {
+      "nimi": "Peitto",
+      "koko": "",
+      "kuvaus": "",
+      "kpl": "100",
+      "id": 13
+    },
+    {
+      "nimi": "Tyyny",
+      "koko": "",
+      "kuvaus": "",
+      "kpl": "100",
+      "id": 14
+    },
+    {
+      "nimi": "Kypärä",
+      "koko": "l",
+      "kuvaus": "Materiaali: komposiittia",
+      "kpl": "100",
+      "id": 15
+    },
+    {
+      "nimi": "Kypärä",
+      "koko": "xl",
+      "kuvaus": "Materiaali: komposiittia",
+      "kpl": "100",
+      "id": 16
     }
   ],
   "lendings": [

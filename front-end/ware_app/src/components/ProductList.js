@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
-import { Label } from 'semantic-ui-react'
+import { Button, Label, Table, Icon } from 'semantic-ui-react'
+import Togglable from './Togglable'
 class ProductList extends React.Component {
     constructor(props){
         super(props)
@@ -10,17 +11,44 @@ class ProductList extends React.Component {
         }
     }
 
+    showProductForm = () => {
+            return (
+                <Togglable buttonLabel="Lisää tuote" ref={component => this.ProductForm = component}>
+                    <ProductForm />
+                </Togglable>)
+    }
 
     render() {
         return (
             <div>
                 <h1>Varasto</h1>
                
-                <ProductForm />
+            
                 <h2>Tuotteet</h2>
-                <ul>
-                    {this.props.products.map(t => <li key={t.id}>{t.nimi}, {t.kuvaus} <Label>Koko <Label.Detail>{t.koko}</Label.Detail></Label></li> )}
-                </ul>
+                {this.showProductForm()}
+                <Table celled striped>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Tuote</Table.HeaderCell>
+                            <Table.HeaderCell>Kuvaus</Table.HeaderCell>
+                            <Table.HeaderCell>Koko</Table.HeaderCell>
+                            <Table.HeaderCell>Varastossa (kpl)</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                        <Table.Body>
+                        {this.props.products.map(t => 
+                            <Table.Row key={t.id}>
+                                <Table.Cell collapsing>
+                                    <Icon name='circle thin' /> {t.nimi}
+                                 </Table.Cell>
+                                <Table.Cell>{t.kuvaus}</Table.Cell>
+                                <Table.Cell>{t.koko}</Table.Cell>
+                                <Table.Cell collapsing textAlign='right'>{t.kpl}</Table.Cell>
+                            </Table.Row>)}
+                    
+                        </Table.Body>
+                    </Table>
+
             </div>
         )
     }

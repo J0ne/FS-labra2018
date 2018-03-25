@@ -3,6 +3,7 @@ import { Form, Button, Modal } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createProduct} from '../reducers/productReducer'
 
+
 const options = [
     { key: '-', text: ' Ei valintaa ', value: 'ei valintaa' },
     { key: 'k', text: 'Kesä', value: 'kesä' },
@@ -56,15 +57,16 @@ class ProductForm extends React.Component {
                 <h2>Lisää tuote</h2>
                 <Form.Group widths='equal'>
                     <Form.Input name="nimi" onChange={this.handleInput} fluid label='Tuote' placeholder='nimi' />
-                    <Form.Select fluid label='Malli' options={options} placeholder='' />
+                    <Form.Select fluid label='Malli' value="-" options={options} placeholder='' />
                     <Form.Input name="kpl" onChange={this.handleInput} fluid label='Kappalemäärä' placeholder='' />
                 </Form.Group>
                 <Form.Group inline>
-                    <label>Koko</label>
+                    <label>Koko (jos vaatekappale)</label>
                     <Form.Radio label='S' value='s' checked={this.state.koko === 's'} onChange={this.handleChange} />
                     <Form.Radio label='M' value='m' checked={this.state.koko === 'm'} onChange={this.handleChange} />
                     <Form.Radio label='L' value='l' checked={this.state.koko === 'l'} onChange={this.handleChange} />
                     <Form.Radio label='XL' value='xl' checked={this.state.koko === 'xl'} onChange={this.handleChange} />
+                    <Form.Radio label='Ei huomioida' value='' checked={this.state.koko === ''} onChange={this.handleChange} />
                 </Form.Group>
                 <Form.TextArea 
                     name="tiedot" label='Tarkemmat tiedot' 

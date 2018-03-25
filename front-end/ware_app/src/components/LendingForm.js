@@ -90,7 +90,7 @@ class LendingForm extends React.Component {
         <Container>
             <Container>
                 <Header as="h3">Uusi lainaus</Header>
-                <Step.Group ordered fluid>
+                    <Step.Group ordered fluid>
                     <Step active={this.state.selectedCustomer === null}
                     completed={this.state.selectedCustomer !== null} >
                         <Step.Content>
@@ -171,7 +171,7 @@ class LendingForm extends React.Component {
                     </Grid>
         </Container>
         <Container>
-                    <Segment.Group>
+                    <Segment.Group style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
                         {this.state.user !== null ? <Segment><Icon name="user" />{this.state.selectedCustomer} 
                         </Segment> : ''}
                         <Segment>
@@ -226,7 +226,7 @@ const mapStateToProps = (state) => {
         products: state.products.map(p => { 
             return {
                 key: p.id,
-                text: p.nimi + ', ' + p.kuvaus + ' (' + p.koko + ')',
+                text: p.nimi + ', ' + p.kuvaus,
                 nimi: p.nimi,
                 value: p.id,
                 koko: p.koko,
