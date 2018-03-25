@@ -38,6 +38,7 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 productForm-komponentti ja lendingFormin parantelua	|
 |	24.3.| 5	| Lainauslomakkeen tekoa UI-säätöä, NumberPicker-komponentin kanssa painimista, tuotteiden tallennus: lomake, reducer ym.|
 |	24.3.| 3	| Lainauslomake, yritystä saada dropdownin kautta oliot talteen, ei vain key/value, jäi kesken...|
+|	25.3.| 2,5	| Lainauslomake: dropdown/select kondikseen; stateen oma taulukko olioita varten|
 
 
 

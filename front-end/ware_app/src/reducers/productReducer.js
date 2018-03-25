@@ -1,8 +1,6 @@
 import productService from '../services/products'
 
 const reducer = (state = [], action) => {
-    console.log(state, action)
-
     if (action.type === 'ADD_PRODUCT') {
         debugger
         return [...state, action.data]
@@ -29,7 +27,6 @@ export const productInitialization = (data) => {
 export const createProduct = (data) => {
     return async (dispatch) => {
         const product = await productService.createNew(data)
-        console.log("PRODUCT", product)
         dispatch({
             type: 'ADD_PRODUCT',
             data: product

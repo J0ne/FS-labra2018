@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Provider} from 'react-redux'
-import productService from './services/products'
 import ConnectedProductList from './components/ProductList'
 import LendingForm from './components/LendingForm'
 import { productInitialization } from './reducers/productReducer'
@@ -10,16 +9,9 @@ import {
   Button,
   Container,
   Divider,
-  Grid,
   Header,
   Icon,
-  Image,
-  List,
   Menu,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
   Input,
   Modal
 } from 'semantic-ui-react'

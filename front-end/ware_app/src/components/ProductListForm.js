@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, List, Item, Button, Input, Label, Icon } from 'semantic-ui-react'
+import { List, Item, Button } from 'semantic-ui-react'
 // import NumberPicker from 'semantic-ui-react-numberpicker';
 
 class ProductListForm extends React.Component{
@@ -19,13 +19,12 @@ class ProductListForm extends React.Component{
     }
     render() {
         const { product } = this.props
-        console.log(product)
         return(
             <List.Item key={product}>
                 <Button floated="right" basic compact size='mini' icon="remove"></Button>
                 <List.Icon name='github' size='large' verticalAlign='middle' />
-                <List.Content> <List.Header as='a'>{ product }</List.Header>
-                    <List.Description as='a'>{"TODO: lisätiedot, koko, ym."}</List.Description>
+                <List.Content> <List.Header as='a'>{product.nimi }</List.Header>
+                    <List.Description as='a'>{product.kuvaus} {product.koko}</List.Description>
                 </List.Content>
                
             </List.Item>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Form, Button, Modal } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createProduct} from '../reducers/productReducer'

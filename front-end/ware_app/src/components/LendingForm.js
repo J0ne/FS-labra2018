@@ -30,15 +30,13 @@ class LendingForm extends React.Component {
         this.setState({selectedCustomer: data.value})
     }
     handleProductsChange = (event, data) => {
-        console.log(data.value)
-        
-        const objArray = data.options.filter(function (element) {
-            return data.value.includes(element.key);
-        });
-        const tmp = [...this.state.selectedProductsAsObjs, ...objArray]
-        this.setState({selectedProductsAsObjs: tmp})
-        console.log(this.state.selectedProductsAsObjs)
         this.setState({ selectedProducts: data.value})
+        console.log(typeof (data.value), data.value)
+        const selectedProductsAsObjs = data.options.filter(x => {
+            if(data.value.includes(x.key)) return x
+        })
+        this.setState({selectedProductsAsObjs})
+        console.log("product", selectedProductsAsObjs)
     } 
     componentDidMount(){
         this.props.getCustomers()
@@ -144,7 +142,8 @@ class LendingForm extends React.Component {
                                             multiple
                                             fluid search selection
                                             options={this.props.products} />
-                                    
+                                    </Form.Group>
+                                    <Form.Group>
                                         <Button floated="right" disabled={this.state.selectedProducts.length === 0} primary style={this.getDisplayValue(1)}
                                             onClick={this.handleProductSelection}>Lisää tuotteet</Button>
                                     </Form.Group>
@@ -177,12 +176,12 @@ class LendingForm extends React.Component {
                         </Segment> : ''}
                         <Segment>
                             <ul style={this.state.productsSelected ? { display: 'none'} : {display: ''}}>
-                                {this.state.selectedProducts.map(p =>
-                                    <li key={p}>{p}</li>)}
+                                {this.state.selectedProductsAsObjs.map(p =>
+                                    <li key={p.key}>{p.text} {p.kuvaus}</li>)}
                             </ul>
                             <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
-                                {this.state.selectedProducts.map(p => 
-                                    <ProductListForm product={p} key={p} />)}
+                                {this.state.selectedProductsAsObjs.map(p => 
+                                    <ProductListForm product={p} key={p.key} />)}
                             </List>
                                     
                         </Segment>
@@ -224,10 +223,11 @@ const mapStateToProps = (state) => {
                 value: `${c.etunimi} ${c.sukunimi}`
             } 
         } ),
-        products: state.products.map(p => { console.log(p)
+        products: state.products.map(p => { 
             return {
                 key: p.id,
-                text: p.nimi + ' ' + p.id,
+                text: p.nimi + ', ' + p.kuvaus + ' (' + p.koko + ')',
+                nimi: p.nimi,
                 value: p.id,
                 koko: p.koko,
                 kpl: p.kpl ? Number(p.kpl): 0,
