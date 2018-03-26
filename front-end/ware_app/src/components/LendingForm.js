@@ -8,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux'
 import { getCustomers } from '../reducers/customerReducers'
 import ProductListForm from './ProductListForm'
-
 class LendingForm extends React.Component {
     constructor(props) {
         super(props)
