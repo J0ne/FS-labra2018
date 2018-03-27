@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux'
 import { getCustomers } from '../reducers/customerReducers'
+import { addLending } from '../reducers/lendingReducer'
 import ProductListForm from './ProductListForm'
 class LendingForm extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class LendingForm extends React.Component {
         this.state = {
             startDate: moment(),
             selectedCustomer: null,
+            selectedCustomerId: null,
             selectedProducts: [],
             selectedProductsAsObjs: [],
             productsSelected: false,
@@ -26,31 +28,40 @@ class LendingForm extends React.Component {
 
     
     handleCustomerChange = (event, data) => {
-        this.setState({selectedCustomer: data.value})
+        const customer = data.options.find(x => {return data.value === x.text})
+        console.log(customer)
+        this.setState({ selectedCustomer: customer.text, selectedCustomerId: customer.key })
     }
     handleProductsChange = (event, data) => {
         this.setState({ selectedProducts: data.value})
-        console.log(typeof (data.value), data.value)
         const selectedProductsAsObjs = data.options.filter(x => {
-            if(data.value.includes(x.key)) return x
+            if(data.value.includes(x.key)) {
+                x.lkm = 1 // lukumäärä
+                return x
+            }
         })
         this.setState({selectedProductsAsObjs})
-        console.log("product", selectedProductsAsObjs)
     } 
     componentDidMount(){
         this.props.getCustomers()
     }
     handleChange = (e) => {
-        console.log(e.format('L'))
     }
     handleProductSelection = (e) => {
         this.setState({productsSelected: true})
     }
     handleSave = (e) => {
-        console.table(this.state)
+        console.log(this.state)
+        const newLending = {
+            tuotteet: this.state.selectedProductsAsObjs.map( p => { return {id: p.key, kpl: p.lkm}}),
+            asiakasid: this.state.selectedCustomerId,
+            alkupvm: moment().format('YYYY-MM-DD'),
+            palautettu: null,
+            palautuspvm: '2018-04-04'
+        }
+        this.props.addLending(newLending)
     }
     handleKuittaus = (e, { checked}) => {
-        console.log(e, checked)
         this.setState({confirmed:  checked})
     }
     customerSelect = (e) => {
@@ -72,7 +83,9 @@ class LendingForm extends React.Component {
         }
 
     }
-    
+    handleAmount(p){
+        console.log(p)
+    }
     getDisplayValue(val){
         if (this.activeStep() === val){
             return {display: ''}
@@ -128,7 +141,7 @@ class LendingForm extends React.Component {
                                         onChange={this.handleCustomerChange}
                                         value={this.state.selectedCustomer}
                                         placeholder='Valitse asiakas'
-                                        fluid search selection options={this.props.customers} />
+                                        search selection options={this.props.customers} />
                                 </div>
                                 <Form style={this.getDisplayValue(1)} onSubmit={this.handleSubmit}>
                                     <Form.Group widths='equal'>
@@ -139,7 +152,7 @@ class LendingForm extends React.Component {
                                             onChange={this.handleProductsChange}
                                             placeholder='Valitse tuotteet'
                                             multiple
-                                            fluid search selection
+                                            search selection
                                             options={this.props.products} />
                                     </Form.Group>
                                     <Form.Group>
@@ -171,7 +184,7 @@ class LendingForm extends React.Component {
         </Container>
         <Container>
                     <Segment.Group style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
-                        {this.state.user !== null ? <Segment><Icon name="user" />{this.state.selectedCustomer} 
+                        {this.state.user !== null ? <Segment><Icon name="user" />{ this.state.selectedCustomer ? this.state.selectedCustomer : '-'} 
                         </Segment> : ''}
                         <Segment>
                             <ul style={this.state.productsSelected ? { display: 'none'} : {display: ''}}>
@@ -180,7 +193,7 @@ class LendingForm extends React.Component {
                             </ul>
                             <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
                                 {this.state.selectedProductsAsObjs.map(p => 
-                                    <ProductListForm product={p} key={p.key} />)}
+                                    <ProductListForm handleClick={(e) => this.handleAmount(p)} product={p} key={p.key} />)}
                             </List>
                                     
                         </Segment>
@@ -229,7 +242,7 @@ const mapStateToProps = (state) => {
                 nimi: p.nimi,
                 value: p.id,
                 koko: p.koko,
-                kpl: p.kpl ? Number(p.kpl): 0,
+                varastossakpl: p.kpl ? Number(p.kpl): 0, //
                 kuvaus: p.kuvaus
             }
         })
@@ -238,5 +251,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { getCustomers }
+    { getCustomers, addLending}
 )(LendingForm)

@@ -9,23 +9,25 @@ class NumberPicker extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            value: 1
+            value: this.props.amount
         }
     }
 
-    changeValue = (e) => {
-        let value = this.state.value
-        e.currentTarget.name === 'plus' ? value++ : value--
-        if(value < 0){ value = 0}
-        this.setState({value})
-    }
+    // changeValue = (e) => {
+    //     let value = this.state.amount
+    //     console.log(value)
+    //     e.currentTarget.name === 'plus' ? value++ : value--
+    //     if(value < 0){ value = 0}
+    //     this.setState({ amount: value})
+    // }
 
     render() {
+        const { handleClick } = this.props
         return(
-            <Input size="mini" style={numberPickerStyle} labelPosition='right' type='text' placeholder='kpl' >
-                <Button disabled={this.state.value === 0} name="minus" size="mini" icon="minus" onClick={this.changeValue} icon="minus" />
-                <input value={this.state.value} />
-                <Button name="plus" size="mini" icon="plus" onClick={this.changeValue} icon="plus" />
+            <Input value={this.props.amount} size="mini" style={numberPickerStyle} labelPosition='right' type='text' placeholder='kpl' >
+                <Button disabled={this.state.amount === 0} name="minus" size="mini" icon="minus" onClick={handleClick} icon="minus" />
+                <input />
+                <Button name="plus" size="mini" icon="plus" onClick={handleClick} icon="plus" />
             </Input >
         )
     }

@@ -6,5 +6,8 @@ const getAll = () => {
     const request = axios.get(baseUrl)
     return request.then(response => response.data)
 }
-
-export default { getAll } 
+const createNew = async (lending) => {
+    const response = await axios.post(baseUrl,lending)
+    return response.data
+}
+export default { getAll, createNew } 

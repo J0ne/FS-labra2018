@@ -6,17 +6,14 @@ import NumberPicker from './NumberPicker'
 class ProductListForm extends React.Component{
     constructor(props){
         super(props)
-        this.state = {
-            numberPickerValue: 0,
-            name: 'kpl'
-        }
     }
 
     render() {
-        const { product } = this.props
+        const { product, handleClick } = this.props
+        console.log('handleClick',handleClick)
         return(
             <List.Item key={product}>
-                <NumberPicker  />
+                <NumberPicker handleClick={handleClick} />
                 <Button floated="right" basic compact size='mini' icon="remove"></Button>
                 <List.Icon name='github' size='large' verticalAlign='middle' />
                 <List.Content> <List.Header as='a'>{product.nimi }</List.Header>

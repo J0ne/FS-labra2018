@@ -90,6 +90,13 @@
       "kuvaus": "Materiaali: komposiittia",
       "kpl": "100",
       "id": 16
+    },
+    {
+      "nimi": "",
+      "koko": "",
+      "kuvaus": "",
+      "kpl": 0,
+      "id": 17
     }
   ],
   "lendings": [
@@ -101,6 +108,160 @@
       "alkupvm": "2018-03-16",
       "loppupvm": null,
       "status": "aktiivinen"
+    },
+    {
+      "tuotteet": [
+        {},
+        {},
+        {}
+      ],
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 2
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 5,
+          "kpl": 50
+        }
+      ],
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 3
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 5,
+          "kpl": 1
+        },
+        {
+          "id": 6,
+          "kpl": 1
+        }
+      ],
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 4
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 4,
+          "kpl": 1
+        },
+        {
+          "id": 5,
+          "kpl": 1
+        },
+        {
+          "id": 6,
+          "kpl": 1
+        }
+      ],
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 5
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 4,
+          "kpl": 1
+        },
+        {
+          "id": 5,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 1,
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 6
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 4,
+          "kpl": 1
+        },
+        {
+          "id": 5,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 1,
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 7
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 4,
+          "kpl": 1
+        },
+        {
+          "id": 5,
+          "kpl": 1
+        },
+        {
+          "id": 6,
+          "kpl": 1
+        },
+        {
+          "id": 7,
+          "kpl": 1
+        },
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 9,
+          "kpl": 1
+        },
+        {
+          "id": 10,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 1
+        },
+        {
+          "id": 12,
+          "kpl": 1
+        },
+        {
+          "id": 13,
+          "kpl": 1
+        },
+        {
+          "id": 14,
+          "kpl": 1
+        },
+        {
+          "id": 15,
+          "kpl": 1
+        },
+        {
+          "id": 16,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-03-27",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 8
     }
   ],
   "customers": [
