@@ -34,15 +34,15 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |	16.3.| 	2,5 | navigaatiota, SPA-hommia,dummy-dataa, UI-komponenttien testailua (mm. modal)
 |   16.3 |  2   | datepicker-komponentti, moment.js + lokalisointi (fi), lainaus-form, Select2|
 |   17.3.|  4,5   | Select2:n käyttöä, asiakkaiden haku: putkea kuntoon, service, reducer..., Select2 lazyna, jonka hylkäsin toistaiseksi, LendingForm: UIn hahmottelua (Semanticin Step-komponentti)|
-|	19.3.|	4,5	| Select2:n korvaaminen UI Semanticin omalla dropdownilla (pajassa 2h), Steppien näkyvyydet,
-productForm-komponentti ja lendingFormin parantelua	|
+|	19.3.|	4,5	| Select2:n korvaaminen UI Semanticin omalla dropdownilla (pajassa 2h), Steppien näkyvyydet,productForm-komponentti ja lendingForminparantelua |
 |	24.3.| 5	| Lainauslomakkeen tekoa UI-säätöä, NumberPicker-komponentin kanssa painimista, tuotteiden tallennus: lomake, reducer ym.|
 |	24.3.| 3	| Lainauslomake, yritystä saada dropdownin kautta oliot talteen, ei vain key/value, jäi kesken...|
 |	25.3.| 4,5	| Lainauslomake: dropdown/select kondikseen; stateen oma taulukko olioita varten, tuotelistausta ja parantelua, uuden tuotteen lisäsys Toggalable-komponentin "taakse"|
 |	26.3.| 3	| Oma numerokomponentti (paja 1h), lainauksen tallennusta |
 |	26.3.| 3,5	| Lainauksen tallennus, numerokomponentin arvon kanssa säätöä|
 |	27.3.| 2	| numerokomponentti|
-|	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille, tuotteiden lukumäärät tallentuvat|
+|	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille |
+|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																					|
 
 
 
