@@ -337,6 +337,52 @@
       "palautettu": null,
       "palautuspvm": "2018-04-04",
       "id": 11
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 12,
+          "kpl": 1
+        },
+        {
+          "id": 13,
+          "kpl": 1
+        },
+        {
+          "id": 14,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-03-30",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 12
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 6,
+          "kpl": 2
+        },
+        {
+          "id": 7,
+          "kpl": 3
+        },
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 9,
+          "kpl": 3
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-03-30",
+      "palautettu": null,
+      "palautuspvm": "2018-09-22T16:49:53.000Z",
+      "id": 13
     }
   ],
   "customers": [

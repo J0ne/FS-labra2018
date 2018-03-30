@@ -20,9 +20,11 @@ class LendingForm extends React.Component {
             selectedProductsAsObjs: [],
             productsSelected: false,
             deadlineDate: null,
-            confirmed: false
+            confirmed: false,
+            saved: false,
+
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
         this.customerSelect = this.customerSelect.bind(this);
         this.updateProduct = this.updateProduct.bind(this);
     }
@@ -46,7 +48,8 @@ class LendingForm extends React.Component {
     componentDidMount(){
         this.props.getCustomers()
     }
-    handleChange = (e) => {
+    handleDeadlineChange = (deadline) => {
+        this.setState({deadlineDate: deadline.toISOString()})
     }
     handleProductSelection = (e) => {
         this.setState({productsSelected: true})
@@ -56,9 +59,9 @@ class LendingForm extends React.Component {
         const newLending = {
             tuotteet: this.state.selectedProductsAsObjs.map( p => { return {id: p.key, kpl: p.lkm}}),
             asiakasid: this.state.selectedCustomerId,
-            alkupvm: moment().format('YYYY-MM-DD'),
+            alkupvm: moment().format('YYYY-MM-DD'), // todo: timestamp oikeasti backendissä
             palautettu: null,
-            palautuspvm: '2018-04-04'
+            palautuspvm: this.state.deadlineDate
         }
         this.props.addLending(newLending)
     }
@@ -168,25 +171,7 @@ class LendingForm extends React.Component {
                                             onClick={this.handleProductSelection}>Lisää tuotteet</Button>
                                     </Form.Group>
                                 </Form>
-                                {/* <div style={this.getDisplayValue(1)}>
-                                    <Dropdown
-                                        size="small"
-                                        noResultsMessage="Ei lisättäviä tuotteita"
-                                        value={this.state.selectedProducts}
-                                        onChange={this.handleProductsChange}
-                                        placeholder='Valitse tuotteet'
-                                        multiple
-                                        fluid search selection
-                                        options={this.props.products} />
-                                </div> */}
-                                <div style={this.getDisplayValue(2)}>
-                                    {/* <DatePicker
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
-                        placeholderText="Palautuspäivä" /> */}
-                                </div>
-
-                            </div>   
+                               </div>   
                         </Grid.Column>
                     </Grid>
         </Container>
@@ -204,7 +189,15 @@ class LendingForm extends React.Component {
                                     <ProductListForm updateProduct={this.updateProduct} product={p} key={p.key} />)}
                                 {/* handleClick={(e) => this.handleAmount(p)} */}
                             </List>
-                                    
+                            <Segment>
+                                <Form.Group>
+                                    <Label><Icon name="calendar" /> Palautuspäivä</Label>
+                                    <DatePicker
+                                        selected={this.state.startDate}
+                                        onChange={this.handleDeadlineChange}
+                                        placeholderText="Palautuspäivä" />
+                                </Form.Group>
+                            </Segment>
                         </Segment>
                         <Segment floated="left">
                             <Form.Field>
@@ -218,7 +211,7 @@ class LendingForm extends React.Component {
                             </Form.Field>
                         </Segment>
                         <Segment floated='right'>
-                           
+                         
                             <Button.Group floated="right" style={!this.state.productsSelected ? { display: 'none' } : { display: '' }} >
                                 <Button negative><Icon name="remove" /> Peruuta</Button>
                                 {/* <Button.Or text="tai" /> */}

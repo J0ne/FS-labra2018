@@ -3,7 +3,6 @@ import { Form, Button, Modal } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { createProduct} from '../reducers/productReducer'
 
-
 const options = [
     { key: '-', text: ' Ei valintaa ', value: 'ei valintaa' },
     { key: 'k', text: 'Kesä', value: 'kesä' },

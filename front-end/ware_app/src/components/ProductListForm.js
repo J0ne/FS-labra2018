@@ -32,7 +32,6 @@ class ProductListForm extends React.Component{
                 <List.Content> <List.Header as='a'>{product.nimi }</List.Header>
                     <List.Description as='a'>{product.kuvaus} {product.koko}</List.Description>
                 </List.Content>
-                {/* <NumberPicker value={this.state.numberPickerValue} onChange={this.updateNumberPicker} /> */}
             </List.Item>
         )
     } 
