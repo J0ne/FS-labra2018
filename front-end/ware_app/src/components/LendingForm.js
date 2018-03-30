@@ -193,7 +193,8 @@ class LendingForm extends React.Component {
                             </ul>
                             <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
                                 {this.state.selectedProductsAsObjs.map(p => 
-                                    <ProductListForm handleClick={(e) => this.handleAmount(p)} product={p} key={p.key} />)}
+                                    <ProductListForm  product={p} key={p.key} />)}
+                                {/* handleClick={(e) => this.handleAmount(p)} */}
                             </List>
                                     
                         </Segment>
