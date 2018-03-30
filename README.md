@@ -42,7 +42,7 @@ productForm-komponentti ja lendingFormin parantelua	|
 |	26.3.| 3	| Oma numerokomponentti (paja 1h), lainauksen tallennusta |
 |	26.3.| 3,5	| Lainauksen tallennus, numerokomponentin arvon kanssa säätöä|
 |	27.3.| 2	| numerokomponentti|
-|	30.3.| 2	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille|
+|	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille, tuotteiden lukumäärät tallentuvat|
 
 
 

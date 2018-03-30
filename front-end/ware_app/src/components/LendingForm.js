@@ -24,6 +24,7 @@ class LendingForm extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.customerSelect = this.customerSelect.bind(this);
+        this.updateProduct = this.updateProduct.bind(this);
     }
 
     
@@ -82,6 +83,13 @@ class LendingForm extends React.Component {
             return 2;
         }
 
+    }
+    updateProduct(product){
+        const index = this.state.selectedProductsAsObjs.findIndex(p => p.key=== product.key)
+        const arrayToUpdate = this.state.selectedProductsAsObjs
+        arrayToUpdate[index] = product
+        this.setState({ selectedProductsAsObjs: arrayToUpdate})
+        console.table(this.state.selectedProductsAsObjs)
     }
     handleAmount(p){
         console.log(p)
@@ -193,7 +201,7 @@ class LendingForm extends React.Component {
                             </ul>
                             <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
                                 {this.state.selectedProductsAsObjs.map(p => 
-                                    <ProductListForm  product={p} key={p.key} />)}
+                                    <ProductListForm updateProduct={this.updateProduct} product={p} key={p.key} />)}
                                 {/* handleClick={(e) => this.handleAmount(p)} */}
                             </List>
                                     
@@ -220,6 +228,7 @@ class LendingForm extends React.Component {
                             </Button.Group>
                         </Segment>
                     </Segment.Group>
+                    
         </Container>
             </Container>
         )

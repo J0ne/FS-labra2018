@@ -10,17 +10,20 @@ class ProductListForm extends React.Component{
             product: this.props.product,
             amount: 1
         }
+        this.updateNumberPicker = this.updateNumberPicker.bind(this);
     }
     
     updateNumberPicker = (e) =>{
-    console.log(e, this)
-    this.setState({ amount: Number(e.value) });
-    console.log(this.state)
-}
+        const newValue = Number(e.value)
+        console.log(this)
+        const updatedProduct = {...this.state.product, lkm: newValue} 
+        this.setState({ amount: newValue, updatedProduct });
+        setTimeout(this.props.updateProduct, 1, updatedProduct);
+    }
 
     render() {
-        const { product} = this.props
-        console.log(this.state.product.nimi, this.state.amount)
+        const { product } = this.props
+        console.log(this.state.product.nimi )
         return(
             <List.Item key={product}>
                 <NumberPicker value={this.state.amount} onChange={this.updateNumberPicker} />
