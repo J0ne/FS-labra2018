@@ -101,26 +101,6 @@
   ],
   "lendings": [
     {
-      "id": 1,
-      "tuoteid": 2,
-      "asiakasid": 1,
-      "kpl": 1,
-      "alkupvm": "2018-03-16",
-      "loppupvm": null,
-      "status": "aktiivinen"
-    },
-    {
-      "tuotteet": [
-        {},
-        {},
-        {}
-      ],
-      "alkupvm": "2018-03-27",
-      "palautettu": null,
-      "palautuspvm": "2018-04-04",
-      "id": 2
-    },
-    {
       "tuotteet": [
         {
           "id": 5,
@@ -383,6 +363,27 @@
       "palautettu": null,
       "palautuspvm": "2018-09-22T16:49:53.000Z",
       "id": 13
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 4,
+          "kpl": 1
+        },
+        {
+          "id": 5,
+          "kpl": 1
+        },
+        {
+          "id": 12,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 1,
+      "alkupvm": "2018-03-31",
+      "palautettu": null,
+      "palautuspvm": "2018-03-29T09:01:18.000Z",
+      "id": 14
     }
   ],
   "customers": [

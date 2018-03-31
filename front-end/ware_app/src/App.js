@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {Provider} from 'react-redux'
 import ConnectedProductList from './components/ProductList'
 import LendingForm from './components/LendingForm'
+import ConnectedLendingList from './components/LendingList'
 import { productInitialization } from './reducers/productReducer'
+import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
@@ -21,7 +23,7 @@ class App extends Component {
     super(props)
     this.state = {
       products: [],
-      activeItem: 'Lainaukset',
+      activeItem: '/',
       modalOpen: false
     }
 }
@@ -33,6 +35,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     this.props.productInitialization()
+    this.props.getLendings()
   }
   render() {
 
@@ -42,9 +45,10 @@ class App extends Component {
       <Router>
       <Container>
        <Menu stackable={true}>
-          <Menu.Item name='Lainaukset' as={NavLink} to={"/lainaukset"} active={activeItem === 'Lainaukset'} onClick={this.handleItemClick} />
-            <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={this.handleItemClick} />
-            <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={this.handleItemClick} />
+        <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === '/'} onClick={this.handleItemClick} />
+        <Menu.Item name='Uusi lainaus' as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={this.handleItemClick} />
+        <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={this.handleItemClick} />
+        <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={this.handleItemClick} />
           <Menu.Menu position='right'>
             <Menu.Item>
               <Input icon='search' placeholder='Search...' />
@@ -52,7 +56,11 @@ class App extends Component {
             <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
           </Menu.Menu>
         </Menu>
-            <Route exact path="/lainaukset" render={({ match }) => <div><LendingForm store={this.props.store} />
+         <Route exact path="/" render={({ match }) => <div>
+              <ConnectedLendingList store={this.props.store} />
+            </div>} />
+            <Route exact path="/uusilainaus" render={({ match }) => <div>
+              <LendingForm store={this.props.store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
@@ -83,5 +91,5 @@ class App extends Component {
 
 export default connect(
   null,
-  { productInitialization }
+  { productInitialization, getLendings }
 )(App)

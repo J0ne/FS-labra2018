@@ -42,8 +42,9 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |	26.3.| 3,5	| Lainauksen tallennus, numerokomponentin arvon kanssa säätöä|
 |	27.3.| 2	| numerokomponentti|
 |	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille |
-|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																					|
-
+|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 	
+|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																				|
+|	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä | 	
 
 
 

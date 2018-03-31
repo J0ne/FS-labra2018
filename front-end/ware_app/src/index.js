@@ -7,7 +7,7 @@ import moment from 'moment'
 import localeFi from 'moment/locale/fi'
 import { Provider } from 'react-redux'
 
-moment.locale('fi', localeFi);
+moment.updateLocale('fi', localeFi);
 
 const render = () => {
     ReactDOM.render(
