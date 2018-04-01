@@ -44,7 +44,8 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille |
 |	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 	
 |	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																				|
-|	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä | 	
+|	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä |
+|	1.4. | 2	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti |	
 
 
 

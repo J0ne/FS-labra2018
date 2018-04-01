@@ -384,6 +384,135 @@
       "palautettu": null,
       "palautuspvm": "2018-03-29T09:01:18.000Z",
       "id": 14
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 12,
+          "kpl": 1
+        },
+        {
+          "id": 14,
+          "kpl": 1
+        },
+        {
+          "id": 15,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "2018-03-30T08:47:33.000Z",
+      "id": 15
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 7,
+          "kpl": 1
+        },
+        {
+          "id": 10,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 1
+        },
+        {
+          "id": 12,
+          "kpl": 1
+        },
+        {
+          "id": 13,
+          "kpl": 1
+        },
+        {
+          "id": 14,
+          "kpl": 4
+        },
+        {
+          "id": 15,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "2018-04-05T09:50:33.000Z",
+      "id": 16
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 7,
+          "kpl": 4
+        },
+        {
+          "id": 12,
+          "kpl": 1
+        },
+        {
+          "id": 13,
+          "kpl": 1
+        },
+        {
+          "id": 14,
+          "kpl": 1
+        },
+        {
+          "id": 16,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": null,
+      "id": 17
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 6,
+          "kpl": 1
+        },
+        {
+          "id": 7,
+          "kpl": 4
+        },
+        {
+          "id": 9,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04",
+      "id": 18
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 9,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 3
+        }
+      ],
+      "asiakasid": 2,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "2018-03-30T10:14:02.000Z",
+      "id": 19
     }
   ],
   "customers": [

@@ -11,7 +11,8 @@ import Divider, {
     Icon,
     Grid,
     List,
-    Label
+    Label,
+    Message
 } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
@@ -32,7 +33,14 @@ class LendingForm extends React.Component {
             productsSelected: false,
             deadlineDate: null,
             confirmed: false,
-            saved: false
+            saved: false,
+            showMessage: false,
+            messageData: {
+                success: false,
+                warning: false,
+                header: '',
+                content: ''
+            }
         }
         this.handleDeadlineChange = this
             .handleDeadlineChange
@@ -91,11 +99,19 @@ class LendingForm extends React.Component {
             asiakasid: this.state.selectedCustomerId,
             alkupvm: moment().format('YYYY-MM-DD'), // todo: timestamp oikeasti backendissä
             palautettu: null,
-            palautuspvm: this.state.deadlineDate
+            // TODO: laitetaan aluksi oletusarvo vain 3 päivää nykyhetkestä testauksen
+            // vuoksi
+            palautuspvm: !this.state.deadlineDate
+                ? moment()
+                    .add(3, 'days')
+                    .format('YYYY-MM-DD')
+                : this.state.deadlineDate
         }
         this
             .props
             .addLending(newLending)
+
+        this.showMessage('', '', 3)
     }
     handleKuittaus = (e, {checked}) => {
         this.setState({confirmed: checked})
@@ -136,6 +152,19 @@ class LendingForm extends React.Component {
         } else {
             return {display: 'none'}
         }
+    }
+    showMessage(type, content, seconds) {
+        const messageData = {
+            success: true,
+            header: 'Tuotteen tallennus',
+            content: 'Tallennus onnistui'
+        }
+        this.setState({showMessage: true, messageData})
+
+        setTimeout(() => {
+            this.setState({showMessage: false })
+        }, seconds * 1000);
+
     }
 
     render() {
@@ -283,7 +312,13 @@ class LendingForm extends React.Component {
                             </Form.Field>
                         </Segment>
                         <Segment floated='right'>
-
+                            {this.state.showMessage
+                                ? <Message
+                                        success={this.state.messageData.success}
+                                        warning={this.state.messageData.warning}
+                                        header={this.state.messageData.header}
+                                        content={this.state.messageData.content}/>
+                                : ''}
                             <Button.Group
                                 floated="right"
                                 style={!this.state.productsSelected
@@ -324,7 +359,9 @@ const mapStateToProps = (state) => {
             .map(p => {
                 return {
                     key: p.id,
-                    text: p.koko && p.koko.length > 0 ? p.nimi +', ' + p.koko : p.nimi,
+                    text: p.koko && p.koko.length > 0
+                        ? p.nimi + ', ' + p.koko
+                        : p.nimi,
                     nimi: p.nimi,
                     value: p.id,
                     koko: p.koko,
