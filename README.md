@@ -23,7 +23,7 @@ Käyttäjä voi kirjata lainauksia asiakkaalle. Toiminnallisuus etenee seuraavas
 4. käyttäjä valitsee palautuspäivän, jolloin tuotteen on palautettava. 
 5. käyttäjän täytyy merkitä kuittaus suoritetuksi ennen lainaustapahtuman tallennusta. Tämä simuloi asiakkaan allekirjoitusta / kuittausta
 6. käyttäjä tallentaa lainauksen. Näin lainaus on päätynyt aktiivisena järjestelmään.
----
+
 todo: ns. aktiivisten lainauksien kuittaus...
 
 Lainauksen tallentaminen muuttaa varastossa olevan tuotteen kappalemäärää.
