@@ -8,19 +8,29 @@ https://github.com/J0ne/FS-labra2018/tree/master/front-end/ware_app
 *Back end:* (todo)
 
 
-Sovellus on eräänlainen lainauksien hallinta. 
+Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
 
 ### Lyhyesti:
 Varastossa on n kpl erilaisia tuotteita. 
 Asiakasrekisterissä on asiakkaat, jotka lainaavat tavaroita.
 Lainaukset ovat siis toimenpiteitä, jotka liittyvät tuotteeseen ja asiakkaaseen.
 
-Ohjelman käyttäjän tulee olla kirjautunut sovellukseen.
-Käyttäjä voi kirjata lainauksia asiakkaalle. Ja (jos aika riittää, niin) hallinnoida sekä asiakkaita että tuotteita.
+Ohjelman käyttäjän tulee olla kirjautunut sovellukseen. (TODO)
+Käyttäjä voi kirjata lainauksia asiakkaalle. Toiminnallisuus etenee seuraavasti:
+1. käyttäjä valitsee asiakkaan
+2. käyttäjä valitsee tuotteita ja liittää ne lainaukseen
+3. käyttäjä voi muuttaa tuotteiden kappalemääriä 
+4. käyttäjä valitsee palautuspäivän, jolloin tuotteen on palautettava. 
+5. käyttäjän täytyy merkitä kuittaus suoritetuksi ennen lainaustapahtuman tallennusta. Tämä simuloi asiakkaan allekirjoitusta / kuittausta
+6. käyttäjä tallentaa lainauksen. Näin lainaus on päätynyt aktiivisena järjestelmään.
+---
+todo: ns. aktiivisten lainauksien kuittaus...
 
 Lainauksen tallentaminen muuttaa varastossa olevan tuotteen kappalemäärää.
 
-Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusvarasto.
+Esimerkkinä ohjelman käyttökohteelle voisi olla esimerkiksi armeijan varusvarasto.
+
+Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
 
 ---
 
@@ -45,7 +55,7 @@ Esimerkkinä ohjelman käyttökohteellee voisi olla esimerkiksi armeijan varusva
 |	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 	
 |	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																				|
 |	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä |
-|	1.4. | 2	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti |	
+|	1.4. | 2,5	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti, ohjeiden (read.me) päivitystä |	
 
 
 
