@@ -14,14 +14,7 @@
     "watch": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/J0ne/FS-labra2018.git"
-  },
   "author": "Jouni Männistö",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/J0ne/FS-labra2018/issues"
-  },
   "homepage": "https://github.com/J0ne/FS-labra2018#readme"
 }
