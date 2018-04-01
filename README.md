@@ -53,12 +53,11 @@ Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
 |	26.3.| 3,5	| Lainauksen tallennus, numerokomponentin arvon kanssa säätöä|
 |	27.3.| 2	| numerokomponentti|
 |	30.3.| 4	| numerokomponentti, ratkaisu löytyi. lapsikomponentista kutsu: this.props.<handle> välitti arvon isäkomponentille |
-|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 	
-|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																				|
+|	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																					|
 |	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä |
 |	1.4. | 2,5	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti, ohjeiden (read.me) päivitystä |	
 |	1.4. | 1,5	| UI-muutoksia, perehtymistä: listaukseen/raporttinäkymään mahdollinen komponentti: https://react-table.js.org/#/story/simple-table		|
-|	1.4. | 3	| Backendin toteutusta, aloitusta, pakkausten asentelua, index.js, mongoose, tietokanta mLabiin |
+|	1.4. | 3,5	| Backendin toteutusta, aloitusta, pakkausten asentelua, index.js, mongoose, tietokanta mLabiin |
 
 
 
