@@ -5,7 +5,8 @@ Full Stack - websovelluskehitys - harjoitustyön repositorio
 *Front end:*
 https://github.com/J0ne/FS-labra2018/tree/master/front-end/ware_app
 
-*Back end:* (todo)
+*Back end:* 
+https://github.com/J0ne/FS-labra2018/tree/master/backend
 
 
 Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
@@ -57,6 +58,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
 |	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä |
 |	1.4. | 2,5	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti, ohjeiden (read.me) päivitystä |	
 |	1.4. | 1,5	| UI-muutoksia, perehtymistä: listaukseen/raporttinäkymään mahdollinen komponentti: https://react-table.js.org/#/story/simple-table		|
+|	1.4. | 3	| Backendin toteutusta, aloitusta, pakkausten asentelua, index.js, mongoose, tietokanta mLabiin |
 
 
 
