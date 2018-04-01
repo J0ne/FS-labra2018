@@ -56,6 +56,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
 |	30.3.| 1	| tuotteiden lukumäärät tallentuvat | 																				|
 |	31.3.| 3	| lainauksien listaus, päivämäärien vertailut vei aikaa, vielä uuden menulinkin active-tieto vähän pielessä |
 |	1.4. | 2,5	| UI - asiaa: lainauksen palautus, kuittaus-modal, tallennuksesta ajastettu message-komponentti, ohjeiden (read.me) päivitystä |	
+|	1.4. | 1,5	| UI-muutoksia, perehtymistä: listaukseen/raporttinäkymään mahdollinen komponentti: https://react-table.js.org/#/story/simple-table		|
 
 
 
