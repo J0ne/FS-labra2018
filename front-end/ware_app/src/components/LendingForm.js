@@ -31,7 +31,7 @@ class LendingForm extends React.Component {
             selectedProducts: [],
             selectedProductsAsObjs: [],
             productsSelected: false,
-            deadlineDate: null,
+            deadlineDate: moment().add(5, 'days').format('l'),
             confirmed: false,
             saved: false,
             showMessage: false,
@@ -88,7 +88,6 @@ class LendingForm extends React.Component {
         this.setState({productsSelected: true})
     }
     handleSave = (e) => {
-        console.log(this.state)
         const newLending = {
             tuotteet: this
                 .state
@@ -112,6 +111,7 @@ class LendingForm extends React.Component {
             .addLending(newLending)
 
         this.showMessage('', '', 3)
+        this.setState({saved: true})
     }
     handleKuittaus = (e, {checked}) => {
         this.setState({confirmed: checked})
@@ -166,6 +166,14 @@ class LendingForm extends React.Component {
         }, seconds * 1000);
 
     }
+    getCurrentDate() {
+        if(!this.state.deadlineDate){
+            return moment().format('l')
+        }
+        else{
+            return moment(this.state.deadlineDate).format('l')
+        }
+    }
 
     render() {
 
@@ -180,7 +188,7 @@ class LendingForm extends React.Component {
                             completed={this.state.selectedCustomer !== null}>
                             <Step.Content>
                                 <Step.Title>Asiakas</Step.Title>
-                                <Step.Description>Valitse asiakas</Step.Description>
+                                <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': this.state.selectedCustomer}</Step.Description>
                             </Step.Content>
                         </Step>
 
@@ -188,12 +196,13 @@ class LendingForm extends React.Component {
                             active={!this.state.productsSelected && this.state.selectedCustomer != null}
                             completed={this.state.selectedProducts.length > 0}>
                             <Step.Content>
-                                <Step.Title>Tuoteet</Step.Title>
-                                <Step.Description>Valitse tuotteet</Step.Description>
+                                <Step.Title>Tuotteet</Step.Title>
+                                <Step.Description>{this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
+                             this.state.selectedProducts.length + ' tuotetta valittuna' }</Step.Description>
                             </Step.Content>
                         </Step>
 
-                        <Step active={this.state.productsSelected}>
+                        <Step completed={this.state.saved} active={this.state.productsSelected}>
                             <Step.Content>
                                 <Step.Title>Tiedot</Step.Title>
                                 <Step.Description>Tilauksen tarkemmat tiedot</Step.Description>
@@ -295,6 +304,7 @@ class LendingForm extends React.Component {
                                     <Label><Icon name="calendar"/>
                                         Palautuspäivä</Label>
                                     <DatePicker
+                                        value={this.state.deadlineDate}
                                         selected={this.state.startDate}
                                         onChange={this.handleDeadlineChange}
                                         placeholderText="Palautuspäivä"/>
@@ -334,7 +344,7 @@ class LendingForm extends React.Component {
                                 <Button><Icon name="edit"/>
                                     Muokkaa</Button>
                                 {/* <Button.Or text="tai" /> */}
-                                <Button disabled={!this.state.confirmed} onClick={this.handleSave} positive><Icon name="save"/>
+                                <Button disabled={!this.state.confirmed || this.state.saved} onClick={this.handleSave} positive><Icon name="save"/>
                                     Tallenna</Button>
                             </Button.Group>
                         </Segment>

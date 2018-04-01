@@ -97,6 +97,20 @@
       "kuvaus": "",
       "kpl": 0,
       "id": 17
+    },
+    {
+      "nimi": "Maastohousut",
+      "koko": "xl",
+      "kuvaus": "",
+      "kpl": "100",
+      "id": 18
+    },
+    {
+      "nimi": "Maastohousut",
+      "koko": "l",
+      "kuvaus": "Valkoinen",
+      "kpl": "100",
+      "id": 19
     }
   ],
   "lendings": [
@@ -513,6 +527,127 @@
       "palautettu": null,
       "palautuspvm": "2018-03-30T10:14:02.000Z",
       "id": 19
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 8,
+          "kpl": 2
+        },
+        {
+          "id": 9,
+          "kpl": 3
+        },
+        {
+          "id": 10,
+          "kpl": 3
+        }
+      ],
+      "asiakasid": 1,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "2018-04-04T13:22:48.000Z",
+      "id": 20
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 6,
+          "kpl": 1
+        },
+        {
+          "id": 7,
+          "kpl": 1
+        },
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 10,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 3,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "6.4.2018",
+      "id": 21
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 6,
+          "kpl": 1
+        },
+        {
+          "id": 7,
+          "kpl": 1
+        },
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 10,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 3,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "6.4.2018",
+      "id": 22
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 7,
+          "kpl": 3
+        },
+        {
+          "id": 8,
+          "kpl": 1
+        },
+        {
+          "id": 9,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 3,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "6.4.2018",
+      "id": 23
+    },
+    {
+      "tuotteet": [
+        {
+          "id": 9,
+          "kpl": 1
+        },
+        {
+          "id": 10,
+          "kpl": 1
+        },
+        {
+          "id": 11,
+          "kpl": 1
+        }
+      ],
+      "asiakasid": 3,
+      "alkupvm": "2018-04-01",
+      "palautettu": null,
+      "palautuspvm": "6.4.2018",
+      "id": 24
     }
   ],
   "customers": [
@@ -525,6 +660,16 @@
       "id": 2,
       "etunimi": "Testaaja",
       "sukunimi": "Teppo"
+    },
+    {
+      "id": 3,
+      "etunimi": "Lapanen",
+      "sukunimi": "Erkka L."
+    },
+    {
+      "id": 4,
+      "etunimi": "Bertil",
+      "sukunimi": "Kepponen"
     }
   ]
 }
