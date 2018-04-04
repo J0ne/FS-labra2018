@@ -9,7 +9,6 @@ const reducer = (state = [], action) => {
         console.table(action.data)
         return action.data
     }
-
     return state
 }
 

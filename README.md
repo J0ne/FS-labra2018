@@ -31,7 +31,7 @@ Lainauksen tallentaminen muuttaa varastossa olevan tuotteen kappalemäärää.
 
 Esimerkkinä ohjelman käyttökohteelle voisi olla esimerkiksi armeijan varusvarasto.
 
-Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
+Ohjelma näyttää etusivulla listauksen lainauksista.
 
 ---
 
@@ -59,6 +59,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista. Lainaus on myö
 |	1.4. | 1,5	| UI-muutoksia, perehtymistä: listaukseen/raporttinäkymään mahdollinen komponentti: https://react-table.js.org/#/story/simple-table		|
 |	1.4. | 3,5	| Backendin toteutusta, aloitusta, pakkausten asentelua, index.js, mongoose, tietokanta mLabiin |
 |	2.4. | 1,5	| React Nativen tutkailua (Expo, ehkä n. 0,5h), backendiin alustava toteutus: getAll ja createNew, putki toimii kantaan asti  |
+|	4.4. | 1,5	| Backendin kehitystä, Product schema mongooseen ja pientä refaktorointia |
 
 
 
