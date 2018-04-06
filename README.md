@@ -60,7 +60,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	1.4. | 3,5	| Backendin toteutusta, aloitusta, pakkausten asentelua, index.js, mongoose, tietokanta mLabiin |
 |	2.4. | 1,5	| React Nativen tutkailua (Expo, ehkä n. 0,5h), backendiin alustava toteutus: getAll ja createNew, putki toimii kantaan asti  |
 |	4.4. | 1,5	| Backendin kehitystä, Product schema mongooseen ja pientä refaktorointia |
-
+|	6.4. | 2	| lainauksen kuittaus |
 
 
 

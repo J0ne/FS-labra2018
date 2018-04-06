@@ -2,21 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Icon, Table, Button, Header, Modal} from 'semantic-ui-react'
 import moment from 'moment'
-import {getLendings} from '../reducers/lendingReducer'
+import {getLendings, markReverted } from '../reducers/lendingReducer'
 
 class LendingList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             modalOpen: false,
-            modalContent: null
+            selectedLending: null
         }
         // this.openModal = this.openModal.bind(this)
         this.kuittaaPalautetuksi = this.kuittaaPalautetuksi.bind(this)
     }
     kuittaaPalautetuksi = (lainaus) => (e) => {
-        console.log(lainaus, e)
-        this.setState({modalOpen: true, modalContent: lainaus});
+        this.setState({modalOpen: true, selectedLending: lainaus});
     }
     onClose = () => this.setState({modalOpen: false});
 
@@ -24,14 +23,31 @@ class LendingList extends React.Component {
 
     hyväksyKuittaus = () => {
         this.setState({modalOpen: false});
-        alert("TODO: tästä kuittaus eteenpäin jne...")
+        const lending = this.convertLending(this.state.selectedLending)
+        
+        lending.palautettu = moment().toISOString()
+        this.props.markReverted(lending)
+        
+    }
+
+    convertLending(lending){
+        return {
+            id: lending.id,
+            nimi: lending.nimi,
+            koko: lending.koko,
+            kuvaus: lending.kuvaus,
+            asiakasid: lending.asiakasid,
+            tuotteet: lending.tuotteet,
+            palautuspvm: moment(lending.palautuspvm).toISOString(),
+            palautettu: lending.palautettu
+        }
     }
 
     render() {
 
         return (
             <div>
-                <Table celled selectable>
+                <Table inverted celled selectable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Numero</Table.HeaderCell>
@@ -48,7 +64,7 @@ class LendingList extends React.Component {
                         {this
                             .props
                             .lendings
-                            .map(lainaus => <Table.Row key={lainaus.id} negative={lainaus.myohassa}>
+                            .map(lainaus => <Table.Row key={lainaus.id} positive={lainaus.palautettu != null} negative={!lainaus.palautettu && lainaus.myohassa}>
                                 <Table.Cell>{lainaus.id}</Table.Cell>
                                 <Table.Cell>{lainaus.alkupvm}</Table.Cell>
                                 <Table.Cell>{lainaus.asiakasid}</Table.Cell>
@@ -56,16 +72,17 @@ class LendingList extends React.Component {
                                 <Table.Cell>{lainaus.palautuspvm}</Table.Cell>
                                 <Table.Cell>{lainaus.myohassa
                                         ? <Icon name="close"/>
-                                        : ''}</Table.Cell>
+                                        : <Icon name="check"/>}</Table.Cell>
                                 <Table.Cell>
-                                    <Button name="kuittaus" onClick={this.kuittaaPalautetuksi(lainaus)}><Icon name="check"/></Button>
+                                    {lainaus.palautettu!= null ? '' :  <Button size="tiny" color='teal' name="kuittaus" onClick={this.kuittaaPalautetuksi(lainaus)}><Icon name="check"/></Button> }
+                                   
                                 </Table.Cell>
                             </Table.Row>)}
                     </Table.Body>
                 </Table>
-                {this.state.modalContent ? 
+                {this.state.selectedLending ? 
                 <Modal open={this.state.modalOpen} basic size='small'>
-    <Header icon='check' content={`Lainauksen ${this.state.modalContent.id} kaikki ${this.state.modalContent.tuotteet.length} tuotetta on palautettu.`} onClose={this.onClose}/>
+    <Header icon='check' content={`Lainauksen ${this.state.selectedLending.id} kaikki ${this.state.selectedLending.tuotteet.length} tuotetta on palautettu.`} onClose={this.onClose}/>
     <Modal.Content>
       <p>Asiakas on palauttanut kaikki lainaamansa tuotteet. Kuitataan lainaus. </p>
     </Modal.Content>
@@ -113,5 +130,5 @@ const mapStateToProps = (state) => {
     }
 }
 // //
-const ConnectedLendingList = connect(mapStateToProps, {getLendings})(LendingList)
+const ConnectedLendingList = connect(mapStateToProps, { getLendings, markReverted })(LendingList)
 export default ConnectedLendingList

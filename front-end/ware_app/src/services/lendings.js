@@ -9,7 +9,12 @@ const createNew = async(lending) => {
     const response = await axios.post(baseUrl, lending)
     return response.data
 }
+
+const markReverted = async(lending) => {
+    const response = await axios.put(baseUrl + '/' + lending.id, lending)
+}
 export default {
     getAll,
-    createNew
+    createNew,
+    markReverted
 }

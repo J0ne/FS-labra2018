@@ -1,13 +1,6 @@
 import React from 'react'
-import Divider, {
-    Container,
-    Dropdown,
-    Button,
-    Checkbox,
-    Form,
-    Header,
-    Step,
-    Segment,
+import Divider, { Container, Dropdown, Button,
+    Checkbox, Form, Header, Step, Segment,
     Icon,
     Grid,
     List,
@@ -21,10 +14,8 @@ import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
 import ProductListForm from './ProductListForm'
-class LendingForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+
+const initialState = {
             startDate: moment(),
             selectedCustomer: null,
             selectedCustomerId: null,
@@ -42,6 +33,11 @@ class LendingForm extends React.Component {
                 content: ''
             }
         }
+
+class LendingForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = initialState
         this.handleDeadlineChange = this
             .handleDeadlineChange
             .bind(this);
@@ -51,6 +47,9 @@ class LendingForm extends React.Component {
         this.updateProduct = this
             .updateProduct
             .bind(this);
+    }
+    resetState() {
+        this.setState(initialState)
     }
 
     handleCustomerChange = (event, data) => {
@@ -106,12 +105,10 @@ class LendingForm extends React.Component {
                     .format('YYYY-MM-DD')
                 : this.state.deadlineDate
         }
-        this
-            .props
-            .addLending(newLending)
+        this.props.addLending(newLending)
 
         this.showMessage('', '', 3)
-        this.setState({saved: true})
+        
     }
     handleKuittaus = (e, {checked}) => {
         this.setState({confirmed: checked})
@@ -163,6 +160,9 @@ class LendingForm extends React.Component {
 
         setTimeout(() => {
             this.setState({showMessage: false })
+            setTimeout(() => {
+                this.resetState()
+            }, 100);
         }, seconds * 1000);
 
     }
