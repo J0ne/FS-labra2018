@@ -11,29 +11,25 @@ console.log(request.params.id)
     response.json(Product.format(product))
 })
 productsRouter.post('/', async(request, response) => {
-    console.log("POST - metodissa...")
+    console.log("POST, product")
     const body = request.body
 
     // todo: loput validoinnit
-    if (body.nimi === undefined) {
-        response
-            .status(400)
-            .json({error: 'fields missing'})
+    if (body.name === undefined) {
+        response.status(400).json({error: 'product name is missing'})
     }
 
     const product = new Product({
-        nimi: body.nimi,
-        kuvaus: body.kuvaus,
-        koko: body.koko,
-        kokonaismäärä: body.kokonaismäärä,
-        varastossaLkm: body.kokonaismäärä,
-        kategoria: body.kategoria
+        name: body.name,
+        description: body.description,
+        size: body.size,
+        amount: body.amount,
+        amountInStorage: body.amountInStorage,
+        category: body.category
     })
 
     const savedProduct = await product.save()
-    response
-        .status(201)
-        .json(savedProduct)
+    response.status(201).json(savedProduct)
 })
 
 module.exports = productsRouter

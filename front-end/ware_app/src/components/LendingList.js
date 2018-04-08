@@ -11,17 +11,17 @@ class LendingList extends React.Component {
             modalOpen: false,
             selectedLending: null
         }
-        // this.openModal = this.openModal.bind(this)
-        this.kuittaaPalautetuksi = this.kuittaaPalautetuksi.bind(this)
+
+        this.confirmReverted = this.confirmReverted.bind(this)
     }
-    kuittaaPalautetuksi = (lainaus) => (e) => {
+    confirmReverted = (lainaus) => (e) => {
         this.setState({modalOpen: true, selectedLending: lainaus});
     }
     onClose = () => this.setState({modalOpen: false});
 
     cancelConfirmation = () => this.setState({modalOpen: false});
 
-    hyväksyKuittaus = () => {
+    acceptConfirmation = () => {
         this.setState({modalOpen: false});
         const lending = this.convertLending(this.state.selectedLending)
         
@@ -62,39 +62,37 @@ class LendingList extends React.Component {
 
                     <Table.Body>
                         {this
-                            .props
-                            .lendings
-                            .map(lainaus => <Table.Row key={lainaus.id} positive={lainaus.palautettu != null} negative={!lainaus.palautettu && lainaus.myohassa}>
-                                <Table.Cell>{lainaus.id}</Table.Cell>
-                                <Table.Cell>{lainaus.alkupvm}</Table.Cell>
-                                <Table.Cell>{lainaus.asiakasid}</Table.Cell>
-                                <Table.Cell>{lainaus.tuotteet.length} tuotetta lainassa</Table.Cell>
-                                <Table.Cell>{lainaus.palautuspvm}</Table.Cell>
-                                <Table.Cell>{lainaus.myohassa
-                                        ? <Icon name="close"/>
-                                        : <Icon name="check"/>}</Table.Cell>
-                                <Table.Cell>
-                                    {lainaus.palautettu!= null ? '' :  <Button size="tiny" color='teal' name="kuittaus" onClick={this.kuittaaPalautetuksi(lainaus)}><Icon name="check"/></Button> }
-                                   
-                                </Table.Cell>
+                            .props.lendings
+                                .map(lainaus => 
+                                <Table.Row key={lainaus.id} positive={lainaus.palautettu != null} negative={!lainaus.palautettu && lainaus.myohassa}>
+                                    <Table.Cell>{lainaus.id}</Table.Cell>
+                                    <Table.Cell>{lainaus.alkupvm}</Table.Cell>
+                                    <Table.Cell>{lainaus.asiakasid}</Table.Cell>
+                                    <Table.Cell>{lainaus.tuotteet.length} tuotetta lainassa</Table.Cell>
+                                    <Table.Cell>{lainaus.palautuspvm}</Table.Cell>
+                                    <Table.Cell>{lainaus.myohassa
+                                        ? <Icon name="close"/> : <Icon name="check"/>}</Table.Cell>
+                                    <Table.Cell>
+                                        {lainaus.palautettu!= null ? '' :  <Button size="tiny" color='teal' name="kuittaus" onClick={this.confirmReverted(lainaus)}><Icon name="check"/></Button> }
+                                    </Table.Cell>
                             </Table.Row>)}
                     </Table.Body>
                 </Table>
                 {this.state.selectedLending ? 
                 <Modal open={this.state.modalOpen} basic size='small'>
-    <Header icon='check' content={`Lainauksen ${this.state.selectedLending.id} kaikki ${this.state.selectedLending.tuotteet.length} tuotetta on palautettu.`} onClose={this.onClose}/>
-    <Modal.Content>
-      <p>Asiakas on palauttanut kaikki lainaamansa tuotteet. Kuitataan lainaus. </p>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button basic color='red' inverted onClick={this.cancelConfirmation} >
-        <Icon name='remove' /> Peruuta kuittaus
-      </Button>
-      <Button color='green' inverted onClick={this.hyväksyKuittaus} >
-        <Icon name='checkmark' /> Kyllä
-      </Button>
-    </Modal.Actions>
-  </Modal> : <div/> }
+                    <Header icon='check' content={`Lainauksen ${this.state.selectedLending.id} kaikki ${this.state.selectedLending.tuotteet.length} tuotetta on palautettu.`} onClose={this.onClose}/>
+                    <Modal.Content>
+                        <p>Asiakas on palauttanut kaikki lainaamansa tuotteet. Kuitataan lainaus. </p>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button basic color='red' inverted onClick={this.cancelConfirmation} >
+                            <Icon name='remove' /> Peruuta kuittaus
+                         </Button>
+                        <Button color='green' inverted onClick={this.acceptConfirmation} >
+                            <Icon name='checkmark' /> Kyllä
+                        </Button>
+                    </Modal.Actions>
+                </Modal> : <div/> }
             </div>
         )
     }
@@ -112,6 +110,7 @@ const mapStateToProps = (state) => {
                     dateB = new Date(b.palautuspvm);
                 return dateA - dateB;
             })
+            .sort(a => a.palautettu ? 1 : 0)
             .map(l => {
                 return {
                     id: l.id,

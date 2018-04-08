@@ -39,11 +39,11 @@ class ProductList extends React.Component {
                         {this.props.products.map(t => 
                             <Table.Row key={t.id}>
                                 <Table.Cell collapsing>
-                                    <Icon name='circle thin' /> {t.nimi}
+                                    <Icon name='circle thin' /> {t.name}
                                  </Table.Cell>
-                                <Table.Cell>{t.kuvaus}</Table.Cell>
-                                <Table.Cell>{t.koko}</Table.Cell>
-                                <Table.Cell collapsing textAlign='right'>{t.kpl}</Table.Cell>
+                                <Table.Cell>{t.description}</Table.Cell>
+                                <Table.Cell>{t.size}</Table.Cell>
+                                <Table.Cell collapsing textAlign='right'>{t.amountinstorage}</Table.Cell>
                             </Table.Row>)}
                     
                         </Table.Body>
@@ -54,7 +54,7 @@ class ProductList extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state.products)
+    console.table(state.products)
     return {
         products: state.products
     }

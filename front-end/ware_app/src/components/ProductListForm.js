@@ -16,21 +16,21 @@ class ProductListForm extends React.Component{
     updateNumberPicker = (e) =>{
         const newValue = Number(e.value)
         console.log(this)
-        const updatedProduct = {...this.state.product, lkm: newValue} 
+        const updatedProduct = {...this.state.product, amount: newValue} 
         this.setState({ amount: newValue, updatedProduct });
         setTimeout(this.props.updateProduct, 1, updatedProduct);
     }
 
     render() {
         const { product } = this.props
-        console.log(this.state.product.nimi )
+        console.log(this.state.product.name )
         return(
             <List.Item key={product}>
                 <NumberPicker value={this.state.amount} onChange={this.updateNumberPicker} />
                 <Button floated="right" basic compact size='mini' icon="remove"></Button>
                 <List.Icon name='github' size='large' verticalAlign='middle' />
-                <List.Content> <List.Header as='a'>{product.nimi }</List.Header>
-                    <List.Description as='a'>{product.kuvaus} {product.koko}</List.Description>
+                <List.Content> <List.Header as='a'>{product.name }</List.Header>
+                    <List.Description as='a'>{product.description} {product.size}</List.Description>
                 </List.Content>
             </List.Item>
         )

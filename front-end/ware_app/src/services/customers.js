@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = "http://localhost:3001/customers"
+const baseUrl = "http://localhost:3003/api/customers"
 
 
 const getAll = () => {

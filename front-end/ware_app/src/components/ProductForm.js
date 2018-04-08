@@ -29,10 +29,10 @@ class ProductForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const newProduct = {
-            nimi: this.state.nimi,
-            koko: this.state.koko,
-            kuvaus: this.state.tiedot,
-            kpl: this.state.kpl
+            name: this.state.nimi,
+            size: this.state.koko,
+            description: this.state.tiedot,
+            amountInStorage: this.state.kpl
         }
         this.props.createProduct(newProduct)
     }

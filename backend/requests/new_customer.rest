@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/customers
+content-type: application/json
+
+{
+        "firstname": "Matti",
+        "lastname": "Möttönen",
+        "email": "matti@esim.com",
+        "telephone": "0505556667",
+        "department": "osasto 2"
+}

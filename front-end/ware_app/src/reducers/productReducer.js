@@ -2,7 +2,6 @@ import productService from '../services/products'
 
 const reducer = (state = [], action) => {
     if (action.type === 'ADD_PRODUCT') {
-        debugger
         return [...state, action.data]
     }
     if (action.type === 'INIT_PRODUCTS') {

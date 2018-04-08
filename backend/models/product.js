@@ -1,26 +1,25 @@
 const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
-    nimi: String,
-    koko: String,
-    kuvaus: String,
-    kokonaismäärä: Number,
-    varastossaLkm: Number,
-    lainassaLkm: Number,
-    kategoria: String
+    name: String,
+    size: String,
+    description: String,
+    amount: Number,
+    amountInStorage: Number,
+    amountOfLended: Number,
+    category: String
 })
 
 productSchema.statics.format = (product) => {
     return {
         id: product._id,
-        nimi: product.nimi,
-        kuvaus: product.kuvaus,
-        koko: product.koko,
-        kokonaismäärä: product.kokonaismäärä,
-        varastossaLkm: product.varastossaLkm,
-        lainassaLkm: product.varastossaLkm,
-        kategoria: product.kategoria
-
+        name: product.name,
+        description: product.description,
+        size: product.size,
+        amount: product.amount,
+        amountInStorage: product.amountInStorage,
+        amountOfLended: product.amountOfLended,
+        category: product.category
     }
 }
 

@@ -2,10 +2,10 @@ POST http://localhost:3003/api/products
 content-type: application/json
 
 {
-      "nimi": "Kerrasto",
-      "koko": "xl",
-      "kuvaus": "Lyhyet kalsarit, verkkopaita",
-      "kokonaismäärä": 100,
-      "varastossaLkm": 100,
-      "kategoria": "vaatteet"
+      "name": "Saappaat",
+      "size": "41",
+      "description": "mustat, nahkaa",
+      "amount": 100,
+      "amountInStorage": 100,
+      "category": "jalkineet"
 }

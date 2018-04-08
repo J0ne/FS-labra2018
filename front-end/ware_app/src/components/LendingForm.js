@@ -281,7 +281,7 @@ class LendingForm extends React.Component {
                                 {this
                                     .state
                                     .selectedProductsAsObjs
-                                    .map(p => <li key={p.key}>{p.text} {p.kuvaus}</li>)}
+                                    .map(p => <li key={p.key}>{p.text} {p.description}</li>)}
                             </ul>
                             <List
                                 divided
@@ -362,23 +362,23 @@ const mapStateToProps = (state) => {
         customers: state
             .customers
             .map(c => {
-                return {text: `${c.etunimi} ${c.sukunimi}`, key: c.id, value: `${c.etunimi} ${c.sukunimi}`}
+                return {text: `${c.firstname} ${c.lastname}`, key: c.id, value: `${c.firstname} ${c.lastname}`}
             }),
         products: state
             .products
             .map(p => {
                 return {
                     key: p.id,
-                    text: p.koko && p.koko.length > 0
-                        ? p.nimi + ', ' + p.koko
-                        : p.nimi,
-                    nimi: p.nimi,
+                    text: p.size && p.size.length > 0
+                        ? p.name + ', ' + p.size
+                        : p.name,
+                    name: p.name,
                     value: p.id,
-                    koko: p.koko,
-                    varastossakpl: p.kpl
-                        ? Number(p.kpl)
+                    size: p.size,
+                    amountinstorage: p.amountInStorage
+                        ? Number(p.amountInStorage)
                         : 0, //
-                    kuvaus: p.kuvaus
+                    description: p.description
                 }
             })
     }
