@@ -43,7 +43,7 @@ class ProductList extends React.Component {
                                  </Table.Cell>
                                 <Table.Cell>{t.description}</Table.Cell>
                                 <Table.Cell>{t.size}</Table.Cell>
-                                <Table.Cell collapsing textAlign='right'>{t.amountinstorage}</Table.Cell>
+                                <Table.Cell collapsing textAlign='right'>{t.amountInStorage}</Table.Cell>
                             </Table.Row>)}
                     
                         </Table.Body>

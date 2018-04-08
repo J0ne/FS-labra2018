@@ -10,6 +10,7 @@ const lendingReducer = (state = [], action) => {
         ]
     }
     if (action.type === 'GET_ALL_LENDINGS') {
+        console.table(action.data)
         return action.data
     }
     if (action.type === 'UPDATE_LENDING') {

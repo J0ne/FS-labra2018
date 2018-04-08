@@ -5,28 +5,8 @@ content-type: application/json
       "customer": "5ac91e3807ed9112067b86d5",
       "products": [
             {
-                  "id": "5ac1efcec4fb53bf55399c57",
-                  "amount": 1
-            },
-            {
-                  "id": "5ac1f03ec4fb53bf55399c58",
-                  "amount": 1
-            },
-            {
-                  "id": "5ac4fc55349676050ababe42",
-                  "amount": 1
-            },
-            {
-                  "id": "5ac4fc5d349676050ababe43",
-                  "amount": 2
-            },
-            {
-                  "id": "5ac4fc61349676050ababe44",
-                  "amount": 1
-            },
-            {
-                  "id": "5ac4fc65349676050ababe45",
-                  "amount": 1
+                  "id": "5ac9c59fc88065241ff9e2db",
+                  "amount": 4
             }
       ],
       "deadline": "2018-06-06"

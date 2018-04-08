@@ -63,7 +63,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	6.4. | 2	| lainauksen kuittaus |
 |	7.4. | 1	| JavaScript-opiskelua: Jeremy Fairbank: https://www.youtube.com/watch?v=HvMemAgOw6I |
 |	 "	 | 2	| backendiin perusoperaatiot (haut ja tallennukset, format-funktiot ym) frontend käyttämään backendiä db.jsonin/test serverin sijaan|
-|	8.4  | 1	| korjauksia ja refaktorointia |
+|	8.4  | 2,5	| korjauksia ja refaktorointia |
 
 
 

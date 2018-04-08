@@ -24,8 +24,6 @@ class LendingList extends React.Component {
     acceptConfirmation = () => {
         this.setState({modalOpen: false});
         const lending = this.convertLending(this.state.selectedLending)
-        
-        lending.palautettu = moment().toISOString()
         this.props.markReverted(lending)
         
     }
@@ -33,13 +31,10 @@ class LendingList extends React.Component {
     convertLending(lending){
         return {
             id: lending.id,
-            nimi: lending.nimi,
-            koko: lending.koko,
-            kuvaus: lending.kuvaus,
-            asiakasid: lending.asiakasid,
-            tuotteet: lending.tuotteet,
-            palautuspvm: moment(lending.palautuspvm).toISOString(),
-            palautettu: lending.palautettu
+            customer: lending.asiakas,
+            products: lending.tuotteet,
+            lendingDate: moment(lending.alkupvm).toISOString(),
+            deadline: moment(lending.palautuspvm).toISOString()
         }
     }
 
@@ -67,7 +62,7 @@ class LendingList extends React.Component {
                                 <Table.Row key={lainaus.id} positive={lainaus.palautettu != null} negative={!lainaus.palautettu && lainaus.myohassa}>
                                     <Table.Cell>{lainaus.id}</Table.Cell>
                                     <Table.Cell>{lainaus.alkupvm}</Table.Cell>
-                                    <Table.Cell>{lainaus.asiakasid}</Table.Cell>
+                                    <Table.Cell>{lainaus.asiakas.firstname} {lainaus.asiakas.lastname}</Table.Cell>
                                     <Table.Cell>{lainaus.tuotteet.length} tuotetta lainassa</Table.Cell>
                                     <Table.Cell>{lainaus.palautuspvm}</Table.Cell>
                                     <Table.Cell>{lainaus.myohassa
@@ -103,25 +98,24 @@ const mapStateToProps = (state) => {
     console.log(state.lendings)
     const currentDate = moment()
     return {
-        lendings: state
-            .lendings
+        lendings: state.lendings
             .sort((a, b) => {
-                var dateA = new Date(a.palautuspvm),
-                    dateB = new Date(b.palautuspvm);
+                var dateA = new Date(a.deadline),
+                    dateB = new Date(b.deadline);
                 return dateA - dateB;
             })
             .sort(a => a.palautettu ? 1 : 0)
             .map(l => {
                 return {
                     id: l.id,
-                    alkupvm: moment(l.alkupvm).format('l'),
-                    asiakasid: l.asiakasid,
-                    tuotteet: l.tuotteet,
-                    palautuspvm: moment(l.palautuspvm).format('l'),
-                    palautettu: l.palautettu
-                        ? moment(l.palautettu).format('l')
+                    alkupvm: moment(l.lendingDate).format('l'),
+                    asiakas: l.customer,
+                    tuotteet: l.products,
+                    palautuspvm: moment(l.deadline).format('l'),
+                    palautettu: l.revertedDate
+                        ? moment(l.revertedDate).format('l')
                         : null,
-                    myohassa: !l.palautettu && moment(l.palautuspvm).isBefore(currentDate),
+                    myohassa: !l.revertedDate && moment(l.revertedDate).isBefore(currentDate),
                     nykyhetki: currentDate.format('l')
                 }
 

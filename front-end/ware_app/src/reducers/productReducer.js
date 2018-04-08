@@ -5,6 +5,7 @@ const reducer = (state = [], action) => {
         return [...state, action.data]
     }
     if (action.type === 'INIT_PRODUCTS') {
+        
         console.table(action.data)
         return action.data
     }
