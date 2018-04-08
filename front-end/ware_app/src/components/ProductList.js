@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
 import { Button, Label, Table, Icon } from 'semantic-ui-react'
 import Togglable from './Togglable'
+
 class ProductList extends React.Component {
     constructor(props){
         super(props)
@@ -54,7 +55,6 @@ class ProductList extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.table(state.products)
     return {
         products: state.products
     }

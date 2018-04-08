@@ -4,7 +4,7 @@ const productHelper = require('../helpers/productHelper')
 
 lendingsRouter.get('/', async(request, response) => {
     const lendings = await Lending.find({}).populate('customer',
-     {'firstname': 1, 'lastname': 1, 'email': 1})
+     {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
     response.json(lendings.map(Lending.format))
 })
 lendingsRouter.get('/:id', async(request, response) => {
@@ -17,11 +17,11 @@ lendingsRouter.post('/', async(request, response) => {
     const body = request.body
 
     // todo: loput validoinnit
-    // if (body.firstname === undefined || body.lastname === undefined) {
-    //     response
-    //         .status(400)
-    //         .json({error: 'Nimitiedot puutteelliset'})
-    // }
+    if (body.customer === undefined) {
+        response
+            .status(400)
+            .json({error: 'Asiakas puuttuu'})
+    }
     const lending = new Lending({
         customer: body.customer,
         products: body.products,
@@ -31,6 +31,7 @@ lendingsRouter.post('/', async(request, response) => {
     })
 
     const savedlending = await lending.save()
+console.log("VARASTON MUUTOKSET!", savedlending.products)
     savedlending.products.map(p => productHelper.decreaseFromStorage(p.id, p.amount))
     response.status(201).json(savedlending)
 })

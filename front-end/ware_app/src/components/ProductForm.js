@@ -95,7 +95,6 @@ class ProductForm extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log("state",state.products)
     return {
         products: state.products
     }

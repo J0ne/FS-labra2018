@@ -67,7 +67,7 @@ class LendingForm extends React.Component {
             .options
             .filter(x => {
                 if (data.value.includes(x.key)) {
-                    x.lkm = 1 // lukumäärä
+                    x.amount = 1 // lukumäärä
                     return x
                 }
             })
@@ -88,18 +88,14 @@ class LendingForm extends React.Component {
     }
     handleSave = (e) => {
         const newLending = {
-            tuotteet: this
+            products: this
                 .state
                 .selectedProductsAsObjs
                 .map(p => {
-                    return {id: p.key, kpl: p.lkm}
+                    return {id: p.key, amount: p.amount}
                 }),
-            asiakasid: this.state.selectedCustomerId,
-            alkupvm: moment().format('YYYY-MM-DD'), // todo: timestamp oikeasti backendissä
-            palautettu: null,
-            // TODO: laitetaan aluksi oletusarvo vain 3 päivää nykyhetkestä testauksen
-            // vuoksi
-            palautuspvm: !this.state.deadlineDate
+            customer: this.state.selectedCustomerId,
+            deadline: !this.state.deadlineDate
                 ? moment()
                     .add(3, 'days')
                     .format('YYYY-MM-DD')
