@@ -1,6 +1,6 @@
 const lendingsRouter = require('express').Router()
 const Lending = require('../models/lending')
-const productHelper = require('../helpers/productHelper')
+const productHelper = require('../services/productService')
 
 lendingsRouter.get('/', async(request, response) => {
     const lendings = await Lending.find({}).populate('customer',
@@ -29,7 +29,7 @@ lendingsRouter.post('/', async(request, response) => {
         revertedDate: null,
         lendingDate: new Date().toISOString()
     })
-
+   
     const savedlending = await lending.save()
 console.log("VARASTON MUUTOKSET!", savedlending.products)
     savedlending.products.map(p => productHelper.decreaseFromStorage(p.id, p.amount))
@@ -45,6 +45,7 @@ lendingsRouter.put('/:id', async(request, response) => {
         revertedDate: new Date().toISOString(),
         lendingDate: body.lendingDate
     }
+console.log('LENDING', lending)
     try {
         const result = await Lending.findByIdAndUpdate(request.params.id, lending, {new: true})
 

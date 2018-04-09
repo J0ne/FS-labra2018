@@ -64,6 +64,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	7.4. | 1	| JavaScript-opiskelua: Jeremy Fairbank: https://www.youtube.com/watch?v=HvMemAgOw6I |
 |	 "	 | 2	| backendiin perusoperaatiot (haut ja tallennukset, format-funktiot ym) frontend käyttämään backendiä db.jsonin/test serverin sijaan|
 |	8.4  | 3,5	| korjauksia ja refaktorointia  (väliaikatietoa: tunteja yhteensä 64)|
+|	9.4. | 3	| Päivämääräkorjauksia, client-puolelle varaston tavaramäärien päivitys [yhteensä 67h] |
 
 
 

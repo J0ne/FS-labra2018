@@ -23,7 +23,9 @@ class LendingList extends React.Component {
 
     acceptConfirmation = () => {
         this.setState({modalOpen: false});
+        debugger
         const lending = this.convertLending(this.state.selectedLending)
+        console.log("LENDING:", lending)
         this.props.markReverted(lending)
         
     }
@@ -33,8 +35,8 @@ class LendingList extends React.Component {
             id: lending.id,
             customer: lending.asiakas,
             products: lending.tuotteet,
-            lendingDate: moment(lending.alkupvm).toISOString(),
-            deadline: moment(lending.palautuspvm).toISOString()
+            lendingDate: moment(lending.alkupvm, 'DD.MM.YYYY').toISOString(),
+            deadline: moment(lending.palautuspvm, 'DD.MM.YYYY').toISOString()
         }
     }
 
@@ -42,10 +44,10 @@ class LendingList extends React.Component {
 
         return (
             <div>
-                <Table inverted celled selectable>
+                <Table celled selectable>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Numero</Table.HeaderCell>
+                            <Table.HeaderCell>Tunnus</Table.HeaderCell>
                             <Table.HeaderCell>Lainauspäivä</Table.HeaderCell>
                             <Table.HeaderCell>Asiakas</Table.HeaderCell>
                             <Table.HeaderCell>Yhteenveto</Table.HeaderCell>
@@ -55,7 +57,7 @@ class LendingList extends React.Component {
                         </Table.Row>
                     </Table.Header>
 
-                    <Table.Body>
+                    <Table.Body >
                         {this
                             .props.lendings
                                 .map(lainaus => 
@@ -95,7 +97,6 @@ class LendingList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.lendings)
     const currentDate = moment()
     return {
         lendings: state.lendings
@@ -104,7 +105,7 @@ const mapStateToProps = (state) => {
                     dateB = new Date(b.deadline);
                 return dateA - dateB;
             })
-            .sort(a => a.palautettu ? 1 : 0)
+            //.sort(a => a.palautettu ? 1 : 0)
             .map(l => {
                 return {
                     id: l.id,
@@ -115,7 +116,7 @@ const mapStateToProps = (state) => {
                     palautettu: l.revertedDate
                         ? moment(l.revertedDate).format('l')
                         : null,
-                    myohassa: !l.revertedDate && moment(l.revertedDate).isBefore(currentDate),
+                    myohassa: !l.revertedDate && moment(l.deadline).isBefore(currentDate),
                     nykyhetki: currentDate.format('l')
                 }
 

@@ -80,7 +80,7 @@ class LendingForm extends React.Component {
     }
     handleDeadlineChange = (deadline) => {
         this.setState({
-            deadlineDate: deadline.toISOString()
+            deadlineDate: moment(deadline).format('l')
         })
     }
     handleProductSelection = (e) => {
@@ -95,11 +95,7 @@ class LendingForm extends React.Component {
                     return {id: p.key, amount: p.amount}
                 }),
             customer: this.state.selectedCustomerId,
-            deadline: !this.state.deadlineDate
-                ? moment()
-                    .add(3, 'days')
-                    .format('YYYY-MM-DD')
-                : this.state.deadlineDate
+            deadline: !this.state.deadlineDate ? moment().add(3, 'days').format('YYYY-MM-DD') : this.state.deadlineDate
         }
         this.props.addLending(newLending)
 
@@ -213,6 +209,10 @@ class LendingForm extends React.Component {
                 </Container>
                 <Container>
                     <Grid stackable columns={1} padded>
+                     <DatePicker
+                                        dateFormat="l"
+                                        value={this.state.deadlineDate}
+                                        placeholderText="Palautuspäivä"/>
                         <Grid.Column>
                             <div>
                                 <div style={this.getDisplayValue(0)}>
@@ -243,7 +243,8 @@ class LendingForm extends React.Component {
                                             disabled={this.state.selectedProducts.length === 0}
                                             primary
                                             style={this.getDisplayValue(1)}
-                                            onClick={this.handleProductSelection}>Lisää tuotteet</Button>
+                                            onClick={this.handleProductSelection}>Lisää tuotteet
+                                        </Button>
                                     </Form.Group>
                                 </Form>
                             </div>
@@ -267,16 +268,9 @@ class LendingForm extends React.Component {
                             : ''}
                         <Segment>
                             <ul
-                                style={this.state.productsSelected
-                                ? {
-                                    display: 'none'
-                                }
-                                : {
-                                    display: ''
-                                }}>
+                                style={this.state.productsSelected ? { display: 'none' } : { display: ''}}>
                                 {this
-                                    .state
-                                    .selectedProductsAsObjs
+                                    .state.selectedProductsAsObjs
                                     .map(p => <li key={p.key}>{p.text} {p.description}</li>)}
                             </ul>
                             <List
@@ -300,6 +294,7 @@ class LendingForm extends React.Component {
                                     <Label><Icon name="calendar"/>
                                         Palautuspäivä</Label>
                                     <DatePicker
+                                        dateFormat="l"
                                         value={this.state.deadlineDate}
                                         selected={this.state.startDate}
                                         onChange={this.handleDeadlineChange}
@@ -365,15 +360,11 @@ const mapStateToProps = (state) => {
             .map(p => {
                 return {
                     key: p.id,
-                    text: p.size && p.size.length > 0
-                        ? p.name + ', ' + p.size
-                        : p.name,
+                    text: p.size && p.size.length > 0 ? p.name + ', ' + p.size : p.name,
                     name: p.name,
                     value: p.id,
                     size: p.size,
-                    amountinstorage: p.amountInStorage
-                        ? Number(p.amountInStorage)
-                        : 0, //
+                    amountinstorage: p.amountInStorage ? Number(p.amountInStorage) : 0, //
                     description: p.description
                 }
             })
