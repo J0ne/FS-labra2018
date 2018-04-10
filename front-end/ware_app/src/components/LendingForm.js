@@ -22,7 +22,7 @@ const initialState = {
             selectedProducts: [],
             selectedProductsAsObjs: [],
             productsSelected: false,
-            deadlineDate: moment().add(5, 'days').format('l'),
+            deadlineDate: moment().add(3, 'days'),
             confirmed: false,
             saved: false,
             showMessage: false,
@@ -80,7 +80,7 @@ class LendingForm extends React.Component {
     }
     handleDeadlineChange = (deadline) => {
         this.setState({
-            deadlineDate: moment(deadline).format('l')
+            deadlineDate: moment(deadline)
         })
     }
     handleProductSelection = (e) => {
@@ -88,14 +88,12 @@ class LendingForm extends React.Component {
     }
     handleSave = (e) => {
         const newLending = {
-            products: this
-                .state
-                .selectedProductsAsObjs
+            products: this.state.selectedProductsAsObjs
                 .map(p => {
                     return {id: p.key, amount: p.amount}
                 }),
             customer: this.state.selectedCustomerId,
-            deadline: !this.state.deadlineDate ? moment().add(3, 'days').format('YYYY-MM-DD') : this.state.deadlineDate
+            deadline: this.state.deadlineDate
         }
         this.props.addLending(newLending)
 
@@ -158,14 +156,6 @@ class LendingForm extends React.Component {
         }, seconds * 1000);
 
     }
-    getCurrentDate() {
-        if(!this.state.deadlineDate){
-            return moment().format('l')
-        }
-        else{
-            return moment(this.state.deadlineDate).format('l')
-        }
-    }
 
     render() {
 
@@ -209,10 +199,6 @@ class LendingForm extends React.Component {
                 </Container>
                 <Container>
                     <Grid stackable columns={1} padded>
-                     <DatePicker
-                                        dateFormat="l"
-                                        value={this.state.deadlineDate}
-                                        placeholderText="Palautuspäivä"/>
                         <Grid.Column>
                             <div>
                                 <div style={this.getDisplayValue(0)}>
@@ -294,9 +280,8 @@ class LendingForm extends React.Component {
                                     <Label><Icon name="calendar"/>
                                         Palautuspäivä</Label>
                                     <DatePicker
-                                        dateFormat="l"
-                                        value={this.state.deadlineDate}
-                                        selected={this.state.startDate}
+                                        dateFormat="DD.MM.YYYY"
+                                        selected={this.state.deadlineDate}
                                         onChange={this.handleDeadlineChange}
                                         placeholderText="Palautuspäivä"/>
                                 </Form.Group>

@@ -33,7 +33,7 @@ lendingsRouter.post('/', async(request, response) => {
     const savedlending = await lending.save()
 console.log("VARASTON MUUTOKSET!", savedlending.products)
     savedlending.products.map(p => productHelper.decreaseFromStorage(p.id, p.amount))
-    response.status(201).json(savedlending)
+    response.status(201).json(Lending.format(savedlending))
 })
 
 lendingsRouter.put('/:id', async(request, response) => {
@@ -45,12 +45,10 @@ lendingsRouter.put('/:id', async(request, response) => {
         revertedDate: new Date().toISOString(),
         lendingDate: body.lendingDate
     }
-console.log('LENDING', lending)
     try {
         const result = await Lending.findByIdAndUpdate(request.params.id, lending, {new: true})
-
         result.products.map( p => productHelper.increaseStorageAmount(p.id, p.amount))
-        console.log("TUOTEMÄÄRÄT PÄIVITETTY")
+        console.log('REVERTED:', result)
         response.json(Lending.format(result))
     } catch (error) {
         console.log("error:", error)
