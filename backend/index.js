@@ -11,6 +11,7 @@ const customersRouter = require('./controllers/customers')
 const lendingsRouter = require('./controllers/lendings')
 const adminRouter = require('./controllers/admin')
 const loginRouter = require('./controllers/login')
+const usersRouter = require('./controllers/users')
 
 
 mongoose
@@ -33,6 +34,7 @@ app.use('/api/customers', customersRouter)
 app.use('/api/lendings', lendingsRouter)
 app.use('/api/admin', adminRouter)
 app.use('/api/login', loginRouter )
+app.use('/api/users', usersRouter)
 
 app.use(middleware.error)
 
