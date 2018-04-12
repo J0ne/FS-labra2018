@@ -9,6 +9,9 @@ const middleware = require('./utils/middleware')
 const productRouter = require('./controllers/products')
 const customersRouter = require('./controllers/customers')
 const lendingsRouter = require('./controllers/lendings')
+const adminRouter = require('./controllers/admin')
+const loginRouter = require('./controllers/login')
+
 
 mongoose
     .connect(config.mongoUrl)
@@ -28,6 +31,8 @@ app.use(middleware.logger)
 app.use('/api/products', productRouter)
 app.use('/api/customers', customersRouter)
 app.use('/api/lendings', lendingsRouter)
+app.use('/api/admin', adminRouter)
+app.use('/api/login', loginRouter )
 
 app.use(middleware.error)
 

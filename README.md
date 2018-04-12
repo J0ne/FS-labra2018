@@ -66,6 +66,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	8.4  | 3,5	| korjauksia ja refaktorointia  (väliaikatietoa: tunteja yhteensä 64)|
 |	9.4. | 3	| Päivämääräkorjauksia, client-puolelle varaston tavaramäärien päivitys [yhteensä 67h] |
 |  10.4. | 1	| DatePickerin kanssa painimista; value/selected yhtäaikaa sotkivat muotoilun, lainauslistan päivitys reduxin kautta vielä kesken |
+|  12.4. |	2	| Käyttäjienhallintaa backendin puolelle	[ yhteensä 100h ]]	|
 
 
 
