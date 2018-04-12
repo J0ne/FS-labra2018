@@ -8,6 +8,7 @@ import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
+  Label,
   Button,
   Container,
   Divider,
@@ -37,6 +38,17 @@ class App extends Component {
     this.props.productInitialization()
     this.props.getLendings()
   }
+
+  showUserDetails = () => {
+    alert("Tästä käyttäjätietoihin... (tulossa)")
+  }
+  logOut = () => {
+    alert("Logout...")
+  }
+  logIn = () => {
+    alert("Login...")
+  }
+
   render() {
 
     const { activeItem } = this.state
@@ -53,10 +65,21 @@ class App extends Component {
             <Menu.Item>
               <Input icon='search' placeholder='Search...' />
             </Menu.Item>
-            <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+            {this.props.user ?
+                <Menu.Item onClick={this.showUserDetails}>
+                  <div>
+                    <Label size="small" as='div' color='grey' image>
+                        <img src='' />{this.props.user.username}
+                          <Label.Detail>{this.props.user.role}</Label.Detail>
+                    </Label> 
+                  </div>
+                </Menu.Item>: '' }
+                {this.props.user ?  <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.logOut} />  : 
+                 <Menu.Item name='login' active={activeItem === 'login'} onClick={this.logIn}/> }
           </Menu.Menu>
         </Menu>
-         <Route exact path="/" render={({ match }) => <div>
+        {this.props.user ? <div>
+            <Route exact path="/" render={({ match }) => <div>
               <ConnectedLendingList store={this.props.store} />
             </div>} />
             <Route exact path="/uusilainaus" render={({ match }) => <div>
@@ -66,6 +89,10 @@ class App extends Component {
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
+        </div> : <div>
+          <h1>Kirjaudu sisään</h1>
+        </div>}
+        
           <Modal
           open={this.state.modalOpen}
           onClose={this.handleClose}
@@ -89,7 +116,13 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { productInitialization, getLendings }
 )(App)

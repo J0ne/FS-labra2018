@@ -14,8 +14,7 @@ const loginRouter = require('./controllers/login')
 const usersRouter = require('./controllers/users')
 
 
-mongoose
-    .connect(config.mongoUrl)
+mongoose.connect(config.mongoUrl)
     .then(() => {
         console.log('connected to database', config.mongoUrl)
     })
@@ -28,6 +27,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('build'))
 app.use(middleware.logger)
+app.use(middleware.tokenExtractor)
 
 app.use('/api/products', productRouter)
 app.use('/api/customers', customersRouter)

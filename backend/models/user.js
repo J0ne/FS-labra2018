@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     passwordHash: String,
     account: String, // account id
     admin: Boolean,
-    rights: String // todo: esim user, manager
+    rights: String, // todo: esim user, manager,
+    created: Date
 })
 
 userSchema.statics.format = (user) => {
