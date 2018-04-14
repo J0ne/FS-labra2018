@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import {Provider} from 'react-redux'
 import ConnectedProductList from './components/ProductList'
 import LendingForm from './components/LendingForm'
+import LoginForm from './components/LoginForm'
+import MenuBar from './components/Menu'
 import ConnectedLendingList from './components/LendingList'
 import { productInitialization } from './reducers/productReducer'
+import { logOut, login } from './reducers/userReducer'
 import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
@@ -14,10 +17,10 @@ import {
   Divider,
   Header,
   Icon,
-  Menu,
   Input,
   Modal
 } from 'semantic-ui-react'
+
 
 class App extends Component {
   constructor(props) {
@@ -25,11 +28,19 @@ class App extends Component {
     this.state = {
       products: [],
       activeItem: '/',
-      modalOpen: false
+      modalOpen: false,
+      username: '',
+      password: ''
     }
 }
   handleItemClick = (e, { name }) => { 
-    this.setState({ activeItem: name })}
+    this.setState({ activeItem: name })
+  }
+  handleLoginFieldChange = (event) => {
+console.log(event.target.value)
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
@@ -43,7 +54,7 @@ class App extends Component {
     alert("Tästä käyttäjätietoihin... (tulossa)")
   }
   logOut = () => {
-    alert("Logout...")
+    this.props.logOut()
   }
   logIn = () => {
     alert("Login...")
@@ -55,29 +66,18 @@ class App extends Component {
     return (
       <div>
       <Router>
-      <Container>
-       <Menu stackable={true}>
-        <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === '/'} onClick={this.handleItemClick} />
-        <Menu.Item name='Uusi lainaus' as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={this.handleItemClick} />
-        <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={this.handleItemClick} />
-        <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={this.handleItemClick} />
-          <Menu.Menu position='right'>
-            <Menu.Item>
-              <Input icon='search' placeholder='Search...' />
-            </Menu.Item>
-            {this.props.user ?
-                <Menu.Item onClick={this.showUserDetails}>
-                  <div>
-                    <Label size="small" as='div' color='grey' image>
-                        <img src='' />{this.props.user.username}
-                          <Label.Detail>{this.props.user.role}</Label.Detail>
-                    </Label> 
-                  </div>
-                </Menu.Item>: '' }
-                {this.props.user ?  <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.logOut} />  : 
-                 <Menu.Item name='login' active={activeItem === 'login'} onClick={this.logIn}/> }
-          </Menu.Menu>
-        </Menu>
+      <Container> 
+        {this.props.user ? <MenuBar activeItem={this.activeItem} user={this.props.user} showUserDetails={this.showUserDetails} 
+      handleItemClick={this.handleItemClick} logOut={this.logOut} logIn={this.logIn} /> : 
+        <Header as='h2'>
+    <Icon name='table' />
+    <Header.Content>
+      Varasto
+      <Header.Subheader>
+        Kirjaudu sisään käyttääksesi
+      </Header.Subheader>
+    </Header.Content>
+  </Header>}
         {this.props.user ? <div>
             <Route exact path="/" render={({ match }) => <div>
               <ConnectedLendingList store={this.props.store} />
@@ -90,7 +90,7 @@ class App extends Component {
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
         </div> : <div>
-          <h1>Kirjaudu sisään</h1>
+         <LoginForm handleLoginData={this.handleLoginFieldChange} onSubmit={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
         
           <Modal
@@ -124,5 +124,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { productInitialization, getLendings }
+  { productInitialization, getLendings, logOut }
 )(App)
