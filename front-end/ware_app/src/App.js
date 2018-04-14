@@ -6,9 +6,10 @@ import LoginForm from './components/LoginForm'
 import MenuBar from './components/Menu'
 import ConnectedLendingList from './components/LendingList'
 import { productInitialization } from './reducers/productReducer'
-import { logOut, login } from './reducers/userReducer'
+import { logOut, logIn } from './reducers/userReducer'
 import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
+import AdminView from './components/AdminView'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
   Label,
@@ -58,6 +59,7 @@ console.log(event.target.value)
   }
   logIn = () => {
     alert("Login...")
+    this.props.logIn()
   }
 
   render() {
@@ -86,6 +88,7 @@ console.log(event.target.value)
               <LendingForm store={this.props.store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
+          <Route exact path="/admin" render={() => <AdminView/> } />
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
@@ -124,5 +127,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { productInitialization, getLendings, logOut }
+  { productInitialization, getLendings, logOut, logIn }
 )(App)

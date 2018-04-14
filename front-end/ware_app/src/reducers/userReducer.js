@@ -17,9 +17,9 @@ const userReducer = ( initialState, action ) => {
     return initialState === undefined ? testUser : initialState
 }
 
-export const login = (loginData) => {
+export const logIn = (loginData) => {
     return async(dispatch) => {
-        const loginResponse = await loginService.logIn(loginData)
+        const loginResponse = {}//await loginService.logIn(loginData)
         dispatch({type: 'LOGIN_SUCCESS', user: loginResponse})
     }
 }

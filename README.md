@@ -69,6 +69,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |  12.4. |	2	| Käyttäjienhallintaa backendin puolelle	[ yhteensä 100h ]]	|
 |   "	 |	2,5	| käyttäjienhallintaa fronttiin. userreducer ym. UI-asioita, mm. kirjautuneen käyttäjän näyttäminen [yhteensä 102.5h]|
 |  14.4  |	1,5	| UI-asioita: loginForm ym. UI:n käyttäytymistä testUserilla, login/logout  (yhteensä 104h)|
+|	"	 |	1	| UI-asioita: admin-näkymän hahmottelua	|
 
 
 
