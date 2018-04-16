@@ -2,15 +2,20 @@ import lendingService from '../services/lendings'
 
 const lendingReducer = (state = [], action) => {
     // console.log(state, action)
+
     if (action.type === 'ADD_LENDING') {
-        return [...state,action.data ]
+        return [...state, action.data ]
     }
     if (action.type === 'GET_ALL_LENDINGS') {
         return action.data
     }
     if (action.type === 'UPDATE_LENDING') {
-        console.log('action', action.data)
-        const newState = [...state ]
+        console.log('UPDATE_LENDING:', action.data)
+
+        const newState = state.map( lending => {
+            const result = lending.id === action.data.id ? action.data : lending
+            return result
+        })
         return newState
     }
     return state
@@ -33,6 +38,7 @@ export const addLending = (data) => {
 export const markReverted = (lending) => {
     return async(dispatch) => {
         const revertedLending = await lendingService.markReverted(lending)
+console.log('revertedLending', revertedLending)
         dispatch({type: 'UPDATE_LENDING', data: revertedLending})
     }
 }

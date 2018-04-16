@@ -23,9 +23,7 @@ class LendingList extends React.Component {
 
     acceptConfirmation = () => {
         this.setState({modalOpen: false});
-        debugger
         const lending = this.convertLending(this.state.selectedLending)
-        console.log("LENDING:", lending)
         this.props.markReverted(lending)
         
     }
@@ -98,6 +96,7 @@ class LendingList extends React.Component {
 
 const mapStateToProps = (state) => {
     const currentDate = moment()
+    console.log(state)
     return {
         lendings: state.lendings
             .sort((a, b) => {
@@ -105,7 +104,7 @@ const mapStateToProps = (state) => {
                     dateB = new Date(b.deadline);
                 return dateA - dateB;
             })
-            //.sort(a => a.palautettu ? 1 : 0)
+            .sort(a => a.palautettu ? 1 : 0)
             .map(l => {
                 return {
                     id: l.id,

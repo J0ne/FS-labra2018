@@ -31,9 +31,13 @@ lendingsRouter.post('/', async(request, response) => {
     })
    
     const savedlending = await lending.save()
-console.log("VARASTON MUUTOKSET!", savedlending.products)
     savedlending.products.map(p => productHelper.decreaseFromStorage(p.id, p.amount))
-    response.status(201).json(Lending.format(savedlending))
+    // haetaan ja palautetaan 'täydellinen' olio
+
+    const populatedObj = await Lending.findById(savedlending._id).populate('customer',
+     {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
+console.log('populatedObj', populatedObj)
+    response.status(201).json(Lending.format(populatedObj))
 })
 
 lendingsRouter.put('/:id', async(request, response) => {

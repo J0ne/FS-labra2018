@@ -55,6 +55,7 @@ console.log(event.target.value)
     alert("Tästä käyttäjätietoihin... (tulossa)")
   }
   logOut = () => {
+    this.setState({activeItem: '/'})
     this.props.logOut()
   }
   logIn = () => {
@@ -76,7 +77,7 @@ console.log(event.target.value)
     <Header.Content>
       Varasto
       <Header.Subheader>
-        Kirjaudu sisään käyttääksesi
+        Kirjaudu sisään
       </Header.Subheader>
     </Header.Content>
   </Header>}

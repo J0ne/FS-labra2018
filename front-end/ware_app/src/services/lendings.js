@@ -11,8 +11,9 @@ const createNew = async(lending) => {
 }
 
 const markReverted = async(lending) => {
-    console.log('LENDING SERVICE',lending)
     const response = await axios.put(baseUrl + '/' + lending.id, lending)
+     console.log('LENDING SERVICE',response)
+    return response.data
 }
 export default {
     getAll,

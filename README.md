@@ -66,11 +66,11 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	8.4  | 3,5	| korjauksia ja refaktorointia  (väliaikatietoa: tunteja yhteensä 64)|
 |	9.4. | 3	| Päivämääräkorjauksia, client-puolelle varaston tavaramäärien päivitys [yhteensä 67h] |
 |  10.4. | 1	| DatePickerin kanssa painimista; value/selected yhtäaikaa sotkivat muotoilun, lainauslistan päivitys reduxin kautta vielä kesken |
-|  12.4. |	2	| Käyttäjienhallintaa backendin puolelle	[ yhteensä 100h ]]	|
-|   "	 |	2,5	| käyttäjienhallintaa fronttiin. userreducer ym. UI-asioita, mm. kirjautuneen käyttäjän näyttäminen [yhteensä 102.5h]|
-|  14.4  |	1,5	| UI-asioita: loginForm ym. UI:n käyttäytymistä testUserilla, login/logout  (yhteensä 104h)|
+|  12.4. |	2	| Käyttäjienhallintaa backendin puolelle	[ yhteensä 70h ]]	|
+|   "	 |	2,5	| käyttäjienhallintaa fronttiin. userreducer ym. UI-asioita, mm. kirjautuneen käyttäjän näyttäminen [yhteensä 72.5h]|
+|  14.4  |	1,5	| UI-asioita: loginForm ym. UI:n käyttäytymistä testUserilla, login/logout  (yhteensä 74h)|
 |	"	 |	1	| UI-asioita: admin-näkymän hahmottelua	|
-
+|	16.4 |	2,5	| Käyttäjienhallintaa, korjauksia (paja) Yhteensä 77.5h	|
 
 
 
