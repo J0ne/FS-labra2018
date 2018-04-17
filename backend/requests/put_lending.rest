@@ -1,0 +1,16 @@
+PUT http://localhost:3003/api/lendings/5ad4c99ac3f1efeb037c7156
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlkaWFkbWluIiwiaWQiOiI1YWNmOGEwZGEyM2VkMThhYTJhM2IxNTUiLCJpYXQiOjE1MjM1NTM4Mjh9.F0crlkt20JFuQymVQ5W0gPSY8vNdFPiojImnY59KddA
+
+{
+      "customer": "5ac91e3807ed9112067b86d5",
+      "products": [
+            {
+                  "id": "5ac9c59fc88065241ff9e2db",
+                  "amount": 4
+            }
+      ],
+      "deadline": "2018-06-06",
+      "revertedDate": "2018-04-16T16:06:12.862Z",
+      "lendingDate": "2018-04-16T16:06:12.862Z" 
+}
