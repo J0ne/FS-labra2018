@@ -9,7 +9,8 @@ lendingsRouter.get('/', async(request, response) => {
 })
 lendingsRouter.get('/:id', async(request, response) => {
     console.log(request.params.id)
-    const lending = await Lending.findById(request.params.id)
+    const lending = await Lending.findById(request.params.id).populate('customer',
+     {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
     response.json(Lending.format(lending))
 })
 lendingsRouter.post('/', async(request, response) => {
@@ -36,7 +37,7 @@ lendingsRouter.post('/', async(request, response) => {
 
     const populatedObj = await Lending.findById(savedlending._id).populate('customer',
      {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
-console.log('populatedObj', populatedObj)
+    console.log('populatedObj', populatedObj)
     response.status(201).json(Lending.format(populatedObj))
 })
 
@@ -52,8 +53,10 @@ lendingsRouter.put('/:id', async(request, response) => {
     try {
         const result = await Lending.findByIdAndUpdate(request.params.id, lending, {new: true})
         result.products.map( p => productHelper.increaseStorageAmount(p.id, p.amount))
-        console.log('REVERTED:', result)
-        response.json(Lending.format(result))
+        
+        const populatedObj = await Lending.findById(result._id).populate('customer',
+     {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
+        response.json(Lending.format(populatedObj))
     } catch (error) {
         console.log("error:", error)
         response.status(400).send({error: 'malformatted id'})

@@ -10,6 +10,7 @@ import { logOut, logIn } from './reducers/userReducer'
 import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
 import AdminView from './components/AdminView'
+import RegisterForm from './components/RegisterForm'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
   Label,
@@ -19,7 +20,8 @@ import {
   Header,
   Icon,
   Input,
-  Modal
+  Modal,
+  Segment
 } from 'semantic-ui-react'
 
 
@@ -38,7 +40,7 @@ class App extends Component {
     this.setState({ activeItem: name })
   }
   handleLoginFieldChange = (event) => {
-console.log(event.target.value)
+        console.log(event.target.value)
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -58,10 +60,19 @@ console.log(event.target.value)
     this.setState({activeItem: '/'})
     this.props.logOut()
   }
-  logIn = () => {
+  logIn = (e) => {
+    e.preventDefault()
     alert("Login...")
     this.props.logIn()
   }
+ handleRegister = (e) => {
+   console.log(e)
+    this.showRegisterForm()
+ }
+
+ showRegisterForm() {
+   return <RegisterForm />
+ }
 
   render() {
 
@@ -94,7 +105,9 @@ console.log(event.target.value)
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
         </div> : <div>
+            <Button basic color='blue' onClick={this.handleRegister}>Rekisteröidy</Button>
          <LoginForm handleLoginData={this.handleLoginFieldChange} onSubmit={this.logIn} username={this.state.username} password={this.state.password} />
+          <RegisterForm />
         </div>}
         
           <Modal

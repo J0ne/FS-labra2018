@@ -14,12 +14,9 @@ usersRouter.post('/', async(request, response) => {
     const username = body.username
     // password requirements
     if (password.length < 5) {
-        return response
-            .status(400)
-            .json({error: 'password too short'})
+        return response.status(400).json({error: 'password too short'})
     }
     // username validation const isUnique = await isUniqueUser(username) parempi
-    // tapa
     const existingUser = await User.find({username})
     if (existingUser.length > 0) {
         return response.status(400).json({error: 'username exists'})

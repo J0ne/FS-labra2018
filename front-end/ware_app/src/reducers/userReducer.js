@@ -19,7 +19,7 @@ const userReducer = ( initialState, action ) => {
 
 export const logIn = (loginData) => {
     return async(dispatch) => {
-        const loginResponse = {}//await loginService.logIn(loginData)
+        const loginResponse = await loginService.logIn(loginData)
         dispatch({type: 'LOGIN_SUCCESS', user: loginResponse})
     }
 }

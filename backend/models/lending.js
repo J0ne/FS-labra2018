@@ -9,6 +9,7 @@ const lendingSchema = new mongoose.Schema({
 })
 
 lendingSchema.statics.format = (lending) => {
+    console.log('FORMAT', lending)
     return {
        id: lending._id,
        customer: lending.customer,

@@ -71,6 +71,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |  14.4  |	1,5	| UI-asioita: loginForm ym. UI:n käyttäytymistä testUserilla, login/logout  (yhteensä 74h)|
 |	"	 |	1	| UI-asioita: admin-näkymän hahmottelua	|
 |	16.4 |	2,5	| Käyttäjienhallintaa, korjauksia (paja) Yhteensä 77.5h	|
+|	17.4 |	3	| Vihdoin kondikseen asiakkaan populointi lainauksella, rekisteröintilomake ja pientä tappelua salasanavertailuiden kanssa (miksi pw1 != pw2...) (80,5h)	|
 
 
 
