@@ -8,7 +8,7 @@ const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, lo
         <Menu.Item name='Uusi lainaus' as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={handleItemClick} />
         <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={handleItemClick} />
         <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={handleItemClick} />
-         {user && user.role === 'admin' ? 
+         {user && user.admin ? 
          <Menu.Item color="red" name='Admin' as={NavLink} to={"/admin"} active={activeItem === 'admin'} onClick={handleItemClick} />: ''}       
           <Menu.Menu position='right'>
             <Menu.Item>
@@ -17,9 +17,9 @@ const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, lo
             {user ?
                 <Menu.Item onClick={showUserDetails}>
                   <div>
-                    <Label size="small" as='div' color='grey' image>
-                        <img src='' />{user.username}
-                          <Label.Detail>{user.role}</Label.Detail>
+                    <Label size="small" as='div' color={user.admin ? 'red': 'blue'} image>
+                        <img src='' />{user.name}
+                          <Label.Detail>{user.admin ? 'admin': 'peruskäyttäjä'}</Label.Detail>
                     </Label> 
                   </div>
                 </Menu.Item>: '' }

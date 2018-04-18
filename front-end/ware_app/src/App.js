@@ -35,12 +35,14 @@ class App extends Component {
       username: '',
       password: ''
     }
+    this.logIn = this.logIn.bind(this)
+    this.handleLoginFieldChange = this.handleLoginFieldChange.bind(this)
 }
   handleItemClick = (e, { name }) => { 
     this.setState({ activeItem: name })
   }
   handleLoginFieldChange = (event) => {
-        console.log(event.target.value)
+        console.log(event.target.name,event.target.value)
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -61,18 +63,19 @@ class App extends Component {
     this.props.logOut()
   }
   logIn = (e) => {
-    e.preventDefault()
-    alert("Login...")
-    this.props.logIn()
+    const loginData = {
+      username: this.state.username,
+      password: this.state.password
+    }
+    console.log(this.state)
+    debugger
+    this.props.logIn(loginData)
   }
  handleRegister = (e) => {
    console.log(e)
     this.showRegisterForm()
  }
 
- showRegisterForm() {
-   return <RegisterForm />
- }
 
   render() {
 
@@ -105,9 +108,8 @@ class App extends Component {
               <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
         </div> : <div>
-            <Button basic color='blue' onClick={this.handleRegister}>Rekisteröidy</Button>
-         <LoginForm handleLoginData={this.handleLoginFieldChange} onSubmit={this.logIn} username={this.state.username} password={this.state.password} />
-          <RegisterForm />
+            {/* <Button basic color='blue' onClick={this.handleRegister}>Rekisteröidy</Button> */}
+         <LoginForm handleRegister={this.handleRegister} handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
         
           <Modal
@@ -134,6 +136,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("STATE,", state)
   return {
     user: state.user
   }
