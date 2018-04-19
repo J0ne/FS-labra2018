@@ -164,7 +164,7 @@ class LendingForm extends React.Component {
             <Container>
                 <Container>
                     <Header as="h3">Uusi lainaus</Header>
-                    <Step.Group ordered fluid>
+                    <Step.Group ordered fluid stackable='tablet'>
                         <Step
                             active={this.state.selectedCustomer === null}
                             completed={this.state.selectedCustomer !== null}>

@@ -28,6 +28,8 @@ app.use(bodyParser.json())
 app.use(express.static('build'))
 app.use(middleware.logger)
 app.use(middleware.tokenExtractor)
+// authorizer
+// url
 
 app.use('/api/products', productRouter)
 app.use('/api/customers', customersRouter)
@@ -39,11 +41,14 @@ app.use('/api/users', usersRouter)
 app.use(middleware.error)
 
 const server = http.createServer(app)
-console.log(config)
-server.listen(config.port, () => {
-    console.log(`Server running on port ${config.port}`)
+// console.log(config)
+// server.listen(config.port, () => {
+//     console.log(`Server running on port ${config.port}`)
+// })
+const PORT = process.env.PORT || config.port
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 })
-
 server.on('close', () => {
     mongoose
         .connection

@@ -142,6 +142,7 @@
       "id": 4
     },
     {
+      "id": 5,
       "tuotteet": [
         {
           "id": 4,
@@ -156,10 +157,8 @@
           "kpl": 1
         }
       ],
-      "alkupvm": "2018-03-27",
-      "palautettu": null,
-      "palautuspvm": "2018-04-04",
-      "id": 5
+      "palautuspvm": "2018-04-03T21:00:00.000Z",
+      "palautettu": "2018-04-07T10:46:54.293Z"
     },
     {
       "id": 6,
@@ -254,6 +253,8 @@
       "palautettu": "2018-04-06T20:54:15.667Z"
     },
     {
+      "id": 9,
+      "asiakasid": 2,
       "tuotteet": [
         {
           "id": 5,
@@ -272,11 +273,8 @@
           "kpl": 3
         }
       ],
-      "asiakasid": 2,
-      "alkupvm": "2018-03-30",
-      "palautettu": null,
-      "palautuspvm": "2018-04-04",
-      "id": 9
+      "palautuspvm": "2018-04-03T21:00:00.000Z",
+      "palautettu": "2018-04-08T06:58:28.127Z"
     },
     {
       "id": 10,
@@ -547,6 +545,8 @@
       "nykyhetki": "6.4.2018"
     },
     {
+      "id": 21,
+      "asiakasid": 3,
       "tuotteet": [
         {
           "id": 6,
@@ -569,11 +569,8 @@
           "kpl": 1
         }
       ],
-      "asiakasid": 3,
-      "alkupvm": "2018-04-01",
-      "palautettu": null,
-      "palautuspvm": "6.4.2018",
-      "id": 21
+      "palautuspvm": "2018-04-05T21:00:00.000Z",
+      "palautettu": "2018-04-07T10:46:37.775Z"
     },
     {
       "id": 22,
