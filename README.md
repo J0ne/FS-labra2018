@@ -12,6 +12,10 @@ https://github.com/J0ne/FS-labra2018/tree/master/backend
 https://github.com/J0ne/ware-app-backend
 - helpottamaan julkaisua Herokuun
 
+Herokussa 
+https://varusvarasto1.herokuapp.com
+pyörii backend
+
 
 Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
 
