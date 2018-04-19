@@ -8,6 +8,10 @@ https://github.com/J0ne/FS-labra2018/tree/master/front-end/ware_app
 *Back end:* 
 https://github.com/J0ne/FS-labra2018/tree/master/backend
 
+*Back-end 2*
+https://github.com/J0ne/ware-app-backend
+- helpottamaan julkaisua Herokuun
+
 
 Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
 
@@ -73,6 +77,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	16.4 |	2,5	| Käyttäjienhallintaa, korjauksia (paja) Yhteensä 77.5h	|
 |	17.4 |	3	| Vihdoin kondikseen asiakkaan populointi lainauksella, rekisteröintilomake ja pientä tappelua salasanavertailuiden kanssa (miksi pw1 != pw2...) (80,5h)	|
 |	18.4 |  3	| Login toimii, aikaa kului kohtuuttoman kauan ihmettelyyn, miksi statesta ei saanu loginData. -> bind(this) auttoi... 83,5h|
-
+|	19	|	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
 
 
