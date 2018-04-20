@@ -134,7 +134,6 @@ class App extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   console.log("STATE,", state)
   return {

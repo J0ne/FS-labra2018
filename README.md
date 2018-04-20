@@ -80,7 +80,9 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	"	 |	1	| UI-asioita: admin-näkymän hahmottelua	|
 |	16.4 |	2,5	| Käyttäjienhallintaa, korjauksia (paja) Yhteensä 77.5h	|
 |	17.4 |	3	| Vihdoin kondikseen asiakkaan populointi lainauksella, rekisteröintilomake ja pientä tappelua salasanavertailuiden kanssa (miksi pw1 != pw2...) (80,5h)	|
-|	18.4 |  3	| Login toimii, aikaa kului kohtuuttoman kauan ihmettelyyn, miksi statesta ei saanu loginData. -> bind(this) auttoi... 83,5h|
-|	19	|	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
+|  18.4. |  3	| Login toimii, aikaa kului kohtuuttoman kauan ihmettelyyn, miksi statesta ei saanu loginData. -> bind(this) auttoi... 83,5h|
+|  19.4. |	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
+|  20.4. | 2,5	| Frontin julkaisuyrityksiä Herokuun. Ei onnistunut...	|
+
 
 

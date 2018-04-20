@@ -24,8 +24,8 @@ mongoose.connect(config.mongoUrl)
 
 mongoose.Promise = global.Promise
 app.use(cors())
-app.use(bodyParser.json())
 app.use(express.static('build'))
+app.use(bodyParser.json())
 app.use(middleware.logger)
 app.use(middleware.tokenExtractor)
 // authorizer
