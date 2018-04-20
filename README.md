@@ -83,6 +83,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |  18.4. |  3	| Login toimii, aikaa kului kohtuuttoman kauan ihmettelyyn, miksi statesta ei saanu loginData. -> bind(this) auttoi... 83,5h|
 |  19.4. |	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
 |  20.4. | 2,5	| Frontin julkaisuyrityksiä Herokuun. Ei onnistunut...	|
+|	"	 | 1,5	|Edelleen tappelua Herokun/frontin kanssa. Jostain syystä app.use(express.static('build')) ei toimi tai build-hakemisto ei ole mennyt oikein|
 
 
 
