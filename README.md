@@ -12,8 +12,9 @@ https://github.com/J0ne/FS-labra2018/tree/master/backend
 https://github.com/J0ne/ware-app-backend
 - helpottamaan julkaisua Herokuun
 
-Herokussa 
-https://varusvarasto1.herokuapp.com
+Herokussa (tosin hyvin keskeneräinen)
+https://varusvarasto.herokuapp.com/
+
 pyörii backend
 
 
@@ -83,7 +84,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |  18.4. |  3	| Login toimii, aikaa kului kohtuuttoman kauan ihmettelyyn, miksi statesta ei saanu loginData. -> bind(this) auttoi... 83,5h|
 |  19.4. |	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
 |  20.4. | 2,5	| Frontin julkaisuyrityksiä Herokuun. Ei onnistunut...	|
-|	"	 | 1,5	|Edelleen tappelua Herokun/frontin kanssa. Jostain syystä app.use(express.static('build')) ei toimi tai build-hakemisto ei ole mennyt oikein|
-
+|	"	 | 1,5	| Edelleen tappelua Herokun/frontin kanssa. Jostain syystä app.use(express.static('build')) ei toimi tai build-hakemisto ei ole mennyt oikein|
+|	"	 | 0,5	| Julkaisu onnistui. Syy oli em. build-hakemisto. Se oli .gitignoressa, joten julkaisussa se ei tietenkään kulkeutunut eteenpäin. Yhteensä 88 h|
 
 
