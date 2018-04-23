@@ -11,6 +11,7 @@ https://github.com/J0ne/FS-labra2018/tree/master/backend
 *Back-end 2*
 https://github.com/J0ne/ware-app-backend
 - helpottamaan julkaisua Herokuun
+- 19.4. -> backendin toteutus täällä
 
 Herokussa (tosin hyvin keskeneräinen)
 https://varusvarasto.herokuapp.com/
