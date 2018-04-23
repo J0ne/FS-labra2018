@@ -17,9 +17,9 @@ const LoginForm = ({logIn, username, password, handleLoginData}) => {
                     <label>Salasana</label>
                     <input
                         name="password"
-                        type="text"
+                        type="password"
                         onChange={handleLoginData}
-                        placeholder='salasana (todo: type -> password)'/>
+                        placeholder='salasana'/>
                 </Form.Field>
                 <Button type='submit'>Kirjaudu</Button>
             </Form>

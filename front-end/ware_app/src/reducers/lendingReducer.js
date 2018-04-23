@@ -10,7 +10,6 @@ const lendingReducer = (state = [], action) => {
         return action.data
     }
     if (action.type === 'UPDATE_LENDING') {
-        console.log('UPDATE_LENDING:', action.data)
 
         const newState = state.map( lending => {
             const result = lending.id === action.data.id ? action.data : lending
@@ -38,7 +37,6 @@ export const addLending = (data) => {
 export const markReverted = (lending) => {
     return async(dispatch) => {
         const revertedLending = await lendingService.markReverted(lending)
-console.log('revertedLending', revertedLending)
         dispatch({type: 'UPDATE_LENDING', data: revertedLending})
     }
 }

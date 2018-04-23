@@ -96,7 +96,6 @@ class LendingList extends React.Component {
 
 const mapStateToProps = (state) => {
     const currentDate = moment()
-    console.log(state)
     return {
         lendings: state.lendings
             .sort((a, b) => {

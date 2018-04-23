@@ -87,4 +87,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	"	 | 1,5	| Edelleen tappelua Herokun/frontin kanssa. Jostain syystä app.use(express.static('build')) ei toimi tai build-hakemisto ei ole mennyt oikein|
 |	"	 | 0,5	| Julkaisu onnistui. Syy oli em. build-hakemisto. Se oli .gitignoressa, joten julkaisussa se ei tietenkään kulkeutunut eteenpäin. Yhteensä 88 h|
 
+|	23.4.| 3h	|Rekisteröinti (back ja frontend) ja UI-asioita, mm. loaderin testailua ()|
+
 

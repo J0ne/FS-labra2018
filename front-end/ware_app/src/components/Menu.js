@@ -5,7 +5,7 @@ import {NavLink} from 'react-router-dom'
 const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, logOut}) => (
     <Menu stackable={true}>
         <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === 'lainaukset'} onClick={handleItemClick} />
-        <Menu.Item name='Uusi lainaus' as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={handleItemClick} />
+        <Menu.Item as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={handleItemClick}>Uusi lainaus</Menu.Item>
         <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={handleItemClick} />
         <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={handleItemClick} />
          {user && user.admin ? 
@@ -23,7 +23,7 @@ const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, lo
                     </Label> 
                   </div>
                 </Menu.Item>: '' }
-                {user ?  <Menu.Item name='logout' active={activeItem === 'logout'} onClick={logOut} />  : 
+                {user ?  <Menu.Item active={activeItem === 'logout'} onClick={logOut}>Kirjaudu ulos</Menu.Item>  : 
                  <Menu.Item name='login' active={activeItem === 'login'} onClick={logIn}/> }
           </Menu.Menu>
     </Menu>

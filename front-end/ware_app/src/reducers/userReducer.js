@@ -1,7 +1,7 @@
 import loginService from '../services/login'
+import userService from '../services/users'
 
 let user = JSON.parse(localStorage.getItem('user'))
-console.log('user:', user)
 const testUser = {
     username: "Jouni",
     role: "admin",
@@ -9,7 +9,7 @@ const testUser = {
 const initialState = user ? user : null
 
 const userReducer = ( state = initialState, action ) => {
-    if (action.type === 'LOGIN_SUCCESS') {
+    if (action.type === 'LOGIN_SUCCESS' || action.type === 'REGISTER') {
         const userAsString = JSON.stringify(action.data)
         localStorage.setItem('user', userAsString )
         const newState = action.data
@@ -28,8 +28,19 @@ export const logIn = (loginData) => {
         dispatch({type: 'LOGIN_SUCCESS', data: loginResponse})
     }
 }
+
 export const logOut = () => {
         return async(dispatch) => {   dispatch({type: 'LOG_OUT'})
+    }
+}
+
+export const register = (registerData) => {
+    return async (dispatch) => {
+        const registerResponse = await userService.register(registerData)
+        dispatch({
+            type: 'REGISTER',
+            data: registerResponse
+        })
     }
 }
 

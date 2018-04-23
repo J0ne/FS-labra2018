@@ -6,7 +6,7 @@ import LoginForm from './components/LoginForm'
 import MenuBar from './components/Menu'
 import ConnectedLendingList from './components/LendingList'
 import { productInitialization } from './reducers/productReducer'
-import { logOut, logIn } from './reducers/userReducer'
+import {logOut, logIn, register} from './reducers/userReducer'
 import { getLendings } from './reducers/lendingReducer'
 import { connect } from 'react-redux'
 import AdminView from './components/AdminView'
@@ -21,6 +21,8 @@ import {
   Icon,
   Input,
   Modal,
+  Dimmer,
+  Loader,
   Segment
 } from 'semantic-ui-react'
 
@@ -33,7 +35,14 @@ class App extends Component {
       activeItem: '/',
       modalOpen: false,
       username: '',
-      password: ''
+      password: '',
+      showloader: false,
+      registerdata: {
+        name: '',
+        username: '',
+        password1: '',
+        password2: ''
+      }
     }
     this.logIn = this.logIn.bind(this)
     this.handleLoginFieldChange = this.handleLoginFieldChange.bind(this)
@@ -42,7 +51,6 @@ class App extends Component {
     this.setState({ activeItem: name })
   }
   handleLoginFieldChange = (event) => {
-        console.log(event.target.name,event.target.value)
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -67,15 +75,48 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password
     }
-    console.log(this.state)
-    debugger
     this.props.logIn(loginData)
   }
- handleRegister = (e) => {
-   console.log(e)
-    this.showRegisterForm()
- }
 
+handleRegisteration = (event) => {
+  const registerdata = {...this.state.registerdata, 
+    [event.target.name]: event.target.value
+  }
+  
+  this.setState({ registerdata })
+}
+sendRegister = () => {
+  const registerdata = this.state.registerdata
+  console.log(this.state.registerdata)
+    if(registerdata.name.length == 0 || registerdata.username.length == 0 ||
+  registerdata.password1.length == 0 ){
+    alert("Anna kaikki tiedot")
+    return
+  }
+  if( registerdata.password1 !== registerdata.password2){
+    alert("Salasanat eivät täsmää!")
+    return
+  }
+  this.props.register(registerdata)
+  this.setState({showloader: true})
+  
+  this.handleClose()
+  if(this.props.user){
+    this.setState({showloader: false})
+  }
+}
+passwordsAreValid = () => {
+  if(this.state.registerdata.username.length == 0) {
+    return false
+  }
+  if(this.state.registerdata.password1.length < 5){
+    return false
+  }
+  if(this.state.registerdata.password1 !== this.state.registerdata.password2){
+    return false
+  }
+  return true
+}
 
   render() {
 
@@ -91,7 +132,7 @@ class App extends Component {
     <Header.Content>
       Varasto
       <Header.Subheader>
-        Kirjaudu sisään
+        Kirjaudu sisään tai  <Button onClick={this.handleOpen} basic color='green'>rekisteröidy</Button>
       </Header.Subheader>
     </Header.Content>
   </Header>}
@@ -104,27 +145,32 @@ class App extends Component {
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/admin" render={() => <AdminView/> } />
+           <Route exact path="/rekisterointi" render={() => <RegisterForm/> } />
           <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
-              <Button onClick={this.handleOpen}>Show Modal</Button>
           </div>} />    
         </div> : <div>
-            {/* <Button basic color='blue' onClick={this.handleRegister}>Rekisteröidy</Button> */}
-         <LoginForm handleRegister={this.handleRegister} handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
+         <LoginForm handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
         
           <Modal
           open={this.state.modalOpen}
           onClose={this.handleClose}
-          basic
-          size='small'
-          >
-          <Header icon='browser' content='Cookies policy' />
+          size='small'>
+          <Header icon='browser' content='Rekisteröidy' />
           <Modal.Content>
-            <h3>This website uses cookies to ensure the best user experience.</h3>
+          <Dimmer active={this.state.showloader}>
+            <Loader />
+          </Dimmer>
+          <RegisterForm username={this.state.registerdata.username} password1={this.state.registerdata.password1}
+          password2={this.state.registerdata.password2}
+          handleRegisteration={this.handleRegisteration} />
           </Modal.Content>
           <Modal.Actions>
-            <Button color='green' onClick={this.handleClose} inverted>
-              <Icon name='checkmark' /> Got it
+             <Button color='grey' onClick={this.handleClose}>
+              <Icon name='close' /> Peruuta
+          </Button>
+            <Button color='green' onClick={this.sendRegister}>
+              <Icon name='checkmark' /> Rekisteröidy!
           </Button>
           </Modal.Actions>
         </Modal>    
@@ -135,13 +181,13 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log("STATE,", state)
   return {
-    user: state.user
+    user: state.user,
+    showloader: state.showloader
   }
 }
 
 export default connect(
   mapStateToProps,
-  { productInitialization, getLendings, logOut, logIn }
+  { productInitialization, getLendings, logOut, logIn, register }
 )(App)

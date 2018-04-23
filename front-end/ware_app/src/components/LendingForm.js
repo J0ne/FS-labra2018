@@ -58,7 +58,6 @@ class LendingForm extends React.Component {
             .find(x => {
                 return data.value === x.text
             })
-        console.log(customer)
         this.setState({selectedCustomer: customer.text, selectedCustomerId: customer.key})
     }
     handleProductsChange = (event, data) => {
@@ -104,8 +103,6 @@ class LendingForm extends React.Component {
         this.setState({confirmed: checked})
     }
     customerSelect = (e) => {
-        // console.log(e) this.setState({ selectedCustomer:
-        // Number(e.currentTarget.value)}) //console.log(this.refs.tags.el)
 
     }
 
@@ -128,10 +125,8 @@ class LendingForm extends React.Component {
         const arrayToUpdate = this.state.selectedProductsAsObjs
         arrayToUpdate[index] = product
         this.setState({selectedProductsAsObjs: arrayToUpdate})
-        console.table(this.state.selectedProductsAsObjs)
     }
     handleAmount(p) {
-        console.log(p)
     }
     getDisplayValue(val) {
         if (this.activeStep() === val) {
