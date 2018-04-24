@@ -7,7 +7,7 @@ const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, lo
         <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === 'lainaukset'} onClick={handleItemClick} />
         <Menu.Item as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={handleItemClick}>Uusi lainaus</Menu.Item>
         <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={handleItemClick} />
-        <Menu.Item name='Asiakkaat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={handleItemClick} />
+        <Menu.Item name='Lainaajat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={handleItemClick} />
          {user && user.admin ? 
          <Menu.Item color="red" name='Admin' as={NavLink} to={"/admin"} active={activeItem === 'admin'} onClick={handleItemClick} />: ''}       
           <Menu.Menu position='right'>

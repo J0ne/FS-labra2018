@@ -3,11 +3,15 @@ import customerService from '../services/customers'
 const customerReducer = (state = [], action) => {
     // console.log(state, action)
 
-    if (action.type === 'CREATE') {
-        return [...state, action.data]
-    }
     if (action.type === 'GET_ALL') {
+        console.log(action.data)
         return action.data
+    }
+    if (action.type === 'ADD_LENDING'){
+        // TODO: tarvitaanko 
+    }
+    if (action.type === 'ADD_CUSTOMER'){
+        return [...state, action.data]
     }
     return state
 }
@@ -22,15 +26,12 @@ export const getCustomers = () => {
     }
 }
 
-// export const productInitialization = (data) => {
-//     return async (dispatch) => {
-//         const products = await productService.getAll()
-//         dispatch({
-//             type: 'INIT_PRODUCTS',
-//             data: products
-//         })
+export const addCustomer = (data) => {
+    return async(dispatch) => {
+        const customer = await customerService.addCustomer(data)
+        dispatch({type: 'ADD_CUSTOMER', data: customer})
 
-//     }
-// }
+    }
+}
 
 export default customerReducer

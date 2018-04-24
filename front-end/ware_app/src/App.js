@@ -8,9 +8,11 @@ import ConnectedLendingList from './components/LendingList'
 import { productInitialization } from './reducers/productReducer'
 import {logOut, logIn, register} from './reducers/userReducer'
 import { getLendings } from './reducers/lendingReducer'
+import { getCustomers } from './reducers/customerReducers'
 import { connect } from 'react-redux'
 import AdminView from './components/AdminView'
 import RegisterForm from './components/RegisterForm'
+import CustomerList from './components/CustomerList'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
   Label,
@@ -61,6 +63,7 @@ class App extends Component {
   componentDidMount = async () => {
     this.props.productInitialization()
     this.props.getLendings()
+    this.props.getCustomers()
   }
 
   showUserDetails = () => {
@@ -146,8 +149,7 @@ passwordsAreValid = () => {
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/admin" render={() => <AdminView/> } />
            <Route exact path="/rekisterointi" render={() => <RegisterForm/> } />
-          <Route exact path="/asiakkaat" render={({ match }) => <div><h1>Asiakkaat</h1>
-          </div>} />    
+          <Route exact path="/asiakkaat" render={({ match }) => <CustomerList />} />    
         </div> : <div>
          <LoginForm handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
@@ -189,5 +191,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { productInitialization, getLendings, logOut, logIn, register }
+  { productInitialization, getLendings, logOut, logIn, register, getCustomers }
 )(App)

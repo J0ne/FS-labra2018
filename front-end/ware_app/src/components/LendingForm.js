@@ -233,6 +233,13 @@ class LendingForm extends React.Component {
                     </Grid>
                 </Container>
                 <Container>
+                     {this.state.showMessage
+                                ? <Message
+                                        success={this.state.messageData.success}
+                                        warning={this.state.messageData.warning}
+                                        header={this.state.messageData.header}
+                                        content={this.state.messageData.content}/>
+                                : ''}
                     <Segment.Group
                         style={!this.state.productsSelected
                         ? {
@@ -293,13 +300,6 @@ class LendingForm extends React.Component {
                             </Form.Field>
                         </Segment>
                         <Segment floated='right'>
-                            {this.state.showMessage
-                                ? <Message
-                                        success={this.state.messageData.success}
-                                        warning={this.state.messageData.warning}
-                                        header={this.state.messageData.header}
-                                        content={this.state.messageData.content}/>
-                                : ''}
                             <Button.Group
                                 floated="right"
                                 style={!this.state.productsSelected
