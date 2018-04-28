@@ -91,6 +91,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	24.4.| 4	| Asiakas-/lainaajalomake, UI-asiaa, asiakkaiden luonti, ym  (95h)|
 |	28.4.| 3	| Lainausprosessin prantelua, lainaukselle suoraan lainaajalistalta, aikaa meni siihen, että sain välitettyä customerid:n oikein querystringissä. Myös ui-asioita|
 |	"	 | 3	| Lainausprosessin ja UI:n parantelua, backendiin redirect, jos urlista tulee virheellinen get	(103,5h)|
-| ----- | ----- | *28.4. tunteja käytetty 103,5* homma jatkuu... |
+| 		 |	    | ###28.4. tunteja käytetty 103,5 homma jatkuu... |
 
 
