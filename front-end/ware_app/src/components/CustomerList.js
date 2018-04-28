@@ -45,7 +45,7 @@ class CustomerList extends React.Component {
                       </Table.Row>
                   </Table.Header>
                       <Table.Body>
-                    {this.props.customers.map(c => <Table.Row>
+                    {this.props.customers.map(c => <Table.Row key={c.id}>
                         <Table.Cell> 
                               <Header as='h4' textAlign='left'>{c.firstname} {c.lastname}</Header>
                         </Table.Cell>

@@ -90,5 +90,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	23.4.| 3h	|Rekisteröinti (back ja frontend) ja UI-asioita, mm. loaderin testailua (91)|
 |	24.4.| 4h	| Asiakas-/lainaajalomake, UI-asiaa, asiakkaiden luonti, ym  (95h)|
 |	28.4.| 3h	| Lainausprosessin prantelua, lainaukselle suoraan lainaajalistalta, aikaa meni siihen, että sain välitettyä customerid:n oikein querystringissä. Myös ui-asioita|
+|	"	 | 3h	| Lainausprosessin ja UI:n parantelua, backendiin redirect, jos urlista tulee virheellinen get	(101h)|
 
 

@@ -5,16 +5,17 @@ import Divider, { Container, Dropdown, Button,
     Grid,
     List,
     Label,
-    Message
+    Message,
+    GridColumn
 } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
 import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
 import ProductListForm from './ProductListForm'
-
+// datepicker styles
+import 'react-datepicker/dist/react-datepicker.css';
 const initialState = {
             startDate: moment(),
             selectedCustomer: null,
@@ -151,7 +152,6 @@ class LendingForm extends React.Component {
         }, seconds * 1000);
 
     }
-
     render() {
 
         const {customers} = this.props
@@ -160,65 +160,70 @@ class LendingForm extends React.Component {
             <Container>
                 <Container>
                     <Header as="h3">Uusi lainaus </Header>
-
-                    <Step.Group ordered fluid stackable='tablet'>
-                        <Step
-                            active={this.state.selectedCustomer === null}
+                    <Grid columns={2} >
+                           <Grid.Column>
+                            <Step.Group fluid vertical ordered>
+                            <Step link active={this.state.selectedCustomer === null}
                             completed={this.state.selectedCustomer !== null}>
-                            <Step.Content>
-                                <Step.Title>Asiakas</Step.Title>
-                                <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': this.state.selectedCustomer}</Step.Description>
+                                <Step.Content>
+                                <Step.Title>Lainaaja</Step.Title>
+                                    <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': this.state.selectedCustomer}
+                                </Step.Description>
+                                 <div style={this.getDisplayValue(0)}>
+                                        <Dropdown fluid onChange={this.handleCustomerChange}
+                                            value={this.state.selectedCustomer}
+                                            placeholder='Valitse asiakas'
+                                            search selection options={this.props.customers}/>
+                                     </div>
                             </Step.Content>
-                        </Step>
-
-                        <Step
-                            active={!this.state.productsSelected && this.state.selectedCustomer != null}
-                            completed={this.state.selectedProducts.length > 0}>
+                            </Step>
+                            <Step link active={!this.state.productsSelected && this.state.selectedCustomer != null}
+                                    completed={this.state.selectedProducts.length > 0}>
                             <Step.Content>
                                 <Step.Title>Tuotteet</Step.Title>
                                 <Step.Description>{this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
-                             this.state.selectedProducts.length + ' tuotetta valittuna' }</Step.Description>
-                            </Step.Content>
-                        </Step>
-
-                        <Step completed={this.state.saved} active={this.state.productsSelected}>
-                            <Step.Content>
-                                <Step.Title>Tiedot</Step.Title>
-                                <Step.Description>Tilauksen tarkemmat tiedot</Step.Description>
-                            </Step.Content>
-                        </Step>
-                        <Step disabled={true}>
-                            <Step.Content>
-                                <Step.Title>Palautus</Step.Title>
-                            </Step.Content>
-                        </Step>
-                    </Step.Group>
-                </Container>
-                <Container>
-                    <Grid stackable columns={1} padded>
-                        <Grid.Column>
-                            <div>
-                                <div style={this.getDisplayValue(0)}>
-                                    <Dropdown
-                                        onChange={this.handleCustomerChange}
-                                        value={this.state.selectedCustomer}
-                                        placeholder='Valitse asiakas'
-                                        search
-                                        selection
-                                        options={this.props.customers}/>
-                                </div>
-                                <Form style={this.getDisplayValue(1)} onSubmit={this.handleSubmit}>
-                                    <Form.Group widths='equal'>
+                                    this.state.selectedProducts.length + ' tuotetta valittuna' }
+                                </Step.Description>
+                                    <div style={this.getDisplayValue(1)}>
                                         <Dropdown
-                                            size="small"
                                             noResultsMessage="Ei lisättäviä tuotteita"
                                             value={this.state.selectedProducts}
                                             onChange={this.handleProductsChange}
                                             placeholder='Valitse tuotteet'
                                             multiple
-                                            search
-                                            selection
+                                            search selection
                                             options={this.props.products}/>
+                                    </div>
+                            </Step.Content>
+                            </Step>
+                            <Step link completed={this.state.saved} active={this.state.productsSelected}>
+                            <Step.Content>
+                                <Step.Title>Vahvistus</Step.Title>
+                                <Step.Description>Kappalemäärät ja palautuspäivä</Step.Description>
+                            </Step.Content>
+                            </Step>
+                            <Step disabled={true}>
+                            <Step.Content>
+                                <Step.Title>Palautus</Step.Title>
+                                <DatePicker
+                                        dateFormat="DD.MM.YYYY"
+                                        selected={this.state.deadlineDate}
+                                        onChange={this.handleDeadlineChange}
+                                        placeholderText="Palautuspäivä"/>
+                            </Step.Content>
+                        </Step>
+                    </Step.Group>
+                    </Grid.Column>
+                    </Grid>
+                </Container>
+                <Container>
+                    <Grid stackable columns={1} padded>
+                        <Grid.Column>
+                            <div>
+                               
+                                <Form style={this.getDisplayValue(1)} onSubmit={this.handleSubmit}>
+                                    <Form.Group widths='equal'>
+
                                     </Form.Group>
                                     <Form.Group>
                                         <Button
@@ -342,12 +347,12 @@ const mapStateToProps = (state) => {
             .map(p => {
                 return {
                     key: p.id,
-                    text: p.size && p.size.length > 0 ? p.name + ', ' + p.size : p.name,
+                    text: p.size && p.size.length > 0 ? p.name + ', koko: ' + p.size : p.name,
                     name: p.name,
                     value: p.id,
                     size: p.size,
                     amountinstorage: p.amountInStorage ? Number(p.amountInStorage) : 0, //
-                    description: p.description
+                    // description: p.description
                 }
             })
     }

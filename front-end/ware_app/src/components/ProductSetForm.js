@@ -4,7 +4,7 @@ import {Image, List, Icon, Container, Header, Table} from 'semantic-ui-react'
 const ProductSet = () => (
     <Container>
         <Header as='h2' icon textAlign='center'>
-            <Icon rotated="clockwisecounterclockwise" name='sitemap' circular/>
+            <Icon rotated="clockwise" name='sitemap' circular/>
             <Header.Content>
                 Tuotesetit
             </Header.Content>
