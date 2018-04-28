@@ -143,8 +143,8 @@ passwordsAreValid = () => {
             <Route exact path="/" render={({ match }) => <div>
               <ConnectedLendingList store={this.props.store} />
             </div>} />
-            <Route exact path="/uusilainaus" render={({ match }) => <div>
-              <LendingForm store={this.props.store} />
+            <Route path="/uusilainaus/:customerid?" render={({ match }) => <div>
+              <LendingForm customerid={match.params.customerid} store={this.props.store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/admin" render={() => <AdminView/> } />

@@ -38,15 +38,9 @@ class LendingForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = initialState
-        this.handleDeadlineChange = this
-            .handleDeadlineChange
-            .bind(this);
-        this.customerSelect = this
-            .customerSelect
-            .bind(this);
-        this.updateProduct = this
-            .updateProduct
-            .bind(this);
+        this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
+        this.customerSelect = this.customerSelect.bind(this);
+        this.updateProduct = this.updateProduct.bind(this);
     }
     resetState() {
         this.setState(initialState)
@@ -54,8 +48,7 @@ class LendingForm extends React.Component {
 
     handleCustomerChange = (event, data) => {
         const customer = data
-            .options
-            .find(x => {
+            .options.find(x => {
                 return data.value === x.text
             })
         this.setState({selectedCustomer: customer.text, selectedCustomerId: customer.key})
@@ -72,10 +65,17 @@ class LendingForm extends React.Component {
             })
         this.setState({selectedProductsAsObjs})
     }
+    componentWillMount() {
+         this.props.getCustomers()
+    }
     componentDidMount() {
-        this
-            .props
-            .getCustomers()
+
+        if(this.props.customers.length > 0 && this.props.customerid){
+            console.log(this.props.customerid)
+            const selected = this.props.customers
+                .find(customer => customer.key === this.props.customerid)
+            this.setState({selectedCustomer: selected.text, selectedCustomerId: selected.key})
+        }
     }
     handleDeadlineChange = (deadline) => {
         this.setState({
@@ -155,10 +155,12 @@ class LendingForm extends React.Component {
     render() {
 
         const {customers} = this.props
+
         return (
             <Container>
                 <Container>
-                    <Header as="h3">Uusi lainaus</Header>
+                    <Header as="h3">Uusi lainaus </Header>
+
                     <Step.Group ordered fluid stackable='tablet'>
                         <Step
                             active={this.state.selectedCustomer === null}

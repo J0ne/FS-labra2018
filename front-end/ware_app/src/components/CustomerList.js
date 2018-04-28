@@ -1,12 +1,12 @@
 import React from 'react'
 import {
-    Image,
+    Header, Table, Rating,
     List,
     Icon,
     Button,
-    Container,
-    Header, Label
+    Container,Label
 } from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Togglable from './Togglable'
 import CustomerForm from './CustomerForm'
 import {connect} from 'react-redux'
@@ -34,24 +34,29 @@ class CustomerList extends React.Component {
                     </Header.Content>
                 </Header>
                 {this.showCustomerForm()}
-                <List celled verticalAlign='middle'>
-                    {this
-                        .props
-                        .customers
-                        .map(c => <List.Item key={c.id}>
-                         <List.Content floated="right">
-                                <Button>Lainaus</Button>
-                            </List.Content>
-                            <Icon name="user"/>
-                            <List.Content>
-                                <List.Header>{c.firstname} {c.lastname}</List.Header>
-                                {c.email} 
-                                 <Label as='a' basic color='blue'>
-                                 <Icon name="phone" />
-                                 {c.telephone}</Label>
-                            </List.Content>
-                        </List.Item>)}
-                </List>
+
+                <Table celled>
+                    <Table.Header>
+                      <Table.Row>
+                       <Table.HeaderCell singleLine>Nimi</Table.HeaderCell>
+                        <Table.HeaderCell>Email</Table.HeaderCell>
+                        <Table.HeaderCell>Puhelin</Table.HeaderCell>
+                          <Table.HeaderCell></Table.HeaderCell>
+                      </Table.Row>
+                  </Table.Header>
+                      <Table.Body>
+                    {this.props.customers.map(c => <Table.Row>
+                        <Table.Cell> 
+                              <Header as='h4' textAlign='left'>{c.firstname} {c.lastname}</Header>
+                        </Table.Cell>
+                         <Table.Cell singleLine>{c.email}</Table.Cell>
+                         <Table.Cell singleLine>{c.telephone}</Table.Cell>
+                        <Table.Cell collapsing>
+                                 <Link to={`/uusilainaus/` + c.id}>Lainaus</Link>
+                        </Table.Cell>
+                        </Table.Row>)}
+                     </Table.Body>
+                     </Table>
             </Container>
         )
     }

@@ -19,6 +19,10 @@ const userReducer = ( state = initialState, action ) => {
         localStorage.removeItem("user")
         return null
     }
+    if (action.type === 'GET_ALL_USERS') {
+        return action.data
+    }
+    
     return state
 }
 
@@ -41,6 +45,12 @@ export const register = (registerData) => {
             type: 'REGISTER',
             data: registerResponse
         })
+    }
+}
+export const getAllUsers = () => {
+    return async(dispatch) => {
+        const users = await userService.getAllUsers()
+        dispatch({type: 'GET_ALL_USERS', data: users})
     }
 }
 

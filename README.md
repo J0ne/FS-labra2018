@@ -86,9 +86,9 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |  19.4. |	2,5	| Yrityksiä deployata Herokuun, säätöä Gitin kanssa ym...	|
 |  20.4. | 2,5	| Frontin julkaisuyrityksiä Herokuun. Ei onnistunut...	|
 |	"	 | 1,5	| Edelleen tappelua Herokun/frontin kanssa. Jostain syystä app.use(express.static('build')) ei toimi tai build-hakemisto ei ole mennyt oikein|
-|	"	 | 0,5	| Julkaisu onnistui. Syy oli em. build-hakemisto. Se oli .gitignoressa, joten julkaisussa se ei tietenkään kulkeutunut eteenpäin. Yhteensä 88 h|
-
+|	"	 | 0,5	| Julkaisu onnistui. Syy oli em. build-hakemisto. -> .gitignoressa, joten julkaisussa se ei tietenkään kulkeutunut eteenpäin. Yhteensä 88 h|
 |	23.4.| 3h	|Rekisteröinti (back ja frontend) ja UI-asioita, mm. loaderin testailua (91)|
 |	24.4.| 4h	| Asiakas-/lainaajalomake, UI-asiaa, asiakkaiden luonti, ym  (95h)|
+|	28.4.| 3h	| Lainausprosessin prantelua, lainaukselle suoraan lainaajalistalta, aikaa meni siihen, että sain välitettyä customerid:n oikein querystringissä. Myös ui-asioita|
 
 
