@@ -27,6 +27,7 @@ const initialState = {
             confirmed: false,
             saved: false,
             showMessage: false,
+            active: '',
             messageData: {
                 success: false,
                 warning: false,
@@ -106,7 +107,9 @@ class LendingForm extends React.Component {
     customerSelect = (e) => {
 
     }
-
+    handleStepClick = (e, {title}) => {
+        console.log(title)
+        this.setState({active: title})}
     activeStep() {
         if (this.state.selectedCustomer === null) {
             return 0
@@ -164,7 +167,10 @@ class LendingForm extends React.Component {
                            <Grid.Column>
                             <Step.Group fluid vertical ordered>
                             <Step link active={this.state.selectedCustomer === null}
-                            completed={this.state.selectedCustomer !== null}>
+                            completed={this.state.selectedCustomer !== null}
+                            onClick={this.handleStepClick}
+                            title='Lainaaja'
+                            >
                                 <Step.Content>
                                 <Step.Title>Lainaaja</Step.Title>
                                     <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': this.state.selectedCustomer}
@@ -177,8 +183,12 @@ class LendingForm extends React.Component {
                                      </div>
                             </Step.Content>
                             </Step>
-                            <Step link active={!this.state.productsSelected && this.state.selectedCustomer != null}
-                                    completed={this.state.selectedProducts.length > 0}>
+                            <Step link title="tuotteet"
+                                    active={!this.state.productsSelected && this.state.selectedCustomer != null}
+                                    completed={this.state.selectedProducts.length > 0}
+                                    onClick={this.handleStepClick}
+                                    >
+                                    
                             <Step.Content>
                                 <Step.Title>Tuotteet</Step.Title>
                                 <Step.Description>{this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
@@ -196,20 +206,16 @@ class LendingForm extends React.Component {
                                     </div>
                             </Step.Content>
                             </Step>
-                            <Step link completed={this.state.saved} active={this.state.productsSelected}>
+                            <Step link title="vahvistus" onClick={this.handleStepClick} completed={this.state.saved} active={this.state.productsSelected}>
                             <Step.Content>
                                 <Step.Title>Vahvistus</Step.Title>
                                 <Step.Description>Kappalemäärät ja palautuspäivä</Step.Description>
                             </Step.Content>
                             </Step>
-                            <Step disabled={true}>
+                            <Step link title="palautus" onClick={this.handleStepClick} disabled={true}>
                             <Step.Content>
                                 <Step.Title>Palautus</Step.Title>
-                                <DatePicker
-                                        dateFormat="DD.MM.YYYY"
-                                        selected={this.state.deadlineDate}
-                                        onChange={this.handleDeadlineChange}
-                                        placeholderText="Palautuspäivä"/>
+                               
                             </Step.Content>
                         </Step>
                     </Step.Group>
