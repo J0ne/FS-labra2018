@@ -14,6 +14,7 @@ import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
 import ProductListForm from './ProductListForm'
+import ProductSelector from './ProductSelector'
 // datepicker styles
 import 'react-datepicker/dist/react-datepicker.css';
 const initialState = {
@@ -91,7 +92,7 @@ class LendingForm extends React.Component {
         const newLending = {
             products: this.state.selectedProductsAsObjs
                 .map(p => {
-                    return {id: p.key, amount: p.amount}
+                    return {id: p.id, amount: p.amount}
                 }),
             customer: this.state.selectedCustomerId,
             deadline: this.state.deadlineDate
@@ -107,9 +108,9 @@ class LendingForm extends React.Component {
     customerSelect = (e) => {
 
     }
-    handleStepClick = (e, {title}) => {
-        console.log(title)
-        this.setState({active: title})}
+    handleStepClick = (e, {id}) => {
+        console.log(id)
+        this.setState({active: id})}
     activeStep() {
         if (this.state.selectedCustomer === null) {
             return 0
@@ -122,15 +123,18 @@ class LendingForm extends React.Component {
 
     }
     updateProduct(product) {
-        const index = this
-            .state
-            .selectedProductsAsObjs
-            .findIndex(p => p.key === product.key)
+        const index = this.state.selectedProductsAsObjs.findIndex(p => p.key === product.key)
         const arrayToUpdate = this.state.selectedProductsAsObjs
         arrayToUpdate[index] = product
         this.setState({selectedProductsAsObjs: arrayToUpdate})
     }
     handleAmount(p) {
+    }
+    handleSelect = (product) => () => {
+        const selectedProductsAsObjs = [...this.state.selectedProductsAsObjs, {...product}]
+        console.log(selectedProductsAsObjs)
+        this.setState({selectedProductsAsObjs})
+        console.log(this.state.selectedProductsAsObjs)
     }
     getDisplayValue(val) {
         if (this.activeStep() === val) {
@@ -163,17 +167,16 @@ class LendingForm extends React.Component {
             <Container>
                 <Container>
                     <Header as="h3">Uusi lainaus </Header>
-                    <Grid columns={2} >
-                           <Grid.Column>
+                    <Grid >
+                           <Grid.Column width={6}>
                             <Step.Group fluid vertical ordered>
-                            <Step link active={this.state.selectedCustomer === null}
+                            <Step id='Lender' link active={this.state.active === 'Lender'}
                             completed={this.state.selectedCustomer !== null}
                             onClick={this.handleStepClick}
-                            title='Lainaaja'
                             >
                                 <Step.Content>
-                                <Step.Title>Lainaaja</Step.Title>
-                                    <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': this.state.selectedCustomer}
+                                <Step.Title>{!this.state.selectedCustomer ? 'Lainaaja': this.state.selectedCustomer}</Step.Title>
+                                    <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': ''}
                                 </Step.Description>
                                  <div style={this.getDisplayValue(0)}>
                                         <Dropdown fluid onChange={this.handleCustomerChange}
@@ -183,44 +186,39 @@ class LendingForm extends React.Component {
                                      </div>
                             </Step.Content>
                             </Step>
-                            <Step link title="tuotteet"
-                                    active={!this.state.productsSelected && this.state.selectedCustomer != null}
+                            <Step link 
+                                    id='Product'
+                                    active={this.state.active === 'Product'}
                                     completed={this.state.selectedProducts.length > 0}
                                     onClick={this.handleStepClick}
-                                    >
-                                    
-                            <Step.Content>
-                                <Step.Title>Tuotteet</Step.Title>
-                                <Step.Description>{this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
+                                    title='Tuotteet'
+                                    description={this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
                                     this.state.selectedProducts.length + ' tuotetta valittuna' }
-                                </Step.Description>
-                                    <div style={this.getDisplayValue(1)}>
-                                        <Dropdown
-                                            noResultsMessage="Ei lisättäviä tuotteita"
-                                            value={this.state.selectedProducts}
-                                            onChange={this.handleProductsChange}
-                                            placeholder='Valitse tuotteet'
-                                            multiple
-                                            search selection
-                                            options={this.props.products}/>
-                                    </div>
+
+                                    />
+                            <Step id='Summary' link onClick={this.handleStepClick} completed={this.state.saved} active={this.state.active === 'Confirmation'}>
+                            <Step.Content>
+                                <Step.Title>Yhteenveto</Step.Title>
+                                <Step.Description></Step.Description>
                             </Step.Content>
                             </Step>
-                            <Step link title="vahvistus" onClick={this.handleStepClick} completed={this.state.saved} active={this.state.productsSelected}>
+                            <Step onClick={this.handleStepClick}>
                             <Step.Content>
                                 <Step.Title>Vahvistus</Step.Title>
-                                <Step.Description>Kappalemäärät ja palautuspäivä</Step.Description>
-                            </Step.Content>
-                            </Step>
-                            <Step link title="palautus" onClick={this.handleStepClick} disabled={true}>
-                            <Step.Content>
-                                <Step.Title>Palautus</Step.Title>
                                
                             </Step.Content>
                         </Step>
                     </Step.Group>
                     </Grid.Column>
+                     <Grid.Column width={10}>
+                        {this.state.active === 'Lender' ? <h1>{this.state.selectedCustomer}</h1>: ''}
+                        {this.state.active === 'Product' ? <ProductSelector selectProduct={this.handleSelect} />: ''}
+                        {this.state.active === 'Summary' ? <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
+                                {this.state.selectedProductsAsObjs.map(p => <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
+                            </List>: ''}
+                    </Grid.Column>
                     </Grid>
+                   
                 </Container>
                 <Container>
                     <Grid stackable columns={1} padded>
@@ -272,23 +270,10 @@ class LendingForm extends React.Component {
                                 style={this.state.productsSelected ? { display: 'none' } : { display: ''}}>
                                 {this
                                     .state.selectedProductsAsObjs
-                                    .map(p => <li key={p.key}>{p.text} {p.description}</li>)}
+                                    .map(p => <li key={p.id}>{p.text} {p.description}</li>)}
                             </ul>
-                            <List
-                                divided
-                                relaxed
-                                style={!this.state.productsSelected
-                                ? {
-                                    display: 'none'
-                                }
-                                : {
-                                    display: ''
-                                }}>
-                                {this
-                                    .state
-                                    .selectedProductsAsObjs
-                                    .map(p => <ProductListForm updateProduct={this.updateProduct} product={p} key={p.key}/>)}
-                                {/* handleClick={(e) => this.handleAmount(p)} */}
+                            <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
+                                {this.state.selectedProductsAsObjs.map(p => <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
                             </List>
                             <Segment>
                                 <Form.Group>
