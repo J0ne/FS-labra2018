@@ -27,7 +27,6 @@ class NumberPicker extends React.Component {
                 }
                 break;
             default:
-                console.log(currentValue)
                 break;
         }
         this.setState({ amount: currentValue })

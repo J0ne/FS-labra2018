@@ -13,6 +13,7 @@ import moment from 'moment';
 import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
+import {toggleSelected, removeFromSelected, updateSelected } from '../reducers/selectionReducer'
 import ProductListForm from './ProductListForm'
 import ProductSelector from './ProductSelector'
 // datepicker styles
@@ -41,9 +42,10 @@ class LendingForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = initialState
-        this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
-        this.customerSelect = this.customerSelect.bind(this);
-        this.updateProduct = this.updateProduct.bind(this);
+        this.handleDeadlineChange = this.handleDeadlineChange.bind(this)
+        this.customerSelect = this.customerSelect.bind(this)
+        this.updateProduct = this.updateProduct.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
     }
     resetState() {
         this.setState(initialState)
@@ -131,10 +133,11 @@ class LendingForm extends React.Component {
     handleAmount(p) {
     }
     handleSelect = (product) => () => {
-        const selectedProductsAsObjs = [...this.state.selectedProductsAsObjs, {...product}]
-        console.log(selectedProductsAsObjs)
-        this.setState({selectedProductsAsObjs})
-        console.log(this.state.selectedProductsAsObjs)
+        this.props.toggleSelected(product)
+        // const selectedProductsAsObjs = [...this.state.selectedProductsAsObjs, {...product}]
+        // console.log(selectedProductsAsObjs)
+        // this.setState({selectedProductsAsObjs})
+        // console.log(this.state.selectedProductsAsObjs)
     }
     getDisplayValue(val) {
         if (this.activeStep() === val) {
@@ -189,11 +192,11 @@ class LendingForm extends React.Component {
                             <Step link 
                                     id='Product'
                                     active={this.state.active === 'Product'}
-                                    completed={this.state.selectedProducts.length > 0}
+                                    completed={this.props.selectedProducts.length > 0}
                                     onClick={this.handleStepClick}
                                     title='Tuotteet'
-                                    description={this.state.selectedProducts.length === 0 ? 'Valitse tuotteet':
-                                    this.state.selectedProducts.length + ' tuotetta valittuna' }
+                                    description={this.props.selectedProducts.length === 0 ? 'Valitse tuotteet':
+                                    this.props.selectedProducts.length + ' tuotetta valittuna' }
 
                                     />
                             <Step id='Summary' link onClick={this.handleStepClick} completed={this.state.saved} active={this.state.active === 'Confirmation'}>
@@ -329,13 +332,11 @@ const mapStateToProps = (state) => {
 
     return {
         customers: state
-            .customers
-            .map(c => {
+            .customers.map(c => {
                 return {text: `${c.firstname} ${c.lastname}`, key: c.id, value: `${c.firstname} ${c.lastname}`}
             }),
         products: state
-            .products
-            .map(p => {
+            .products.map(p => {
                 return {
                     key: p.id,
                     text: p.size && p.size.length > 0 ? p.name + ', koko: ' + p.size : p.name,
@@ -345,8 +346,11 @@ const mapStateToProps = (state) => {
                     amountinstorage: p.amountInStorage ? Number(p.amountInStorage) : 0, //
                     // description: p.description
                 }
-            })
+            }),
+        selectedProducts: state.selectedProducts
     }
 }
 
-export default connect(mapStateToProps, {getCustomers, addLending})(LendingForm)
+export default connect(mapStateToProps, {getCustomers, addLending,
+toggleSelected, removeFromSelected, updateSelected
+})(LendingForm)

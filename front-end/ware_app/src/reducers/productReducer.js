@@ -15,7 +15,6 @@ const reducer = (state = [], action) => {
             map.set(element.id, element.amount)
         })
         const keys = Array.from(map.keys())
-        console.log(keys)
         const newSate = state.map( p => {
             if(keys.includes(p.id)){
                 return updateAmount(map.get(p.id), p)

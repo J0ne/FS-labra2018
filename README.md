@@ -96,5 +96,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	"	 | 3	| Lainausprosessin ja UI:n parantelua, backendiin redirect, jos urlista tulee virheellinen get	(103,5h)|
 | 	29.4 | 2,5  | React Nativeen perehtymistä, video (1,5h): https://www.youtube.com/watch?v=mkualZPRZCs Perusasioita, tekijä sekoili amatöörimäisesti välillä |
 | 5.5.  | 1,5	| Lainausprosessia uusiksi / UI/UX - asiaa|
+|	6.5. | 1,5	| React Native app - ympäristöt ja testailua iOS n. 109h|
 
 
