@@ -98,5 +98,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 | 5.5.  | 1,5	| Lainausprosessia uusiksi / UI/UX - asiaa|
 |	6.5. | 1,5	| React Native app - ympäristöt ja testailua iOS n. 109h|
 |	6.5. |	2,5 | UI:n parantelua, tuotevalinnat (lisäys ja poisto) storeen ja käsittely reduceriin |
+|	8.5	|	2,5	| mm. CustomerSelector ja UI:n parantelua, yhteensä 114h 	|
 
 

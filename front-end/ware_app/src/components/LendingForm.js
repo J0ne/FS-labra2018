@@ -1,12 +1,7 @@
 import React from 'react'
 import Divider, { Container, Dropdown, Button,
     Checkbox, Form, Header, Step, Segment,
-    Icon,
-    Grid,
-    List,
-    Label,
-    Message,
-    GridColumn
+    Icon, Grid, List, Label, Message, GridColumn, Sticky
 } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
@@ -16,6 +11,7 @@ import {addLending} from '../reducers/lendingReducer'
 import {toggleSelected, removeFromSelected, updateSelected } from '../reducers/selectionReducer'
 import ProductListForm from './ProductListForm'
 import ProductSelector from './ProductSelector'
+import CustomerSelector from './CustomerSelector'
 // datepicker styles
 import 'react-datepicker/dist/react-datepicker.css';
 const initialState = {
@@ -29,7 +25,7 @@ const initialState = {
             confirmed: false,
             saved: false,
             showMessage: false,
-            active: '',
+            active: 'Lender',
             messageData: {
                 success: false,
                 warning: false,
@@ -47,6 +43,8 @@ class LendingForm extends React.Component {
         this.updateProduct = this.updateProduct.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
     }
+
+    handleContextRef = contextRef => this.setState({ contextRef })
     resetState() {
         this.setState(initialState)
     }
@@ -125,10 +123,12 @@ class LendingForm extends React.Component {
 
     }
     updateProduct(product) {
+        console.log(product)
         const index = this.state.selectedProductsAsObjs.findIndex(p => p.key === product.key)
         const arrayToUpdate = this.state.selectedProductsAsObjs
         arrayToUpdate[index] = product
-        this.setState({selectedProductsAsObjs: arrayToUpdate})
+        //this.setState({selectedProductsAsObjs: arrayToUpdate})
+        this.props.updateSelected(product)
     }
     handleAmount(p) {
     }
@@ -165,30 +165,26 @@ class LendingForm extends React.Component {
     render() {
 
         const {customers} = this.props
-
+        const { contextRef } = this.state
         return (
             <Container>
+                 <div ref={this.handleContextRef}>
                 <Container>
                     <Header as="h3">Uusi lainaus </Header>
                     <Grid >
+                        
                            <Grid.Column width={6}>
+                            <Sticky context={contextRef}>
                             <Step.Group fluid vertical ordered>
-                            <Step id='Lender' link active={this.state.active === 'Lender'}
+                            <Step id = 'Lender'
+                            link active = {
+                                this.state.active === 'Lender' || this.state.selectedCustomer === null
+                            }
+                            title={!this.state.selectedCustomer ? 'Lainaaja': this.state.selectedCustomer}
                             completed={this.state.selectedCustomer !== null}
                             onClick={this.handleStepClick}
-                            >
-                                <Step.Content>
-                                <Step.Title>{!this.state.selectedCustomer ? 'Lainaaja': this.state.selectedCustomer}</Step.Title>
-                                    <Step.Description>{!this.state.selectedCustomer ? 'Valitse asiakas': ''}
-                                </Step.Description>
-                                 <div style={this.getDisplayValue(0)}>
-                                        <Dropdown fluid onChange={this.handleCustomerChange}
-                                            value={this.state.selectedCustomer}
-                                            placeholder='Valitse asiakas'
-                                            search selection options={this.props.customers}/>
-                                     </div>
-                            </Step.Content>
-                            </Step>
+                            description={!this.state.selectedCustomer ? 'Valitse lainaaja': ''}
+                            />
                             <Step link 
                                     id='Product'
                                     active={this.state.active === 'Product'}
@@ -199,7 +195,7 @@ class LendingForm extends React.Component {
                                     this.props.selectedProducts.length + ' tuotetta valittuna' }
 
                                     />
-                            <Step id='Summary' link onClick={this.handleStepClick} completed={this.state.saved} active={this.state.active === 'Confirmation'}>
+                            <Step id='Summary' link onClick={this.handleStepClick} completed={this.state.saved} active={this.state.active === 'Summary'}>
                             <Step.Content>
                                 <Step.Title>Yhteenveto</Step.Title>
                                 <Step.Description></Step.Description>
@@ -207,22 +203,31 @@ class LendingForm extends React.Component {
                             </Step>
                             <Step onClick={this.handleStepClick}>
                             <Step.Content>
-                                <Step.Title>Vahvistus</Step.Title>
+                                    <Step.Title>Vahvistus</Step.Title>
                                
-                            </Step.Content>
-                        </Step>
-                    </Step.Group>
+                                </Step.Content>
+                            </Step>
+                        </Step.Group>
+                    </Sticky>
+                   
                     </Grid.Column>
                      <Grid.Column width={10}>
-                        {this.state.active === 'Lender' ? <h1>{this.state.selectedCustomer}</h1>: ''}
+                        {this.state.active === 'Lender' ? <CustomerSelector 
+                            selectedCustomer={this.state.selectedCustomer} customers={this.props.customers}
+                            handleRemove={() => this.setState({selectedCustomer: null})} 
+                            handleCustomerChange={this.handleCustomerChange} /> : ''
+                        }
                         {this.state.active === 'Product' ? <ProductSelector selectProduct={this.handleSelect} />: ''}
-                        {this.state.active === 'Summary' ? <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
-                                {this.state.selectedProductsAsObjs.map(p => <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
-                            </List>: ''}
+                        {this.state.active === 'Summary' ?
+                            <List divided relaxed>
+                                {this.props.selectedProducts.map(p =>
+                                    <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
+                            </List> : ''}
                     </Grid.Column>
                     </Grid>
                    
                 </Container>
+
                 <Container>
                     <Grid stackable columns={1} padded>
                         <Grid.Column>
@@ -323,6 +328,7 @@ class LendingForm extends React.Component {
                     </Segment.Group>
 
                 </Container>
+                </div>
             </Container>
         )
     }
@@ -344,6 +350,7 @@ const mapStateToProps = (state) => {
                     value: p.id,
                     size: p.size,
                     amountinstorage: p.amountInStorage ? Number(p.amountInStorage) : 0, //
+                    amount: 0
                     // description: p.description
                 }
             }),

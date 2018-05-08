@@ -11,15 +11,21 @@ const reducer = (state = [], action) => {
        }
        else{
            console.log("added", action.data)
+           action.data.amount = 1 // alustetaan lisätessä yhdellä
            return [...state, action.data]
        }
     }
 
-    if (action.type === 'ADD_TO_SELECTED') {
-        return [...state, action.data]
-    }
     if (action.type === 'UPDATE_SELECTED') {
-            return [...state, action.data]
+        const newState = state.map(item => {
+            if (item.id === action.data.id) {
+                return action.data
+            }
+            else {
+                return item
+            }
+        })
+        return newState
     }
     if (action.type === 'REMOVE_FROM_SELECTED') {
         const newState = state.map( item => {

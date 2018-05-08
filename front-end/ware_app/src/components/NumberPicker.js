@@ -39,12 +39,15 @@ class NumberPicker extends React.Component {
     }
 
     render() {
+        const { numberPickrStyle} = this.props
         return(
-            <Input size="mini" style={numberPickerStyle} labelPosition='right' type='text' placeholder='kpl' >
-                <Button disabled={this.state.amount === 0} name="minus" size="mini" icon="minus" onClick={this.changeValue} icon="minus" />
-                <input value={this.props.value} onChange={this.changeValue}/>
-                <Button name="plus" size="mini" icon="plus" onClick={this.changeValue} icon="plus" />
-            </Input >
+            <div style={numberPickrStyle}>
+                <Input size="mini" style={numberPickerStyle} labelPosition='right' type='text' placeholder='kpl' >
+                    <Button disabled={this.state.amount === 0} name="minus" size="mini" icon="minus" onClick={this.changeValue} icon="minus" />
+                        <input value={this.props.value} onChange={this.changeValue}/>
+                    <Button name="plus" size="mini" icon="plus" onClick={this.changeValue} icon="plus" />
+                </Input >
+            </div>
         )
     }
 }

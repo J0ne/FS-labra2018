@@ -21,11 +21,19 @@ class ProductListForm extends React.Component{
     }
 
     render() {
+        const listStyle = {
+            display: 'inline',
+            backgroundColor: 'yellow',
+            border: '2px solid black'
+        }
+        const numberPickrStyle = {
+            float: 'right'
+        }
         const { product } = this.props
         return(
-            <List.Item key={product}>
-                <NumberPicker value={this.state.amount} onChange={this.updateNumberPicker} />
-                <Button floated="right" basic compact size='mini' icon="remove"></Button>
+            <List.Item key={product.id} style={this.listStyle} >
+                <NumberPicker numberPickrStyle={numberPickrStyle} value={this.state.amount} onChange={this.updateNumberPicker} />
+                {/* <Button floated="right" basic compact size='mini' icon="remove"></Button> */}
                 <List.Icon name='github' size='large' verticalAlign='middle' />
                 <List.Content> <List.Header as='a'>{product.name }</List.Header>
                     <List.Description as='a'>{product.description} {product.size}</List.Description>
