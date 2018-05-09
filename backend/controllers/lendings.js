@@ -18,10 +18,8 @@ lendingsRouter.post('/', async(request, response) => {
     const body = request.body
 
     // todo: loput validoinnit
-    if (body.customer === undefined) {
-        response
-            .status(400)
-            .json({error: 'Asiakas puuttuu'})
+    if (body.customer === undefined || body.customer === null ) {
+        response.status(400).json({error: 'Asiakas puuttuu'})
     }
     const lending = new Lending({
         customer: body.customer,

@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ProductForm from './ProductForm'
-import { Button, Label, Table, Icon } from 'semantic-ui-react'
+import { Button, Label, Table, Icon, TableCell } from 'semantic-ui-react'
 import Togglable from './Togglable'
+import NumberPicker from './NumberPicker';
 
 class ProductSelector extends React.Component {
     constructor(props){
@@ -11,19 +12,35 @@ class ProductSelector extends React.Component {
             showForm: false
         }
     }
+
+    getAmount(id){
+        if(this.props.selectedProducts.length === 0) return 1
+        const product = this.props.selectedProducts.find( x => x.id === id)
+        const amount = product ? product.amount : 1
+        return amount
+    }
     render() {
-        const {selectProduct} = this.props
+        const {selectProduct, updateNumberPicker } = this.props
+        const show = (selected) => {
+            const display = selected ? { display: 'block'}  : { display : 'none' }
+            
+            return display
+        }
         return (
             <div>
-                <Table celled striped>
+                <Table striped>
                         <Table.Body>
                         {this.props.products.map(t => 
                             <Table.Row key={t.id} positive={t.isSelected} >
                                 <Table.Cell name={t.id} collapsing>
-                                {t.name}
+                                 {t.name} 
                                  </Table.Cell>
-                                <Table.Cell collapsing>{t.description}</Table.Cell>
-                                <Table.Cell>{t.size}</Table.Cell>
+                                <Table.Cell collapsing>{t.description} 
+                                 </Table.Cell>
+                                 <Table.Cell> {t.size ?<Label float='right'>{t.size}</Label>: ''} </Table.Cell>
+                                <Table.Cell >
+                                    <div style={show(t.isSelected)}><NumberPicker value={this.getAmount(t.id)} onChange={updateNumberPicker(t.id)} /></div>
+                                </Table.Cell>
                                  <Table.Cell collapsing >
                                     <Button onClick={selectProduct(t)} positive={!t.isSelected}>
                                          <Icon name={t.isSelected ? 'remove' : 'plus' }/>
@@ -48,7 +65,8 @@ const mapStateToProps = (state) => {
                 p.isSelected = false
                 return p
             }
-        })
+        }),
+        selectedProducts: state.selectedProducts
     }
 }
 

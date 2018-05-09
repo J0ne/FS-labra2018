@@ -4,7 +4,6 @@ const customerReducer = (state = [], action) => {
     // console.log(state, action)
 
     if (action.type === 'GET_ALL') {
-        console.log(action.data)
         return action.data
     }
     if (action.type === 'ADD_LENDING'){

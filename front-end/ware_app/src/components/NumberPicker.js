@@ -14,9 +14,9 @@ class NumberPicker extends React.Component {
     }
 
     changeValue = (e) => {
+        console.log(e)
         const actionFilter = e.currentTarget.name
         let currentValue = this.state.amount
-
         switch (actionFilter) {
             case "plus":
                 currentValue++ 
@@ -39,23 +39,16 @@ class NumberPicker extends React.Component {
     }
 
     render() {
-        const { numberPickrStyle} = this.props
+        const { numberPickrStyle, target } = this.props
         return(
             <div style={numberPickrStyle}>
                 <Input size="mini" style={numberPickerStyle} labelPosition='right' type='text' placeholder='kpl' >
                     <Button disabled={this.state.amount === 0} name="minus" size="mini" icon="minus" onClick={this.changeValue} icon="minus" />
-                        <input value={this.props.value} onChange={this.changeValue}/>
+                        <input value={this.props.value} onChange={(target) => this.changeValue(target)}/>
                     <Button name="plus" size="mini" icon="plus" onClick={this.changeValue} icon="plus" />
                 </Input >
             </div>
         )
     }
 }
-
-// NumberPicker.propTypes = {
-//     name: React.PropTypes.string.isRequired,
-//     id: React.PropTypes.string,
-//     value: React.PropTypes.any,
-//     onChange: React.PropTypes.func.isRequired
-// }
 export default NumberPicker

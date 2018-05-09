@@ -26,6 +26,7 @@ const initialState = {
             saved: false,
             showMessage: false,
             active: 'Lender',
+            defaultAmount: 1,
             messageData: {
                 success: false,
                 warning: false,
@@ -90,7 +91,7 @@ class LendingForm extends React.Component {
     }
     handleSave = (e) => {
         const newLending = {
-            products: this.state.selectedProductsAsObjs
+            products: this.props.selectedProducts
                 .map(p => {
                     return {id: p.id, amount: p.amount}
                 }),
@@ -130,21 +131,14 @@ class LendingForm extends React.Component {
         //this.setState({selectedProductsAsObjs: arrayToUpdate})
         this.props.updateSelected(product)
     }
-    handleAmount(p) {
+    handleAmount = (id) => (e) => {
+        console.log(id, e)
+        const product = this.props.selectedProducts.find(p => p.id === id)
+        product.amount = e.value
+        this.props.updateSelected(product)
     }
     handleSelect = (product) => () => {
         this.props.toggleSelected(product)
-        // const selectedProductsAsObjs = [...this.state.selectedProductsAsObjs, {...product}]
-        // console.log(selectedProductsAsObjs)
-        // this.setState({selectedProductsAsObjs})
-        // console.log(this.state.selectedProductsAsObjs)
-    }
-    getDisplayValue(val) {
-        if (this.activeStep() === val) {
-            return {display: ''}
-        } else {
-            return {display: 'none'}
-        }
     }
     showMessage(type, content, seconds) {
         const messageData = {
@@ -164,12 +158,21 @@ class LendingForm extends React.Component {
     }
     render() {
 
+        
         const {customers} = this.props
         const { contextRef } = this.state
         return (
             <Container>
                  <div ref={this.handleContextRef}>
                 <Container>
+                    {this.state.showMessage
+                                ? <Message
+                                        success={this.state.messageData.success}
+                                        warning={this.state.messageData.warning}
+                                        header={this.state.messageData.header}
+                                        content={this.state.messageData.content}/>
+                                : ''}
+
                     <Header as="h3">Uusi lainaus </Header>
                     <Grid >
                         
@@ -195,18 +198,20 @@ class LendingForm extends React.Component {
                                     this.props.selectedProducts.length + ' tuotetta valittuna' }
 
                                     />
-                            <Step id='Summary' link onClick={this.handleStepClick} completed={this.state.saved} active={this.state.active === 'Summary'}>
-                            <Step.Content>
-                                <Step.Title>Yhteenveto</Step.Title>
-                                <Step.Description></Step.Description>
-                            </Step.Content>
+                            <Step id='Summary' link title='Yhteenveto'
+                                disabled={this.props.selectedProducts.length == 0 ||
+                                this.state.selectedCustomer === null}
+                                onClick={this.handleStepClick} 
+                                completed={this.state.saved} 
+                                description='Palautuspäivä'
+                                active={this.state.active === 'Summary'}>
+                           
                             </Step>
-                            <Step onClick={this.handleStepClick}>
-                            <Step.Content>
-                                    <Step.Title>Vahvistus</Step.Title>
-                               
-                                </Step.Content>
-                            </Step>
+                            <Step onClick={this.handleStepClick}
+                                title="Kuittaus ja lähetys"
+                            />
+                                   
+                            
                         </Step.Group>
                     </Sticky>
                    
@@ -217,116 +222,40 @@ class LendingForm extends React.Component {
                             handleRemove={() => this.setState({selectedCustomer: null})} 
                             handleCustomerChange={this.handleCustomerChange} /> : ''
                         }
-                        {this.state.active === 'Product' ? <ProductSelector selectProduct={this.handleSelect} />: ''}
+                        {this.state.active === 'Product' ? <ProductSelector updateNumberPicker={this.handleAmount} selectProduct={this.handleSelect} />: ''}
                         {this.state.active === 'Summary' ?
-                            <List divided relaxed>
+                        <Segment>
+                            <List divided >
                                 {this.props.selectedProducts.map(p =>
                                     <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
-                            </List> : ''}
+                            </List>
+                            <Segment>
+                            <Form>
+                                 <Form.Group widths='equal'>
+                                    <Form.Field>
+                                        <Checkbox
+                                        toggle label='Kuitattu' name='checkboxKuittaus' checked={this.state.confirmed}
+                                         onChange={this.handleKuittaus}/>
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Label><Icon name="calendar"/>Palautuspäivä</Label>
+                                        <DatePicker
+                                            dateFormat="DD.MM.YYYY"
+                                            selected={this.state.deadlineDate}
+                                            onChange={this.handleDeadlineChange}
+                                            placeholderText="Palautuspäivä"/>
+                                    </Form.Field >
+                                    <Form.Field>
+                                        <Button disabled={!this.state.confirmed || this.state.saved} onClick={this.handleSave} positive><Icon name="save"/>
+                                        Tallenna</Button>
+                                    </Form.Field>
+                                    </Form.Group>
+                            </Form>
+                            </Segment>
+                        </Segment> : ''}
                     </Grid.Column>
                     </Grid>
                    
-                </Container>
-
-                <Container>
-                    <Grid stackable columns={1} padded>
-                        <Grid.Column>
-                            <div>
-                               
-                                <Form style={this.getDisplayValue(1)} onSubmit={this.handleSubmit}>
-                                    <Form.Group widths='equal'>
-
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Button
-                                            floated="right"
-                                            disabled={this.state.selectedProducts.length === 0}
-                                            primary
-                                            style={this.getDisplayValue(1)}
-                                            onClick={this.handleProductSelection}>Lisää tuotteet
-                                        </Button>
-                                    </Form.Group>
-                                </Form>
-                            </div>
-                        </Grid.Column>
-                    </Grid>
-                </Container>
-                <Container>
-                     {this.state.showMessage
-                                ? <Message
-                                        success={this.state.messageData.success}
-                                        warning={this.state.messageData.warning}
-                                        header={this.state.messageData.header}
-                                        content={this.state.messageData.content}/>
-                                : ''}
-                    <Segment.Group
-                        style={!this.state.productsSelected
-                        ? {
-                            display: 'none'
-                        }
-                        : {
-                            display: ''
-                        }}>
-                        {this.state.user !== null
-                            ? <Segment><Icon name="user"/>{this.state.selectedCustomer
-                                        ? this.state.selectedCustomer
-                                        : '-'}
-                                </Segment>
-                            : ''}
-                        <Segment>
-                            <ul
-                                style={this.state.productsSelected ? { display: 'none' } : { display: ''}}>
-                                {this
-                                    .state.selectedProductsAsObjs
-                                    .map(p => <li key={p.id}>{p.text} {p.description}</li>)}
-                            </ul>
-                            <List divided relaxed style={!this.state.productsSelected ? { display: 'none' } : { display: '' }}>
-                                {this.state.selectedProductsAsObjs.map(p => <ProductListForm updateProduct={this.updateProduct} product={p} key={p.id}/>)}
-                            </List>
-                            <Segment>
-                                <Form.Group>
-                                    <Label><Icon name="calendar"/>
-                                        Palautuspäivä</Label>
-                                    <DatePicker
-                                        dateFormat="DD.MM.YYYY"
-                                        selected={this.state.deadlineDate}
-                                        onChange={this.handleDeadlineChange}
-                                        placeholderText="Palautuspäivä"/>
-                                </Form.Group>
-                            </Segment>
-                        </Segment>
-                        <Segment floated="left">
-                            <Form.Field>
-                                <Checkbox
-                                    toggle
-                                    label='Kuitattu'
-                                    name='checkboxKuittaus'
-                                    checked={this.state.confirmed}
-                                    onChange={this.handleKuittaus}/>
-                            </Form.Field>
-                        </Segment>
-                        <Segment floated='right'>
-                            <Button.Group
-                                floated="right"
-                                style={!this.state.productsSelected
-                                ? {
-                                    display: 'none'
-                                }
-                                : {
-                                    display: ''
-                                }}>
-                                <Button negative><Icon name="remove"/>
-                                    Peruuta</Button>
-                                {/* <Button.Or text="tai" /> */}
-                                <Button><Icon name="edit"/>
-                                    Muokkaa</Button>
-                                {/* <Button.Or text="tai" /> */}
-                                <Button disabled={!this.state.confirmed || this.state.saved} onClick={this.handleSave} positive><Icon name="save"/>
-                                    Tallenna</Button>
-                            </Button.Group>
-                        </Segment>
-                    </Segment.Group>
-
                 </Container>
                 </div>
             </Container>
