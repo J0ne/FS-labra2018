@@ -4,7 +4,12 @@ import Divider, { Container, Dropdown, Button,
     Icon, Grid, List, Label, Message, GridColumn, Sticky
 } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
-import moment from 'moment';
+
+
+import Flatpickr from 'react-flatpickr'
+import 'flatpickr/dist/themes/material_green.css'
+import { Finnish} from 'flatpickr/dist/l10n/fi.js'
+import moment, { locale } from 'moment';
 import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
@@ -21,7 +26,7 @@ const initialState = {
             selectedProducts: [],
             selectedProductsAsObjs: [],
             productsSelected: false,
-            deadlineDate: moment().add(3, 'days'),
+            deadlineDate: null,
             confirmed: false,
             saved: false,
             showMessage: false,
@@ -81,9 +86,10 @@ class LendingForm extends React.Component {
             this.setState({selectedCustomer: selected.text, selectedCustomerId: selected.key})
         }
     }
-    handleDeadlineChange = (deadline) => {
+    handleDeadlineChange = (data) => {
+        console.log('DATE', data.date[0])
         this.setState({
-            deadlineDate: moment(deadline)
+            deadlineDate: moment(data.date[0]).toISOString()
         })
     }
     handleProductSelection = (e) => {
@@ -99,8 +105,9 @@ class LendingForm extends React.Component {
             deadline: this.state.deadlineDate
         }
         this.props.addLending(newLending)
-
+        this.setState({saved: true})
         this.showMessage('', '', 3)
+        
         
     }
     handleKuittaus = (e, {checked}) => {
@@ -161,6 +168,10 @@ class LendingForm extends React.Component {
         
         const {customers} = this.props
         const { contextRef } = this.state
+        const flatpickrOptions = {
+            locale: Finnish,
+            dateFormat: 'd.m.Y'
+        }
         return (
             <Container>
                  <div ref={this.handleContextRef}>
@@ -199,17 +210,24 @@ class LendingForm extends React.Component {
 
                                     />
                             <Step id='Summary' link title='Yhteenveto'
+                                completed={this.state.confirmed && this.state.deadlineDate !== null }
                                 disabled={this.props.selectedProducts.length == 0 ||
                                 this.state.selectedCustomer === null}
                                 onClick={this.handleStepClick} 
-                                completed={this.state.saved} 
-                                description='Palautuspäivä'
+                                description='Palautuspäivä ja kuittaus'
                                 active={this.state.active === 'Summary'}>
-                           
+
                             </Step>
                             <Step onClick={this.handleStepClick}
-                                title="Kuittaus ja lähetys"
-                            />
+                                disabled={!(this.state.confirmed && this.state.deadlineDate !== null)}
+                                completed={this.state.saved}
+                                title={<Form.Field>
+                                        <Button disabled={!this.state.confirmed || 
+                                            this.state.deadlineDate === null || this.state.saved} onClick={this.handleSave} positive><Icon name="save"/>
+                                        Tallenna</Button>
+                                    </Form.Field>}
+                            >
+                            </Step>
                                    
                             
                         </Step.Group>
@@ -237,18 +255,11 @@ class LendingForm extends React.Component {
                                         toggle label='Kuitattu' name='checkboxKuittaus' checked={this.state.confirmed}
                                          onChange={this.handleKuittaus}/>
                                     </Form.Field>
-                                    <Form.Field>
-                                        <Label><Icon name="calendar"/>Palautuspäivä</Label>
-                                        <DatePicker
-                                            dateFormat="DD.MM.YYYY"
-                                            selected={this.state.deadlineDate}
-                                            onChange={this.handleDeadlineChange}
-                                            placeholderText="Palautuspäivä"/>
+                                    <Form.Field inline>
+                                         <Flatpickr value={this.state.deadlineDate}
+                                            options={flatpickrOptions} placeholder='Palautuspäivämäärä'
+                                          onChange={date => { this.handleDeadlineChange({date}) }} />
                                     </Form.Field >
-                                    <Form.Field>
-                                        <Button disabled={!this.state.confirmed || this.state.saved} onClick={this.handleSave} positive><Icon name="save"/>
-                                        Tallenna</Button>
-                                    </Form.Field>
                                     </Form.Group>
                             </Form>
                             </Segment>

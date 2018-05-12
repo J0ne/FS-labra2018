@@ -3,6 +3,7 @@ import { Menu, Label, Input } from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom'
 
 const MenuBar = ({ activeItem, showUserDetails, user, handleItemClick, logIn, logOut}) => (
+
     <Menu stackable={true}>
         <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === 'lainaukset'} onClick={handleItemClick} />
         <Menu.Item as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={handleItemClick}>Uusi lainaus</Menu.Item>

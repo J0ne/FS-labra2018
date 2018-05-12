@@ -28,20 +28,20 @@ class ProductSelector extends React.Component {
         }
         return (
             <div>
-                <Table striped>
+                <Table striped stackable>
                         <Table.Body>
                         {this.props.products.map(t => 
                             <Table.Row key={t.id} positive={t.isSelected} >
                                 <Table.Cell name={t.id} collapsing>
                                  {t.name} 
                                  </Table.Cell>
-                                <Table.Cell collapsing>{t.description} 
+                                <Table.Cell  collapsing>{t.description} 
                                  </Table.Cell>
-                                 <Table.Cell> {t.size ?<Label float='right'>{t.size}</Label>: ''} </Table.Cell>
-                                <Table.Cell >
+                                 <Table.Cell> {t.size ?<Label>{t.size}</Label>: ''} </Table.Cell>
+                                <Table.Cell>
                                     <div style={show(t.isSelected)}><NumberPicker value={this.getAmount(t.id)} onChange={updateNumberPicker(t.id)} /></div>
                                 </Table.Cell>
-                                 <Table.Cell collapsing >
+                                 <Table.Cell collapsing textAlign='right'>
                                     <Button onClick={selectProduct(t)} positive={!t.isSelected}>
                                          <Icon name={t.isSelected ? 'remove' : 'plus' }/>
                                     </Button>
