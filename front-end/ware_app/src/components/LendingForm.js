@@ -55,6 +55,7 @@ class LendingForm extends React.Component {
     handleContextRef = contextRef => this.setState({ contextRef })
     resetState() {
         this.setState(initialState)
+        this.props.removeCustomer(this.props.selectedCustomer)
     }
 
     handleProductsChange = (event, data) => {
@@ -91,14 +92,19 @@ class LendingForm extends React.Component {
         this.setState({productsSelected: true})
     }
     handleSave = (e) => {
+        if(!this.props.selectCustomer){
+            this.showMessage('error', 'Lainaajaa ei ole valittuna', 4)
+            return
+        }
         const newLending = {
             products: this.props.selectedProducts
                 .map(p => {
                     return {id: p.id, amount: p.amount}
                 }),
-            customer: this.state.selectedCustomerId,
+            customer: this.props.selectedCustomerId,
             deadline: this.state.deadlineDate
         }
+        
         this.props.addLending(newLending)
         this.setState({saved: true})
         this.showMessage('', '', 3)
@@ -170,7 +176,8 @@ class LendingForm extends React.Component {
         const { contextRef } = this.state
         const flatpickrOptions = {
             locale: Finnish,
-            dateFormat: 'd.m.Y'
+            dateFormat: 'd.m.Y',
+            disableMobile: true
         }
         return (
             <Container>

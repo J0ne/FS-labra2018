@@ -28,20 +28,23 @@ class ProductSelector extends React.Component {
         }
         return (
             <div>
-                <Table striped stackable>
+                <Table striped stackable verticalAlign='top'>
                         <Table.Body>
                         {this.props.products.map(t => 
                             <Table.Row key={t.id} positive={t.isSelected} >
-                                <Table.Cell name={t.id} collapsing>
-                                 {t.name} 
+                                <Table.Cell name={t.id} collapsing verticalAlign='top'>
+                                 {t.name} <br/>
+                                 <div style={show(t.isSelected)}>
+                                        <NumberPicker value={this.getAmount(t.id)} onChange={updateNumberPicker(t.id)} />
+                                    </div>
                                  </Table.Cell>
-                                <Table.Cell  collapsing>{t.description} 
+                                <Table.Cell verticalAlign='top'>{t.description} 
                                  </Table.Cell>
-                                 <Table.Cell> {t.size ?<Label>{t.size}</Label>: ''} </Table.Cell>
-                                <Table.Cell>
-                                    <div style={show(t.isSelected)}><NumberPicker value={this.getAmount(t.id)} onChange={updateNumberPicker(t.id)} /></div>
-                                </Table.Cell>
-                                 <Table.Cell collapsing textAlign='right'>
+                                 <Table.Cell verticalAlign='top' collapsing> {t.size ?<Label>{t.size}</Label>: ''} </Table.Cell>
+                                {/* <Table.Cell>
+                                  
+                                </Table.Cell> */}
+                                 <Table.Cell textAlign='right' verticalAlign='top'>
                                     <Button onClick={selectProduct(t)} positive={!t.isSelected}>
                                          <Icon name={t.isSelected ? 'remove' : 'plus' }/>
                                     </Button>
