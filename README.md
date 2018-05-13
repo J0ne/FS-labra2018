@@ -102,6 +102,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	9.5. |	2,5 | UIn parantelua lainausprosessi lähes valmiiksi. Nyt suoraviivaistettu tuotteiden valintaa ja lukumäärämuutoksia|
 |	10.5.| 2	| Tappelua Semantic UI:n taulukon kanssa; tuotevalintalistauksen kappalemäärävalinta menee toisen solun päälle tablettikoossa|
 |	11.5.| 1	| Ongelmia Flatpickr-tyylien tuonnin kanssa; pitääkö konfata webpack?|
-|	12.5.| 2	| Flatpickr käyttöön |
+|	12.5.| 2	| Flatpickr käyttöön, edelleen lainausprosessin parantelua |
 
 

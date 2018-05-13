@@ -5,6 +5,7 @@ import customerReducer from './reducers/customerReducers'
 import lendingReducer from './reducers/lendingReducer'
 import userReducer from './reducers/userReducer'
 import selectionReducer from './reducers/selectionReducer'
+import customerSelectionReducer from './reducers/customerSelectionReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
 
 const reducer = combineReducers({
@@ -12,7 +13,8 @@ const reducer = combineReducers({
     customers: customerReducer, 
     lendings: lendingReducer, 
     user: userReducer,
-    selectedProducts: selectionReducer
+    selectedProducts: selectionReducer,
+    selectedCustomer: customerSelectionReducer
 })
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))

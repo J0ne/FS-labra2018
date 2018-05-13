@@ -14,9 +14,10 @@ import {connect} from 'react-redux'
 import {getCustomers} from '../reducers/customerReducers'
 import {addLending} from '../reducers/lendingReducer'
 import {toggleSelected, removeFromSelected, updateSelected } from '../reducers/selectionReducer'
+import { selectCustomer, removeCustomer} from '../reducers/customerSelectionReducer'
 import ProductListForm from './ProductListForm'
 import ProductSelector from './ProductSelector'
-import CustomerSelector from './CustomerSelector'
+import ConnectedCustomerSelector from './CustomerSelector'
 // datepicker styles
 import 'react-datepicker/dist/react-datepicker.css';
 const initialState = {
@@ -48,6 +49,7 @@ class LendingForm extends React.Component {
         this.customerSelect = this.customerSelect.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
+        this.handleCustomerSelect = this.handleCustomerSelect.bind(this)
     }
 
     handleContextRef = contextRef => this.setState({ contextRef })
@@ -55,13 +57,6 @@ class LendingForm extends React.Component {
         this.setState(initialState)
     }
 
-    handleCustomerChange = (event, data) => {
-        const customer = data
-            .options.find(x => {
-                return data.value === x.text
-            })
-        this.setState({selectedCustomer: customer.text, selectedCustomerId: customer.key})
-    }
     handleProductsChange = (event, data) => {
         this.setState({selectedProducts: data.value})
         const selectedProductsAsObjs = data
@@ -107,7 +102,7 @@ class LendingForm extends React.Component {
         this.props.addLending(newLending)
         this.setState({saved: true})
         this.showMessage('', '', 3)
-        
+
         
     }
     handleKuittaus = (e, {checked}) => {
@@ -143,6 +138,11 @@ class LendingForm extends React.Component {
         const product = this.props.selectedProducts.find(p => p.id === id)
         product.amount = e.value
         this.props.updateSelected(product)
+    }
+    
+    handleCustomerSelect = (customer) => () => {
+        customer.isSelected = true
+        this.props.selectCustomer(customer)
     }
     handleSelect = (product) => () => {
         this.props.toggleSelected(product)
@@ -192,12 +192,13 @@ class LendingForm extends React.Component {
                             <Step.Group fluid vertical ordered>
                             <Step id = 'Lender'
                             link active = {
-                                this.state.active === 'Lender' || this.state.selectedCustomer === null
+                                this.state.active === 'Lender' || this.props.selectedCustomer === null
                             }
-                            title={!this.state.selectedCustomer ? 'Lainaaja': this.state.selectedCustomer}
-                            completed={this.state.selectedCustomer !== null}
+                            title = {!this.props.selectedCustomer ? 'Lainaaja' : `${this.props.selectedCustomer.firstname} ${this.props.selectedCustomer.lastname}`
+                            }
+                            completed={this.props.selectedCustomer !== null}
                             onClick={this.handleStepClick}
-                            description={!this.state.selectedCustomer ? 'Valitse lainaaja': ''}
+                            description={!this.props.selectedCustomer ? 'Valitse lainaaja': ''}
                             />
                             <Step link 
                                     id='Product'
@@ -212,7 +213,7 @@ class LendingForm extends React.Component {
                             <Step id='Summary' link title='Yhteenveto'
                                 completed={this.state.confirmed && this.state.deadlineDate !== null }
                                 disabled={this.props.selectedProducts.length == 0 ||
-                                this.state.selectedCustomer === null}
+                                this.props.selectedCustomer === null}
                                 onClick={this.handleStepClick} 
                                 description='Palautuspäivä ja kuittaus'
                                 active={this.state.active === 'Summary'}>
@@ -235,11 +236,10 @@ class LendingForm extends React.Component {
                    
                     </Grid.Column>
                      <Grid.Column width={10}>
-                        {this.state.active === 'Lender' ? <CustomerSelector 
-                            selectedCustomer={this.state.selectedCustomer} customers={this.props.customers}
-                            handleRemove={() => this.setState({selectedCustomer: null})} 
-                            handleCustomerChange={this.handleCustomerChange} /> : ''
-                        }
+                        {this.state.active === 'Lender' ? <ConnectedCustomerSelector  toggleCustomer={this.handleCustomerSelect}
+                            selectedCustomer={this.props.selectedCustomer}
+                            customers={this.props.customers}
+                             /> : ''}
                         {this.state.active === 'Product' ? <ProductSelector updateNumberPicker={this.handleAmount} selectProduct={this.handleSelect} />: ''}
                         {this.state.active === 'Summary' ?
                         <Segment>
@@ -294,10 +294,12 @@ const mapStateToProps = (state) => {
                     // description: p.description
                 }
             }),
-        selectedProducts: state.selectedProducts
+        selectedProducts: state.selectedProducts,
+        selectedCustomer: state.selectedCustomer
     }
 }
 
 export default connect(mapStateToProps, {getCustomers, addLending,
-toggleSelected, removeFromSelected, updateSelected
+toggleSelected, removeFromSelected, updateSelected, 
+selectCustomer, removeCustomer
 })(LendingForm)
