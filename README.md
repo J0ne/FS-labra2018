@@ -104,5 +104,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	11.5.| 1	| Ongelmia Flatpickr-tyylien tuonnin kanssa; pitääkö konfata webpack?|
 |	12.5.| 2	| Flatpickr käyttöön, edelleen lainausprosessin parantelua |
 |	13.5.| 2	| Asiakasvalintaan muutoksia. bugi: valittu asiakas null. Validointi tälle, julkaisuja herokuun|
+|	14.5.| 2	| Bugikorjauksia, julkaisuja Herokuun ja testailua tabletilla |
 
 

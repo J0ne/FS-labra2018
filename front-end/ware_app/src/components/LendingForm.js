@@ -23,7 +23,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 const initialState = {
             startDate: moment(),
             selectedCustomer: null,
-            selectedCustomerId: null,
             selectedProducts: [],
             selectedProductsAsObjs: [],
             productsSelected: false,
@@ -46,10 +45,10 @@ class LendingForm extends React.Component {
         super(props)
         this.state = initialState
         this.handleDeadlineChange = this.handleDeadlineChange.bind(this)
-        this.customerSelect = this.customerSelect.bind(this)
         this.updateProduct = this.updateProduct.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
         this.handleCustomerSelect = this.handleCustomerSelect.bind(this)
+        this.handleSave = this.handleSave.bind(this)
     }
 
     handleContextRef = contextRef => this.setState({ contextRef })
@@ -76,10 +75,13 @@ class LendingForm extends React.Component {
     componentDidMount() {
 
         if(this.props.customers.length > 0 && this.props.customerid){
-            console.log(this.props.customerid)
             const selected = this.props.customers
-                .find(customer => customer.key === this.props.customerid)
-            this.setState({selectedCustomer: selected.text, selectedCustomerId: selected.key})
+                .find(customer => customer.id === this.props.customerid)
+            this.props.selectCustomer(selected)
+
+            if(selected){
+                this.setState({active: 'Product'})
+            }
         }
     }
     handleDeadlineChange = (data) => {
@@ -94,14 +96,14 @@ class LendingForm extends React.Component {
     handleSave = (e) => {
         if(!this.props.selectCustomer){
             this.showMessage('error', 'Lainaajaa ei ole valittuna', 4)
-            return
+            return;
         }
         const newLending = {
             products: this.props.selectedProducts
                 .map(p => {
                     return {id: p.id, amount: p.amount}
                 }),
-            customer: this.props.selectedCustomerId,
+            customer: this.props.selectedCustomer.id,
             deadline: this.state.deadlineDate
         }
         
@@ -109,13 +111,9 @@ class LendingForm extends React.Component {
         this.setState({saved: true})
         this.showMessage('', '', 3)
 
-        
     }
     handleKuittaus = (e, {checked}) => {
         this.setState({confirmed: checked})
-    }
-    customerSelect = (e) => {
-
     }
     handleStepClick = (e, {id}) => {
         console.log(id)
@@ -144,6 +142,7 @@ class LendingForm extends React.Component {
         const product = this.props.selectedProducts.find(p => p.id === id)
         product.amount = e.value
         this.props.updateSelected(product)
+        this.setState({active: 'Product'})
     }
     
     handleCustomerSelect = (customer) => () => {
@@ -171,7 +170,6 @@ class LendingForm extends React.Component {
     }
     render() {
 
-        
         const {customers} = this.props
         const { contextRef } = this.state
         const flatpickrOptions = {
@@ -199,7 +197,7 @@ class LendingForm extends React.Component {
                             <Step.Group fluid vertical ordered>
                             <Step id = 'Lender'
                             link active = {
-                                this.state.active === 'Lender' || this.props.selectedCustomer === null
+                                this.state.active === 'Lender'
                             }
                             title = {!this.props.selectedCustomer ? 'Lainaaja' : `${this.props.selectedCustomer.firstname} ${this.props.selectedCustomer.lastname}`
                             }
@@ -209,7 +207,9 @@ class LendingForm extends React.Component {
                             />
                             <Step link 
                                     id='Product'
-                                    active={this.state.active === 'Product'}
+                                    active = {
+                                        this.state.active === 'Product' && this.props.selectedCustomer
+                                    }
                                     completed={this.props.selectedProducts.length > 0}
                                     onClick={this.handleStepClick}
                                     title='Tuotteet'
@@ -284,10 +284,7 @@ class LendingForm extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-        customers: state
-            .customers.map(c => {
-                return {text: `${c.firstname} ${c.lastname}`, key: c.id, value: `${c.firstname} ${c.lastname}`}
-            }),
+        customers: state.customers,
         products: state
             .products.map(p => {
                 return {
@@ -302,7 +299,8 @@ const mapStateToProps = (state) => {
                 }
             }),
         selectedProducts: state.selectedProducts,
-        selectedCustomer: state.selectedCustomer
+        selectedCustomer: state.selectedCustomer,
+        error: state.error
     }
 }
 

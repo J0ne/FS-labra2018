@@ -31,8 +31,8 @@ lendingsRouter.post('/', async(request, response) => {
    
     const savedlending = await lending.save()
     savedlending.products.map(p => productHelper.decreaseFromStorage(p.id, p.amount))
-    // haetaan ja palautetaan 'täydellinen' olio
-
+    
+    // haetaan ja palautetaan täydellinen olio
     const populatedObj = await Lending.findById(savedlending._id).populate('customer',
      {'id': 1, 'firstname': 1, 'lastname': 1, 'email': 1})
     console.log('populatedObj', populatedObj)
