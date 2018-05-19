@@ -23,11 +23,8 @@ class ProductList extends React.Component {
         return (
             <div>
                 <h1>Varasto</h1>
-               
-            
-                <h2>Tuotteet</h2>
                 {this.showProductForm()}
-                <Table celled striped>
+                <Table celled striped unstackable collapsing>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Tuote</Table.HeaderCell>
@@ -42,7 +39,7 @@ class ProductList extends React.Component {
                                 <Table.Cell collapsing>
                                     <Icon name='circle thin' /> {t.name}
                                  </Table.Cell>
-                                <Table.Cell>{t.description}</Table.Cell>
+                                <Table.Cell collapsing >{t.description}</Table.Cell>
                                 <Table.Cell>{t.size}</Table.Cell>
                                 <Table.Cell collapsing textAlign='right'>{t.amountInStorage}</Table.Cell>
                             </Table.Row>)}

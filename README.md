@@ -105,5 +105,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	12.5.| 2	| Flatpickr käyttöön, edelleen lainausprosessin parantelua |
 |	13.5.| 2	| Asiakasvalintaan muutoksia. bugi: valittu asiakas null. Validointi tälle, julkaisuja herokuun|
 |	14.5.| 2	| Bugikorjauksia, julkaisuja Herokuun ja testailua tabletilla |
+|	19.5.| 4,5	| Mobiilimenu ja ui:n pyörittelyä. |
 
 

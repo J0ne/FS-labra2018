@@ -116,7 +116,7 @@ class LendingForm extends React.Component {
         this.setState({confirmed: checked})
     }
     handleStepClick = (e, {id}) => {
-        console.log(id)
+        console.log(e, id)
         this.setState({active: id})}
     activeStep() {
         if (this.state.selectedCustomer === null) {
@@ -192,23 +192,17 @@ class LendingForm extends React.Component {
                     <Header as="h3">Uusi lainaus </Header>
                     <Grid >
                         
-                           <Grid.Column width={6}>
+                        <Grid.Column width={6}>
                             <Sticky context={contextRef}>
                             <Step.Group fluid vertical ordered>
-                            <Step id = 'Lender'
-                            link active = {
-                                this.state.active === 'Lender'
+                            <Step id = 'Lender' link active = {this.state.active === 'Lender'}
+                                    title = {!this.props.selectedCustomer ? 'Lainaaja' : `${this.props.selectedCustomer.firstname} ${this.props.selectedCustomer.lastname}`
                             }
-                            title = {!this.props.selectedCustomer ? 'Lainaaja' : `${this.props.selectedCustomer.firstname} ${this.props.selectedCustomer.lastname}`
-                            }
-                            completed={this.props.selectedCustomer !== null}
-                            onClick={this.handleStepClick}
-                            description={!this.props.selectedCustomer ? 'Valitse lainaaja': ''}
+                                completed={this.props.selectedCustomer !== null} onClick={this.handleStepClick} description={!this.props.selectedCustomer ? 'Valitse lainaaja': ''}
                             />
                             <Step link 
                                     id='Product'
-                                    active = {
-                                        this.state.active === 'Product' && this.props.selectedCustomer
+                                    active = {this.state.active === 'Product' && this.props.selectedCustomer !== null
                                     }
                                     completed={this.props.selectedProducts.length > 0}
                                     onClick={this.handleStepClick}
@@ -236,8 +230,6 @@ class LendingForm extends React.Component {
                                     </Form.Field>}
                             >
                             </Step>
-                                   
-                            
                         </Step.Group>
                     </Sticky>
                    

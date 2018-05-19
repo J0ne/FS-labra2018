@@ -28,7 +28,7 @@ class ProductSelector extends React.Component {
         }
         return (
             <div>
-                <Table striped stackable verticalAlign='top'>
+                <Table size='small' striped stackable verticalAlign='top'>
                         <Table.Body>
                         {this.props.products.map(t => 
                             <Table.Row key={t.id} positive={t.isSelected} >
@@ -45,7 +45,7 @@ class ProductSelector extends React.Component {
                                   
                                 </Table.Cell> */}
                                  <Table.Cell textAlign='right' verticalAlign='top'>
-                                    <Button onClick={selectProduct(t)} positive={!t.isSelected}>
+                                    <Button size='mini' onClick={selectProduct(t)} positive={!t.isSelected}>
                                          <Icon name={t.isSelected ? 'remove' : 'plus' }/>
                                     </Button>
                                 </Table.Cell>

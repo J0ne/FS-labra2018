@@ -31,7 +31,7 @@ class ProductListForm extends React.Component{
         }
         const { product } = this.props
         return(
-            <List.Item key={product.id} style={this.listStyle} >
+            <List.Item size="small" key={product.id} style={this.listStyle} >
                 {/* <NumberPicker numberPickrStyle={numberPickrStyle} value={this.state.amount} onChange={this.updateNumberPicker} /> */}
                 {/* <Button floated="right" basic compact size='mini' icon="remove"></Button> */}
                      <Label style={floatRight} circular color='grey' >{product.amount}</Label>

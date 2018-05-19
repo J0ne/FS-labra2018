@@ -21,7 +21,7 @@ class CustomerSelector extends React.Component {
             <div>
                  <div>
                      
-                <Table striped stackable>
+                <Table size='small' striped stackable>
                         <Table.Body>
                         {this.props.customers.map(p => 
                             <Table.Row key={p.id} positive={this.isSelected(p, selectedCustomer)} >
@@ -55,7 +55,6 @@ class CustomerSelector extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log('selectedCustomer', state.selectedCustomer)
     return {
         customers: state.customers.map(p => {
             p.isSelected = false

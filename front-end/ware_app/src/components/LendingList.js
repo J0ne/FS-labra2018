@@ -67,7 +67,7 @@ class LendingList extends React.Component {
                                     <Table.Cell>{lainaus.palautuspvm}</Table.Cell>
                                     <Table.Cell>{lainaus.myohassa
                                         ? <Icon name="close"/> : <Icon name="check"/>}</Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell textAlign='right'>
                                         {lainaus.palautettu!= null ? '' :  <Button size="tiny" color='teal' name="kuittaus" onClick={this.confirmReverted(lainaus)}><Icon name="check"/></Button> }
                                     </Table.Cell>
                             </Table.Row>)}

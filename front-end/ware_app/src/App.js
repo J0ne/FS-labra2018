@@ -25,7 +25,8 @@ import {
   Modal,
   Dimmer,
   Loader,
-  Segment
+  Segment,
+  Responsive
 } from 'semantic-ui-react'
 
 
@@ -39,6 +40,7 @@ class App extends Component {
       username: '',
       password: '',
       showloader: false,
+      sidebarVisible: false,
       registerdata: {
         name: '',
         username: '',
@@ -50,8 +52,11 @@ class App extends Component {
     this.handleLoginFieldChange = this.handleLoginFieldChange.bind(this)
 }
   handleItemClick = (e, { name }) => { 
-    this.setState({ activeItem: name })
+    this.setState({ activeItem: name, sidebarVisible: false })
   }
+  toggleVisibility = () => this.setState({
+    sidebarVisible: !this.state.sidebarVisible
+  })
   handleLoginFieldChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -122,24 +127,8 @@ passwordsAreValid = () => {
 }
 
   render() {
-
-    const { activeItem } = this.state
-    return (
-      <div>
-      <Router>
-      <Container> 
-        {this.props.user ? <MenuBar activeItem={this.activeItem} user={this.props.user} showUserDetails={this.showUserDetails} 
-      handleItemClick={this.handleItemClick} logOut={this.logOut} logIn={this.logIn} /> : 
-        <Header as='h2'>
-    <Icon name='table' />
-    <Header.Content>
-      Varasto
-      <Header.Subheader>
-        Kirjaudu sisään tai  <Button onClick={this.handleOpen} basic color='green'>rekisteröidy</Button>
-      </Header.Subheader>
-    </Header.Content>
-  </Header>}
-        {this.props.user ? <div>
+    const mainContent = () => {
+      return (<div>
             <Route exact path="/" render={({ match }) => <div>
               <ConnectedLendingList store={this.props.store} />
             </div>} />
@@ -150,7 +139,27 @@ passwordsAreValid = () => {
           <Route exact path="/admin" render={() => <AdminView/> } />
            <Route exact path="/rekisterointi" render={() => <RegisterForm/> } />
           <Route exact path="/asiakkaat" render={({ match }) => <CustomerList />} />    
-        </div> : <div>
+        </div> )
+    }
+    const { activeItem } = this.state
+    return (
+      <div>
+      <Router>
+      <Container> 
+        {this.props.user ? <MenuBar content={mainContent()} 
+        toggleVisibility={this.toggleVisibility}
+        visible={this.state.sidebarVisible} activeItem={this.activeItem} user={this.props.user} showUserDetails={this.showUserDetails} 
+      handleItemClick={this.handleItemClick} logOut={this.logOut} logIn={this.logIn} /> : 
+        <Header as='h2'>
+    <Icon name='table' />
+    <Header.Content>
+      Varasto
+      <Header.Subheader>
+        Kirjaudu sisään tai  <Button onClick={this.handleOpen} basic color='green'>rekisteröidy</Button>
+      </Header.Subheader>
+    </Header.Content>
+  </Header>}
+        {this.props.user ? <Responsive minWidth={768} >{mainContent()}</Responsive> : <div>
          <LoginForm handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
         
