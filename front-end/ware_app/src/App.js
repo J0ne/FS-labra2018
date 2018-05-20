@@ -133,7 +133,7 @@ passwordsAreValid = () => {
               <ConnectedLendingList store={this.props.store} />
             </div>} />
             <Route path="/uusilainaus/:customerid?" render={({ match }) => <div>
-              <LendingForm customerid={match.params.customerid} store={this.props.store} />
+              <LendingForm stickyActive={true} customerid={match.params.customerid} store={this.props.store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/admin" render={() => <AdminView/> } />

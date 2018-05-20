@@ -51,7 +51,12 @@ class LendingForm extends React.Component {
         this.handleSave = this.handleSave.bind(this)
     }
 
-    handleContextRef = contextRef => this.setState({ contextRef })
+    handleContextRef = contextRef => 
+    {
+        console.log(contextRef)
+        this.setState({ contextRef })
+    }
+
     resetState() {
         this.setState(initialState)
         this.props.removeCustomer(this.props.selectedCustomer)
@@ -170,7 +175,7 @@ class LendingForm extends React.Component {
     }
     render() {
 
-        const {customers} = this.props
+        const {customers, stickyActive} = this.props
         const { contextRef } = this.state
         const flatpickrOptions = {
             locale: Finnish,
@@ -179,7 +184,7 @@ class LendingForm extends React.Component {
         }
         return (
             <Container>
-                 <div ref={this.handleContextRef}>
+                 <div id="stickyDiv" ref={this.handleContextRef}>
                 <Container>
                     {this.state.showMessage
                                 ? <Message
@@ -193,8 +198,8 @@ class LendingForm extends React.Component {
                     <Grid >
                         
                         <Grid.Column width={6}>
-                            <Sticky context={contextRef}>
-                            <Step.Group fluid vertical ordered>
+                            <Sticky active={stickyActive} context={contextRef}>
+                            <Step.Group fluid vertical ordered >
                             <Step id = 'Lender' link active = {this.state.active === 'Lender'}
                                     title = {!this.props.selectedCustomer ? 'Lainaaja' : `${this.props.selectedCustomer.firstname} ${this.props.selectedCustomer.lastname}`
                             }
