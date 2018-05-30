@@ -184,7 +184,7 @@ class LendingForm extends React.Component {
         }
         return (
             <Container>
-                 <div id="stickyDiv" ref={this.handleContextRef}>
+               
                 <Container>
                     {this.state.showMessage
                                 ? <Message
@@ -195,6 +195,7 @@ class LendingForm extends React.Component {
                                 : ''}
 
                     <Header as="h3">Uusi lainaus </Header>
+                      <div id="stickyDiv" ref={this.handleContextRef}>
                     <Grid >
                         
                         <Grid.Column width={6}>
@@ -270,9 +271,8 @@ class LendingForm extends React.Component {
                         </Segment> : ''}
                     </Grid.Column>
                     </Grid>
-                   
+                     </div>
                 </Container>
-                </div>
             </Container>
         )
     }

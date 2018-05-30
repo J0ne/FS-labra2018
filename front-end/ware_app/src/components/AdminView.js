@@ -10,6 +10,7 @@ const AdminView = () => (
         <Grid.Row>
             <Grid.Column>
                 <CategoryForm />
+                
             </Grid.Column>
             <Grid.Column>
                 <ProductSet />

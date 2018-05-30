@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import AdminView from './components/AdminView'
 import RegisterForm from './components/RegisterForm'
 import CustomerList from './components/CustomerList'
+import MainContent from './components/MainContent'
 import { BrowserRouter as Router, Route, NavLink, Link, Redirect } from 'react-router-dom'
 import {
   Label,
@@ -26,13 +27,15 @@ import {
   Dimmer,
   Loader,
   Segment,
-  Responsive
+  Responsive,
+  Sidebar, Menu
 } from 'semantic-ui-react'
 
 
 class App extends Component {
   constructor(props) {
     super(props)
+    this.mainContent = React.createRef();
     this.state = {
       products: [],
       activeItem: '/',
@@ -125,31 +128,35 @@ passwordsAreValid = () => {
   }
   return true
 }
-
   render() {
-    const mainContent = () => {
-      return (<div>
-            <Route exact path="/" render={({ match }) => <div>
-              <ConnectedLendingList store={this.props.store} />
-            </div>} />
-            <Route path="/uusilainaus/:customerid?" render={({ match }) => <div>
-              <LendingForm stickyActive={true} customerid={match.params.customerid} store={this.props.store} />
-            </div>} />
-          <Route exact path="/varasto" render={() => <ConnectedProductList />} />
-          <Route exact path="/admin" render={() => <AdminView/> } />
-           <Route exact path="/rekisterointi" render={() => <RegisterForm/> } />
-          <Route exact path="/asiakkaat" render={({ match }) => <CustomerList />} />    
-        </div> )
-    }
+
     const { activeItem } = this.state
     return (
       <div>
       <Router>
       <Container> 
-        {this.props.user ? <MenuBar content={mainContent()} 
-        toggleVisibility={this.toggleVisibility}
-        visible={this.state.sidebarVisible} activeItem={this.activeItem} user={this.props.user} showUserDetails={this.showUserDetails} 
-      handleItemClick={this.handleItemClick} logOut={this.logOut} logIn={this.logIn} /> : 
+        {this.props.user ?   <Responsive {...Responsive.onlyMobile}>
+      <Menu fluid>
+       <Button icon='content' basic onClick={this.toggleVisibility} />
+        {/* {this.getMenuRightContent()} */}
+      </Menu>
+   
+    <Sidebar.Pushable as={Segment}>
+          <Sidebar as={Menu} as={Menu} animation='scale down'width='thin' visible={this.state.sidebarVisible} icon='labeled' vertical inverted>
+            <Menu.Item name='Lainaukset' as={NavLink} to={"/"} active={activeItem === 'lainaukset'} onClick={this.handleItemClick} />
+            <Menu.Item as={NavLink} to={"/uusilainaus"} active={activeItem === 'uusilainaus'} onClick={this.handleItemClick}>Uusi lainaus</Menu.Item>
+            <Menu.Item name='Varasto' as={NavLink} to={"/varasto"} active={activeItem === 'Varasto'} onClick={this.handleItemClick} />
+            <Menu.Item name='Lainaajat' as={NavLink} to={"/asiakkaat"} active={activeItem === 'Asiakkaat'} onClick={this.handleItemClick} />
+                      {this.props.user && this.props.user.admin ? 
+            <Menu.Item color="red" name='Admin' as={NavLink} to={"/admin"} active={activeItem === 'admin'} onClick={this.handleItemClick} />: ''}       
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+                < MainContent ref={this.mainContent}/>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+  </Responsive> : 
         <Header as='h2'>
     <Icon name='table' />
     <Header.Content>
@@ -159,7 +166,9 @@ passwordsAreValid = () => {
       </Header.Subheader>
     </Header.Content>
   </Header>}
-        {this.props.user ? <Responsive minWidth={768} >{mainContent()}</Responsive> : <div>
+        {this.props.user ? <Responsive as={Container} minWidth={768} >
+        <MainContent ref={this.mainContent}/>
+        </Responsive> : <div>
          <LoginForm handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}
         

@@ -107,5 +107,6 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	14.5.| 2	| Bugikorjauksia, julkaisuja Herokuun ja testailua tabletilla |
 |	19.5.| 4,5	| Mobiilimenu ja ui:n pyörittelyä. |
 |	20.5.| 1	| Semantic UI:n sticky aiheuttaa päänvaivaa mobiilikoossa |
+|	30.5.| 1	| createRef-ongelmaa ja edellisten päivien kertausta (pienen tauon jälkeen)|
 
 
