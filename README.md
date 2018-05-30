@@ -45,7 +45,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 
 ---
 
-##*30.5. käytetty tunteja *132.5*
+*30.5. käytetty tunteja *132.5*
 
 ---
 
