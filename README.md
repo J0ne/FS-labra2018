@@ -16,7 +16,7 @@ https://github.com/J0ne/ware-app-backend
 Herokussa
 https://varusvarasto.herokuapp.com/
 
-30.5. käytetty tunteja *132.5*
+
 
 
 Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
@@ -45,8 +45,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 
 ---
 
-*Väliaikatietoa: 28.4. tunteja käytetty 103.5*
-
+##*30.5. käytetty tunteja *132.5*
 
 ---
 
