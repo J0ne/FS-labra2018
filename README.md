@@ -13,8 +13,10 @@ https://github.com/J0ne/ware-app-backend
 - helpottamaan julkaisua Herokuun
 - 19.4. -> backendin toteutus täällä
 
-Herokussa (tosin hyvin keskeneräinen)
+Herokussa
 https://varusvarasto.herokuapp.com/
+
+30.5. käytetty tunteja *132.5*
 
 
 Sovellus on pieni toiminnanohjaussofta, joka on erikoistunut lainauksien hallintaan. 
@@ -107,6 +109,7 @@ Ohjelma näyttää etusivulla listauksen lainauksista.
 |	14.5.| 2	| Bugikorjauksia, julkaisuja Herokuun ja testailua tabletilla |
 |	19.5.| 4,5	| Mobiilimenu ja ui:n pyörittelyä. |
 |	20.5.| 1	| Semantic UI:n sticky aiheuttaa päänvaivaa mobiilikoossa |
-|	30.5.| 1	| createRef-ongelmaa ja edellisten päivien kertausta (pienen tauon jälkeen)|
+|	30.5.| 1,5	| createRef-ongelmaa|
+|	30.5.| 		| Yhteensä: 132.5 tuntia |
 
 

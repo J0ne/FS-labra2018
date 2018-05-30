@@ -35,7 +35,6 @@ import {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.mainContent = React.createRef();
     this.state = {
       products: [],
       activeItem: '/',
@@ -128,6 +127,20 @@ passwordsAreValid = () => {
   }
   return true
 }
+ MainContent = () => {
+      return (<div>
+            <Route exact path="/" render={({ match }) => <div>
+              <ConnectedLendingList store={this.props.store} />
+            </div>} />
+            <Route path="/uusilainaus/:customerid?" render={({ match }) => <div>
+              <LendingForm customerid={match.params.customerid} store={this.props.store} />
+            </div>} />
+          <Route exact path="/varasto" render={() => <ConnectedProductList />} />
+          <Route exact path="/admin" render={() => <AdminView/> } />
+           <Route exact path="/rekisterointi" render={() => <RegisterForm/> } />
+          <Route exact path="/asiakkaat" render={({ match }) => <CustomerList />} />    
+        </div> )
+    }
   render() {
 
     const { activeItem } = this.state
@@ -152,7 +165,10 @@ passwordsAreValid = () => {
           </Sidebar>
           <Sidebar.Pusher>
             <Segment basic>
-                < MainContent ref={this.mainContent}/>
+                < MainContent ref = {
+                  component => this.mainContent = component
+                }
+                />
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -167,7 +183,7 @@ passwordsAreValid = () => {
     </Header.Content>
   </Header>}
         {this.props.user ? <Responsive as={Container} minWidth={768} >
-        <MainContent ref={this.mainContent}/>
+        <MainContent ref={component => this.mainContent = component}/>
         </Responsive> : <div>
          <LoginForm handleLoginData={this.handleLoginFieldChange} logIn={this.logIn} username={this.state.username} password={this.state.password} />
         </div>}

@@ -9,13 +9,14 @@ import RegisterForm from './RegisterForm'
 import CustomerList from './CustomerList'
 import AdminView from './AdminView'
 
- const MainContent = () => {
+ const MainContent = (store) => {
+
       return (<div>
             <Route exact path="/" render={({ match }) => <div>
-              <ConnectedLendingList store={this.props.store} />
+              <ConnectedLendingList store={store} />
             </div>} />
             <Route path="/uusilainaus/:customerid?" render={({ match }) => <div>
-              <LendingForm customerid={match.params.customerid} store={this.props.store} />
+              <LendingForm customerid={match.params.customerid} store={store} />
             </div>} />
           <Route exact path="/varasto" render={() => <ConnectedProductList />} />
           <Route exact path="/admin" render={() => <AdminView/> } />
