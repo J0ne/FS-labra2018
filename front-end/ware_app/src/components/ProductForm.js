@@ -46,7 +46,6 @@ class ProductForm extends React.Component {
 
     handleChange = (e, { value }) => {
         this.setState({ koko: value })
-        console.log(this.state)
     }
 
     render() {
