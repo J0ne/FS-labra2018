@@ -20,6 +20,10 @@ const tokenExtractor = (request, response, next) => {
     next()
 }
 
+const authorization = (request, response, next) => {
+    
+}
+
 const error = (request, response) => {
     response
         .status(404)

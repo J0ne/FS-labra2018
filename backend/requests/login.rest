@@ -1,6 +1,5 @@
 POST http://localhost:3003/api/login
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImlkaWFkbWluIiwiaWQiOiI1YWNmOGEwZGEyM2VkMThhYTJhM2IxNTUiLCJpYXQiOjE1MjM1NTM4Mjh9.F0crlkt20JFuQymVQ5W0gPSY8vNdFPiojImnY59KddA
 
 {
   "username": "idiadmin",

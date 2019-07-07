@@ -1,6 +1,7 @@
 const productsRouter = require('express').Router()
 const Product = require('../models/product')
 
+//
 productsRouter.get('/', async(request, response) => {
     const products = await Product.find({})
     response.json(products.map(Product.format))
@@ -10,6 +11,7 @@ console.log(request.params.id)
     const product = await Product.findById(request.params.id)
     response.json(Product.format(product))
 })
+
 productsRouter.post('/', async(request, response) => {
     console.log("POST, product")
     const body = request.body

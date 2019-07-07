@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.19.0",
     "json-server": "^0.15.0",
+=======
+    "axios": "^0.18.0",
+    "json-server": "^0.14.2",
+>>>>>>> Mobiili-UIn-kehityshaara
     "lodash": "^4.17.11",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
@@ -15,7 +20,11 @@
     "react-moment": "^0.7.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+<<<<<<< HEAD
     "react-scripts": "^3.0.1",
+=======
+    "react-scripts": "^2.1.8",
+>>>>>>> Mobiili-UIn-kehityshaara
     "react-select": "^1.2.1",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
@@ -31,7 +40,11 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
+<<<<<<< HEAD
     "css-loader": "^3.0.0",
+=======
+    "css-loader": "^2.1.1",
+>>>>>>> Mobiili-UIn-kehityshaara
     "style-loader": "^0.21.0"
   }
 }

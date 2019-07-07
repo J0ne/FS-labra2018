@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const adminRouter = require('express').Router()
 const User = require('../models/user')
 
+adminRouter.use(middleware.tokenExtractor)
 adminRouter.post('/', async(request, response) => {
     const body = request.body
 
